@@ -12,9 +12,20 @@ header {
 header a {
     color: white;
     text-decoration: none;
+    padding:0 15px;
+    display: inline-block;
 }
 
+header a:hover {
+  color: black;
+  background-color: white;
+}
 
 .langs {
   float: right;
+}
+
+.wrap {
+  width: 1200px;
+  margin: auto;
 }

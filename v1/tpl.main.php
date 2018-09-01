@@ -5,7 +5,7 @@
   <title><?php echo $title;?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="<?php echo $title;?>">
-  <link rel="stylesheet" href="style.css?v=<?php echo $v;?>">
+  <link rel="stylesheet" href="<?php echo BASE_URL?>style.css?v=<?php echo $v;?>">
 </head>
 <body>
   <header>
@@ -13,12 +13,12 @@
       <?php foreach($menu as $link => $text) { ?>
           <a href="<?php echo BASE_URL . $lang . '/'. $link;?>"><?php echo $text;?></a>
       <?php } ?>
+      <div class="langs">
+        <?php foreach($langs as $lang) { ?>
+            <a href="<?php echo BASE_URL . $lang;?>"><?php echo $lang;?></a>
+        <?php } ?>
+      </div>
     </nav>
-    <div class="langs">
-      <?php foreach($langs as $lang) { ?>
-          <a href="<?php echo BASE_URL . $lang;?>"><?php echo $lang;?></a>
-      <?php } ?>
-    </div>
   </header>
   <main>
     <div class="wrap">
