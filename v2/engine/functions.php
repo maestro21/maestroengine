@@ -9,3 +9,8 @@ function route() {
 }
 
 function path() {}
+
+
+function json($data) {
+  return json_encode($data);
+}

@@ -1,54 +1,82 @@
 <?php
-
 class controller {
 
-  $model = '';
-  $cl = '';
+    $model = '';
+    $cl = '';
 
-
-  function __construct() {
-    $this->cl = self::class;
-    $this->model = model($this->cl);
-  }
-
-
-
-  function render($tpl, $data) {
-    $content = tpl($this->cl . '/' . $tpl, ['data' => $data]);
-    return tpl('main', ['content' => $content, 'class' => $this->cl]);
-  }
-
-
-  /** Actions **/
-
-  function list() {
-     $data = $this->model->list();
-     return $this->render('list', $data);
-  }
-
-  function view() {
-      $data = $this->model->get();
-      return $this->render('view', $data);
-  }
-
-  function form() {
-    if(id()) {
-      $data = $this->model->get(id());
+    function __construct() {
+      $this->cl = self::class;
+      $this->model = model($this->cl);
     }
-    return $this->render('form', $data ?? []);
+
+
+
+    function handleRequest() {
+        $return = false;
+
+        $method = method() . 'Action';
+        if(method_exists($this, $method)) {
+          $content = $this->$method();
+        }
+
+        if(path(0) != 'api') {
+          $content = $this->render($content);
+        }
+        return $content;
+    }
+
+
+    function render($content) {
+      if(!$content){
+        redirect();
+      }
+      return tpl('index', ['content' => $content]);
+    }
+
+
+    function view($tpl, $data) {
+      return view($this->cl . '/' . $view, $data);
+    }
+
+
+  public function error($error = null) {
+    return [
+      'status' => 'error',
+      'error' => $error ?? T('error')
+    ];
   }
 
-  function save() {
-      return json($this->model->save(post('form')));
-  }
 
-  function del() {
-    return json($this->model->del());
-  }
+    /** Front actions **/
 
-}
+    function listAction() {
+       $data = $this->model->list();
+       return $this->view('list', $data);
+    }
+
+    function viewAction() {
+      $data = $this->model->get(id());
+      return $this->view('view', $data);
+    }
+
+    function formAction() {
+      $data = $this->model->get(id());
+      return $this->view('form', $data);
+    }
 
 
-function c($name) {
-  return new {$name . 'controller'}();
+    /** Api actions **/
+
+    function saveAction() {
+        // if(!can('admin')) return false;
+        $data = $this->model->save(post('form'), id());
+        return json($data);
+    }
+
+    function delAction() {
+      // if(!can('admin')) return false;
+      $data = $this->model->del(id());
+      return json($data);
+    }
+
 }
