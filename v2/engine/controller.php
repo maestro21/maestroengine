@@ -1,20 +1,23 @@
 <?php
 class controller {
 
-    $model = '';
-    $cl = '';
+    var $model = '';
+    var $cl = '';
+    var $defaultAction = '';
 
     function __construct() {
       $this->cl = self::class;
-      $this->model = model($this->cl);
+      //$this->model = model($this->cl);
+      $this->defaultAction = 'index';
+
     }
 
 
 
     function handleRequest() {
         $return = false;
-
-        $method = method() . 'Action';
+        echo "handling request in controller"; die();  
+        $method = $this->method() . 'Action';
         if(method_exists($this, $method)) {
           $content = $this->$method();
         }

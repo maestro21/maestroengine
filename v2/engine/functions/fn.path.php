@@ -1,13 +1,15 @@
 <?php
 /**
  * Path functions
- * lang/module/function/id/
+ * ({lang}?api)/module/function/id/
  */
 
  function route() {
-     global $_SERVER, $_PATH;
-     $vars = explode('?', $_SERVER['REQUEST_URI']);
-     $path = trim(str_replace(HOST_FOLDER, '', $vars[0]), '/');
+      global $_PATH;
+     $vars = explode('?', server('REQUEST_URI'));
+     $folders = explode('://', BASE_URL);
+     $folders = str_replace(server('HTTP_HOST'),'', $folders[1]);
+     $path = trim(str_replace($folders, '', $vars[0]), '/');
      $_PATH = explode('/', $path);
  }
 
@@ -22,10 +24,6 @@ function path($key = null) {
     return $_PATH;
 }
 
-$_lang = deflang();
-function lang() {
-    return path(0);
-}
 
 function module() {
     return path(1);
