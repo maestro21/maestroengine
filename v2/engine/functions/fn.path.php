@@ -29,10 +29,10 @@ function module() {
     return path(1);
 }
 
-function action() {
-    return path(2);
-}
-
-function id() {
-  return path(3);
+function id($path = 2) {
+    $id = path($path);
+    if(empty($id)) {
+      return null;
+    }
+    return $id;
 }

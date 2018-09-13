@@ -28,7 +28,7 @@ function c($name = '') {
   $return = mf($path . CONTROLLER_EXT);
   if($return) {
     require_once($return);
-    $name .= 'Controller';
+    $name .= 'Controller'; 
     $return = new $name();
   }
   return $return;

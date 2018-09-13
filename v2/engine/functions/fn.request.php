@@ -6,7 +6,7 @@ function processRequest() {
     redirect();
   }
 
-  $controller = c(path(1)); 
+  $controller = c(path(1));
   if(!$controller) {
     redirect();
   }
@@ -37,11 +37,29 @@ function setting($name) {
   return $_SETTINGS[$name] ?? null;
 }
 
+/** data is just local request data **/
+$_DATA = [];
+function data($key, $value = null) {
+  global $_DATA;
+  if(!$key) return $_DATA;
+  if($value) {
+      $_DATA[$key] = $value;
+  }
+  return $_DATA[$key] ?? null;
+}
+
+
 function server($name) {
   global $_SERVER;
   return $_SERVER[$name] ?? null;
 }
 
+/**
+ * return request method
+ */
+function method() {
+  return server('REQUEST_METHOD');
+}
 
 function get($key, $default = NULL) {
     global $_GET;
@@ -68,4 +86,9 @@ function session($key = null, $value = null) {
         $_SESSION[$key] = $value;
     }
     return $_SESSION[$key] ?? null;
+}
+
+
+function api() {
+  return (path(0) == 'api');
 }

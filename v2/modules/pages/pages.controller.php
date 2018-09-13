@@ -1,6 +1,6 @@
 <?php
 
-class PagesController extends Controller {
+class PagesController extends CRUDController {
 
 
 }

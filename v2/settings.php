@@ -1,6 +1,7 @@
 <?php
  $_SETTINGS = [
-    'base_url' => 'http://localhost/maestroengine/v2/',
+    'base_url' => 'http://localhost/maestroengine/v2/',    
+    'env' => ENV_DEV,
     'deflang' => 'en',
     'db_host' => 'localhost',
     'db_name' => 'root',
