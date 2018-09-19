@@ -1,8 +1,8 @@
 <?php
- $_SETTINGS = [
+ $_CONF = [
     'base_url' => 'http://localhost/maestroengine/v2/',
-    'deflang' => 'en'
-
+    'env' => ENV_DEV,
+    'deflang' => 'en',
     'db_host' => 'localhost',
     'db_name' => 'root',
     'db_pass' => '',

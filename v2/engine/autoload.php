@@ -10,14 +10,14 @@ define('ENV_PROD', 'prod');
 define('BASE_PATH', dirname(dirname(__FILE__)) . '/');
 define('ENGINE_PATH', BASE_PATH . 'engine/');
 
-require_once(BASE_PATH . 'settings.php');
+require_once(BASE_PATH . 'conf.php');
 
-define('ENV', $_SETTINGS['env']);
+define('ENV', $_CONF['env']);
 
-define('BASE_URL', $_SETTINGS['base_url']);
+define('BASE_URL', $_CONF['base_url']);
 
-define('DEFLANG', $_SETTINGS['deflang'] ?? 'en');
-define('DEFCONTROLLER', $_SETTINGS['defcontroller'] ?? 'pages');
+define('DEFLANG', $_CONF['deflang'] ?? 'en');
+define('DEFCONTROLLER', $_CONF['defcontroller'] ?? 'pages');
 
 define('CONTROLLER_EXT', '.controller.php');
 

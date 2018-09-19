@@ -32,23 +32,6 @@ function goBack(){
 }
 
 
-function setting($name) {
-  global $_SETTINGS;
-  return $_SETTINGS[$name] ?? null;
-}
-
-/** data is just local request data **/
-$_DATA = [];
-function data($key, $value = null) {
-  global $_DATA;
-  if(!$key) return $_DATA;
-  if($value) {
-      $_DATA[$key] = $value;
-  }
-  return $_DATA[$key] ?? null;
-}
-
-
 function server($name) {
   global $_SERVER;
   return $_SERVER[$name] ?? null;
