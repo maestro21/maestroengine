@@ -38,7 +38,6 @@ function model($name = '') {
  * Function to include controller
  */
 function c($name = '') {
-  require_once(ENGINE_PATH . '/controller.php');
   if(empty($name)) {
     $name = DEFCONTROLLER;
   }
@@ -61,7 +60,7 @@ function c($name = '') {
 function view($view, $data, $class = '') {
   $return = mf($class . '/' . $view . VIEW_EXT);
   if(!$return) {
-    $return = ENGINE_PATH . 'view/'  . $view . VIEW_EXT;
+    $return = FRONT_PATH . 'view/'  . $view . VIEW_EXT;
     if(!file_exists($return)) {
       return null;
     }
@@ -69,23 +68,48 @@ function view($view, $data, $class = '') {
   return obfile($return, $data);
 }
 
-function obfile($path, $data) {
+function obfile($path, $data = []) {
   if(!file_exists($path)) return false;
 
   foreach ($data as $k =>$v) {
     $$k=$v;
   }
   ob_start();
-  include($_url);
+  include($path);
   $content = ob_get_contents();
   ob_end_clean();
 
   return $content;
 }
 
+/**
+ * load all files in dir;
+ */
+function include_dir($dir) {
+  $files = dir_list($dir);
+  $content = '';
+  foreach($files as $file) {
+      $content .= obfile($dir . $file);
+  }
+  return $content;
+}
 
-function tpl($path, $data){
-    $theme = (settings('theme') != '' ? settings('theme') : DEFTHEME);
-    $path = THEME_FOLDER . $theme . '/tpl/' . $path . TPL_EXT;
+function theme() {
+  return (settings('theme') != '' ? settings('theme') : DEFTHEME);
+}
+
+function themepath() {
+  return THEME_PATH . theme() . '/';
+}
+
+function themeurl() {
+  return THEME_URL . theme() . '/';
+}
+
+function tpl($tpl, $data = []){
+    $path = themepath() . 'tpl/' . $tpl . TPL_EXT;
+    if(!file_exists($path)) {
+      $path = FRONT_PATH . 'tpl/' . $tpl . TPL_EXT;
+    }
     return obfile($path, $data);
 }

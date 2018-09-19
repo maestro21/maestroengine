@@ -37,7 +37,7 @@ function data($key, $value = null) {
   if conf are technical essentials of website, settings can be altered and have
   such data as default language or theme */
 $_SETTINGS = [];
-function setting($name = null) {
+function settings($name = null) {
   global $_SETTINGS;
   if($name) {
     return $_SETTINGS[$name] ?? null;

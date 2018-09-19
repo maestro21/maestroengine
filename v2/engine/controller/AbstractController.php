@@ -43,7 +43,7 @@ abstract class AbstractController {
       }
 
 
-      function render($content) { echo $content; return;
+      function render($content) { // echo $content; return;
         if(!$content){
           redirect();
         }
