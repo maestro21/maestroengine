@@ -7,13 +7,7 @@ new Vue({
 el: '#app',
 iconfont: 'fa',
 data: () => ({
-  drawer: false,
-model: null,
-items: [
-   { 'text': 'Home' },
-   { 'text': 'Products'},
-   { 'text': 'Vodka'}
-]
-})
+  drawer: false
+  })
 })
 </script>

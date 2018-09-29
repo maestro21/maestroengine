@@ -6,13 +6,15 @@
   <body>
     <div id="app">
       <v-app dark>
-        <?php echo tpl('adminpanel');?>
+        <?php echo tpl('controlpanel');?>
         <?php echo tpl('header');?>
         <v-content>
-          <?php echo $content;?>
+          <wrap>
+            <?php echo $content;?>
+          </wrap>  
         </v-content>
         <?php echo tpl('footer');?>
-     </div>     
+     </div>
      <?php echo tpl('vue');?>
   </body>
 </html>

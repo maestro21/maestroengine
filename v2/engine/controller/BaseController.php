@@ -15,7 +15,7 @@ class BaseController extends AbstractController {
     }
 
     function saveAction() {
-
+        inspect(post());
     }
 
 }

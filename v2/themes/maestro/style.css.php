@@ -1,4 +1,4 @@
-<?php header("Content-type: text/css"); ?>
+<?php header("Content-type: text/css");?>
 .v-content ul {
   padding-left: 40px;
 }
@@ -47,7 +47,7 @@ main {
 }
 
 .application {
-  background: url('bg.jpg') fixed !important;
+  background: url('img/bg.jpg') fixed !important;
   background-size: cover !important;
   background-position: center;
 }

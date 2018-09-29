@@ -9,11 +9,11 @@
 <link href="<?php echo EXT_URL;?>vue/vuetify.min.css" rel="stylesheet">
 <script src="<?php echo EXT_URL;?>vue/vue.js"></script>
 <script src="<?php echo EXT_URL;?>vue/vuetify.js"></script>
-<!-- Font Awesome -->
-<link rel="stylesheet" href="<?php echo EXT_URL;?>fa.css">
 <!-- Compiled JS\CSS -->
 <!--<script src="<?php echo EXT_URL;?>script.js"></script> -->
 <!--<link href="<?php echo EXT_URL;?>style.css" rel="stylesheet"> -->
 <link href="<?php echo themeurl();?>style.css.php" rel="stylesheet">
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,600,700,800,900|Playfair+Display&amp;subset=cyrillic" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">

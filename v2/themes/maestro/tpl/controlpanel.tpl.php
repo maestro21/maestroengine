@@ -8,7 +8,7 @@
   <v-list class="pa-0">
     <v-list-tile avatar>
       <v-list-tile-avatar>
-        <img src="https://randomuser.me/api/portraits/men/85.jpg">
+        <img src="<?php echo themeurl();?>img/logo.png">
       </v-list-tile-avatar>
 
       <v-list-tile-content>
@@ -21,16 +21,16 @@
   </v-list>
 </v-toolbar>
   <hr>
-  <h1><i class="caesar">M</i></h1>
+  <h1><img src="<?php echo themeurl();?>img/logo.png"></h1>
   <div class="center">Maestro Engine X<br>
   Administration Panel</div>
   <hr>
   <v-list dense class="cpmenu">
-    <v-list-tile @click=""><v-list-tile-content>
-      <v-list-tile-title>Languages</v-list-tile-title></v-list-tile-content>
-    </v-list-tile>
-    <v-list-tile @click=""><v-list-tile-content>
-    <v-list-tile-title>  Settings</v-list-tile-title></v-list-tile-content>
-    </v-list-tile>
+    <?php $modules = ['settings']; ?>
+    <?php foreach($modules as $module) { ?>
+      <v-list-tile href="<?php echo BASE_URL . lang() . '/'. $module;?>"><v-list-tile-content>
+        <v-list-tile-title><?php echo t($module);?></v-list-tile-title></v-list-tile-content>
+      </v-list-tile>
+    <?php } ?>
   </v-list>
 </v-navigation-drawer>
