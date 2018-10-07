@@ -2,8 +2,19 @@
 
 abstract class AbstractController {
 
+      /** Form fields */
+      var $formFields = [];
+      
+      var $listFields = [];
 
-      var $model = '';
+      /**
+       * Default values of a new item
+       */
+      var $defvalues = []; 
+      
+
+
+      var $model;
       var $cl = '';
       var $defaultAction = 'index';
       var $allowedActions = ['view', 'list', 'edit', 'add'];
@@ -20,9 +31,21 @@ abstract class AbstractController {
 
 
       function __construct() {
-        $this->cl = self::class;
+        $this->cl = str_replace('Controller', '', get_class($this));
+        $this->model = model(strtolower($this->cl));
+
+        $this->formFields = $this->listFields = $this->model()->fields();
+
+        $this->setDefvalues();
       }
 
+      function setDefvalues() {
+        $data = [];
+        foreach($this->formFields as $key => $smth) {
+          $data[$key] = null;
+        }
+        $this->defvalues = $data;
+      }
 
       function handleRequest() {
           //echo "handling request in controller"; die();
@@ -30,6 +53,9 @@ abstract class AbstractController {
           $this->parse = (api() ? P_JSON : P_FULL);
 
           $action = $this->getAction() . 'Action';
+          if(!api()) {
+            $this->prepareSiteTemplate();
+          }
 
           if(method_exists($this, $action)) {
             $content = $this->$action();
@@ -42,6 +68,10 @@ abstract class AbstractController {
           return $content;
       }
 
+      function prepareSiteTemplate() {
+        data('title', T($this->cl)); 
+        data('wrap', true);
+      }
 
       function render($content) { // echo $content; return;
         if(!$content){
@@ -51,7 +81,7 @@ abstract class AbstractController {
       }
 
 
-      function view($tpl, $data) {
+      function view($view, $data = []) { 
         return view($this->cl . '/' . $view, $data);
       }
 
@@ -70,6 +100,11 @@ abstract class AbstractController {
       } else {
         redirect(BASE_URL);
       }
+    }
+
+
+    public function model() {
+      return $this->model;
     }
 
     abstract function getAction();

@@ -1,6 +1,6 @@
 <?php
 
-class SettingsController extends BaseController {
+class SettingsController extends FormController {
 
 
 }

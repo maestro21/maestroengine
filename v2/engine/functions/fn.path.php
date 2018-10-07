@@ -5,12 +5,12 @@
  */
 
  function route() {
-      global $_PATH;
-     $vars = explode('?', server('REQUEST_URI'));
-     $folders = explode('://', BASE_URL);
-     $folders = str_replace(server('HTTP_HOST'),'', $folders[1]);
-     $path = trim(str_replace($folders, '', $vars[0]), '/');
-     $_PATH = explode('/', $path);
+    global $_PATH;
+    $vars = explode('?', server('REQUEST_URI'));
+    $folders = explode('://', BASE_URL);
+    $folders = str_replace(server('HTTP_HOST'),'', $folders[1]);
+    $path = trim(str_replace($folders, '', $vars[0]), '/');
+    $_PATH = explode('/', $path);
  }
 
 

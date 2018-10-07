@@ -30,7 +30,7 @@ function model($name = '') {
     require_once($return);
     $name .= 'Model';
     $return = new $name();
-  }
+  } 
   return $return;
 }
 
@@ -57,14 +57,23 @@ function c($name = '') {
 }
 
 
-function view($view, $data, $class = '') {
-  $return = mf($class . '/' . $view . VIEW_EXT);
+function view($view, $data) {
+  $view = explode('/', $view);
+  if($view[1]) {
+    $class = $view[0];
+    $view = $view[1];
+  } else {
+    $view = $view[0];
+  }
+  
+  $return = mf(strtolower($class) . '/' . $view . VIEW_EXT);
   if(!$return) {
-    $return = FRONT_PATH . 'view/'  . $view . VIEW_EXT;
+    $return = FRONT_PATH . 'view/'  . $view . VIEW_EXT; 
     if(!file_exists($return)) {
       return null;
     }
   }
+
   return obfile($return, $data);
 }
 

@@ -9,9 +9,7 @@
         <?php echo tpl('controlpanel');?>
         <?php echo tpl('header');?>
         <v-content>
-          <wrap>
-            <?php echo $content;?>
-          </wrap>  
+            <?php echo tpl('page', ['content' =>$content]);?>
         </v-content>
         <?php echo tpl('footer');?>
      </div>

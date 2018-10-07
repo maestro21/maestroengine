@@ -24,7 +24,7 @@ function conf($name = null) {
 
 /** data is just local request data **/
 $_DATA = [];
-function data($key, $value = null) {
+function data($key = null, $value = null) {
   global $_DATA;
   if(!$key) return $_DATA;
   if($value) {
@@ -43,4 +43,11 @@ function settings($name = null) {
     return $_SETTINGS[$name] ?? null;
   }
   return $_SETTINGS;
+}
+
+
+function inspect($data) {
+  echo "<pre>";
+  print_r($data);
+  echo "</pre>";
 }

@@ -1,5 +1,5 @@
 <?php
-$menu = [
+$data = [
 
   'en' => [
     '' => 'Home',

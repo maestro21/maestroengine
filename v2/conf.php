@@ -1,7 +1,6 @@
 <?php
  $_CONF = [
     'base_url' => 'http://localhost/maestroengine/v2/',
-    'env' => ENV_DEV,
     'deflang' => 'en',
     'db_host' => 'localhost',
     'db_name' => 'root',
