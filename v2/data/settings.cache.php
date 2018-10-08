@@ -1,6 +1,9 @@
 <?php
 
     $data = [
-        'testkey' => 'testvalue',
+        'testkey' => [
+            'key' => 'testkey',
+            'value' => 'testvalue'
+        ],
 
     ];

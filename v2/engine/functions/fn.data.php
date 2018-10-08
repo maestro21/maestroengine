@@ -1,10 +1,10 @@
 <?php
 
 
-function php2js($data) {
-    echo 'json_decode(' . json($data) . ')';
-}
 
+function json($data) {
+    return json_encode($data);
+}
 
 function cache($name = '', $_data = null) {
     $path = DATA_PATH . $name . CACHE_EXT;

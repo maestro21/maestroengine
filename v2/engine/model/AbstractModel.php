@@ -17,6 +17,7 @@ abstract class AbstractModel {
     public function __construct() { 
         $this->name =  str_replace('Model', '', get_class($this)); 
         $this->extend();
+        $this->fields[$this->key] = 'hidden';
       }
 
     function fields() { 
@@ -26,15 +27,14 @@ abstract class AbstractModel {
    /**
      * Validate single data row
      */
-    function validate($row) {
+    function validate($row) { 
         
-        if($row == self::AI || !$this->fields) {
+        if(!$this->fields) {
             return $row;
         }
         
         $return = [];
-
-        foreach($this->fields as $name => $field) {
+        foreach($this->fields as $key => $field) {
         
             if(is_array($field)) {
                 $type = $field[0];
@@ -42,18 +42,17 @@ abstract class AbstractModel {
                 $type = $field;
             }
 
-            $value = $row[$name];
+            $value = $row[$key] ?? null;
 
             switch($type) {
                 case DATA_INT: $value = (int)$value; break;
-                case DATA_FLOAT: $value = (float)$value; break;
+                //case DATA_FLOAT: $value = (float)$value; break;
                 case DATA_BOOL: $value = (bool)$value; break;
                 case DATA_ARRAY: $value = $this->validateArray($value); break;
             }
             
-            $return[$name] = $value;
+            $return[$key] = $value;
         }
-
         return $return;
     }
 

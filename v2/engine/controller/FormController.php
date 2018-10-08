@@ -13,7 +13,7 @@ class FormController extends AbstractController {
     function indexAction() { 
         $data = $this->model()->list(); 
         return $this->view('edittable', [
-            'headers' => $this->formFields,
+            'headers' => $this->listFields,
             'newItem' => $this->defvalues,
             'data' => $data
         ]);

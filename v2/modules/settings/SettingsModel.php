@@ -7,6 +7,8 @@ class SettingsModel extends CacheModel {
            'key' => DATA_TEXT,
            'value' => DATA_TEXT
         ];   
+
+        $this->key = 'key';
     }
 
 }

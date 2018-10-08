@@ -22,8 +22,12 @@ class CacheModel extends AbstractModel {
     $data = cache($this->name);
     if($start !== null) {
       $data = array_slice($data, (int)$start, $length);
+    }    
+    $return = [];
+    foreach($data as $key => $row) {
+      $return[] = $this->validate($row);
     }
-    return $data;
+    return $return;
   }
 
   /**
@@ -78,5 +82,12 @@ class CacheModel extends AbstractModel {
     $ai++;
     return $ai;
   } 
+
+  function validate($row) {
+    if($row == self::AI) {
+      return $row;
+    }
+    return parent::validate($row);
+  }
 
 }

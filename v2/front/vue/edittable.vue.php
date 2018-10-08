@@ -1,11 +1,10 @@
-
 <!-- edittable -->
 <script type="text/x-template" id="edittable">
   <div>
-    <v-btn flat @click.native="add">Add</v-btn>
+    <v-btn @click.native="add">Add</v-btn>
     <v-data-table
-      :headers="headers"
-      :items="data"
+      v-bind:headers="theaders"
+      v-bind:items="titems"
       hide-actions
       class="elevation-1"
     >
@@ -19,8 +18,20 @@
 </script>
 <script>
 Vue.component('edittable', {
-  props: ['data', 'headers'],
-  template: '#edittable'
+  props: [ 'items', 'headers', 'newitem'],
+  template: '#edittable',
+  methods: {
+    add () {
+      this.titems.push(this.tnewitem);
+    }
+   },
+   data() {
+		return {
+			tnewitem: this.newitem,
+			theaders: this.headers,
+			titems: this.items,
+		}
+	}
 });
 </script>
 <!-- /edittable -->
