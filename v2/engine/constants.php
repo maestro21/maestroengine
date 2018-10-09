@@ -16,6 +16,7 @@ define('EXT_URL', BASE_URL . 'ext/');
 define('THEME_URL', BASE_URL . 'themes/');
 define('DATA_URL', BASE_URL . 'data/');
 define('UPLOAD_URL', DATA_URL . 'up/');
+define('API_URL', BASE_URL . 'api/');
 
 
 /** Extensions **/

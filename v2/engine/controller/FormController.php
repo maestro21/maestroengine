@@ -15,12 +15,14 @@ class FormController extends AbstractController {
         return $this->view('edittable', [
             'headers' => $this->listFields,
             'newItem' => $this->defvalues,
-            'data' => $data
+            'data' => $data,
+            'endpoint' => API_URL . $this->cl
         ]);
     }
 
     function saveAction() {
         // foreach row [id] => row
+        $this->model->save(post('data'));
         inspect(post());
     }
 

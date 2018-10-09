@@ -6,7 +6,6 @@
 .icons button{
   padding:0;
   margin:0;
-  font-size: 1vmax;
 }
 
 
@@ -62,8 +61,14 @@ main {
 .langs.v-list,
 .application .v-toolbar,
 .application .v-footer,
-.application .v-card {
+.application .v-card,
+.v-table,
+.v-btn:not(.v-btn--flat) {
   background: rgba(0,0,0,0.3) !important;
+}
+
+.v-table tbody tr:hover:not(.v-datatable__expand-row) {
+  background:rgba(255,255,255,0.3) !important;
 }
 
 .application .v-card {
@@ -94,7 +99,9 @@ h1 {
     display: block;
     text-align: center;
     font-size: 5em;
-    margin: 0.3em auto;
+    line-height: 2.5em;
+    margin: 0;
+    padding: 0;
     font-weight: 100;
     font-family: Roboto;
 }
@@ -187,4 +194,30 @@ aside h1 {
 
 .right {
   text-align: right;
+}
+
+
+.v-content .wrap {
+  padding: 50px;
+  background: rgba(0,0,0,0.3);
+  min-height: 100%;
+}
+
+.v-btn:not(.v-btn--flat) {
+  border: 1px rgba(255,255,255, 0.5) solid;
+}
+
+.v-content {
+  padding: 0 !important;
+}
+
+.v-footer {
+  line-height: 36px;
+}
+
+.application .v-toolbar,
+.application .v-footer,
+.v-content button,
+thead {
+  background: rgba(0,0,0,0.5) !important;
 }
