@@ -2,7 +2,9 @@
 
 class CacheModel extends AbstractModel {
 
-  const AI = '__ai';
+
+    const AI = '__id';
+    
 
   /**
    * Set signle element and save it
@@ -14,27 +16,45 @@ class CacheModel extends AbstractModel {
     $data = null;
   }
 
+
+  private $rows2keyvalues =true;
+  function rows2keyvalues($value = null) {
+    if($value !== null) {
+        $this->rows2keyvalues = $value;
+    }
+    return $this->rows2keyvalues;
+  }
   
   /**
    * Get all data
    */
   function list($start = null, $length = null) {  
     $data = cache($this->name);
+
+    if($this->rows2keyvalues) {
+        $data = keyvalues2rows($data);
+    } else {
+        $data = $this->validate($data);
+    }
+
     if($start !== null) {
       $data = array_slice($data, (int)$start, $length);
-    }    
-    $return = [];
-    foreach($data as $key => $row) {
-      $return[] = $this->validate($row);
-    }
-    return $return;
+    }  
+    return $data;
   }
 
   /**
    * Save all data
    */
   function save($data) {
-      cache($this->name, $data);
+    
+    $data = $this->validate($data);
+    
+    if($this->rows2keyvalues) {
+       $data = rows2keyvalues($data);
+    }
+    
+    cache($this->name, $data);
   }
 
   /**
@@ -83,11 +103,11 @@ class CacheModel extends AbstractModel {
     return $ai;
   } 
 
-  function validate($row) {
+  function validateRow($row) {
     if($row == self::AI) {
       return $row;
     }
-    return parent::validate($row);
+    return parent::validateRow($row);
   }
 
 }

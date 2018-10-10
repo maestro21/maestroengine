@@ -19,3 +19,24 @@ function cache($name = '', $_data = null) {
     }
     return null;
 }
+
+
+
+function rows2keyvalues($data) {
+    $_data = [];
+    foreach($data as $row) {
+        $_data[$row['key']] = $row['value'];
+    }
+    return $_data;
+  }
+
+function keyvalues2rows($data) {
+    $_data = [];
+    foreach($data as $key => $value) {
+        $_data[] = [
+            'key' => $key,
+            'value' => $value,
+        ];
+    }
+    return $_data;
+}

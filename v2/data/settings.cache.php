@@ -1,12 +1,5 @@
 <?php $data = array (
-  0 => 
-  array (
-    'key' => 'testkey',
-    'value' => 'testvalue',
-  ),
-  1 => 
-  array (
-    'key' => 'test',
-    'value' => 'test2',
-  ),
+  'testkey' => 'value2',
+  'test' => 'test2',
+  'rhrrrrrrhrh' => 'rthrhtrhtrhrhrthhr',
 );
