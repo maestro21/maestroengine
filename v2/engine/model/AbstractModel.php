@@ -25,6 +25,7 @@ abstract class AbstractModel {
     }
 
     function validate($data) {
+        if(empty($data)) return [];
         $return = [];
         foreach($data as $key => $row) {
           $key = $this->validateField($row, $this->key);

@@ -20,7 +20,7 @@ define('API_URL', BASE_URL . 'api/');
 
 
 /** Extensions **/
-define('CONTROLLER_EXT', '.controller.php');
+define('CONTROLLER_EXT', 'Controller.php');
 define('TPL_EXT', '.tpl.php');
 define('VIEW_EXT', '.view.php');
 define('MODEL_EXT', 'Model.php');

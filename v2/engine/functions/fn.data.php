@@ -22,10 +22,10 @@ function cache($name = '', $_data = null) {
 
 
 
-function rows2keyvalues($data) {
+function rows2keyvalues($data, $key = 'key', $value = 'value') {
     $_data = [];
     foreach($data as $row) {
-        $_data[$row['key']] = $row['value'];
+        $_data[$row[$key]] = $row[$value];
     }
     return $_data;
   }

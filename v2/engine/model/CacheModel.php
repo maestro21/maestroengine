@@ -1,9 +1,7 @@
 <?php
 
 class CacheModel extends AbstractModel {
-
-
-    const AI = '__id';
+  const AI = '__id';
     
 
   /**
@@ -17,7 +15,8 @@ class CacheModel extends AbstractModel {
   }
 
 
-  private $rows2keyvalues =true;
+  protected $rows2keyvalues = false;
+
   function rows2keyvalues($value = null) {
     if($value !== null) {
         $this->rows2keyvalues = $value;
@@ -55,6 +54,8 @@ class CacheModel extends AbstractModel {
     }
     
     cache($this->name, $data);
+
+    return $data;
   }
 
   /**

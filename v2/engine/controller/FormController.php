@@ -23,7 +23,6 @@ class FormController extends AbstractController {
     function saveAction() {
         // foreach row [id] => row
         $this->model->save(post('data'));
-        inspect(post());
     }
 
 }

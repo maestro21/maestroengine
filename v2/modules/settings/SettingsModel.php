@@ -3,6 +3,8 @@
 class SettingsModel extends CacheModel {
 
     function extend() {
+        $this->rows2keyvalues = true;    
+
         $this->fields = [
            'key' => DATA_TEXT,
            'value' => DATA_TEXT

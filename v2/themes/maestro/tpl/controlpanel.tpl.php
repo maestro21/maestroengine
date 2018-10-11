@@ -26,7 +26,7 @@
   Administration Panel</div>
   <hr>
   <v-list dense class="cpmenu">
-    <?php $modules = ['settings']; ?>
+    <?php $modules = ['settings', 'languages']; ?>
     <?php foreach($modules as $module) { ?>
       <v-list-tile href="<?php echo BASE_URL . lang() . '/'. $module;?>"><v-list-tile-content>
         <v-list-tile-title><?php echo t($module);?></v-list-tile-title></v-list-tile-content>
