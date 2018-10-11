@@ -1,14 +1,14 @@
 <?php $data = array (
-  'en' => 
+  0 => 
   array (
     'abbr' => 'en',
     'name' => 'English',
-    'active' => false,
+    'active' => true,
   ),
-  'ru' => 
+  1 => 
   array (
     'abbr' => 'ru',
     'name' => 'Русский',
-    'active' => false,
+    'active' => true,
   ),
 );

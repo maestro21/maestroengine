@@ -9,7 +9,7 @@ class LanguagesModel extends CacheModel {
            'active' => DATA_BOOL,
         ];   
 
-        $this->key = 'abbr';
+        $this->key = null;
     }
 
     function save($data) {

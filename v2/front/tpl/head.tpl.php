@@ -12,19 +12,20 @@
 <script src="<?php echo EXT_URL;?>vue/vue.js"></script>
 <script src="<?php echo EXT_URL;?>vue/vuetify.js"></script>
 
-<!-- Axios -->
-<script src="<?php echo EXT_URL;?>axios.min.js"></script>
+<!-- Toastr -->
+<script type="text/javascript" src="<?php echo EXT_URL;?>toastr/toastr.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo EXT_URL;?>toastr/toastr.min.css" />
 
 <!-- Compiled JS\CSS -->
 <script src="<?php echo FRONT_URL;?>js/script.js"></script>
 <!--<link href="<?php echo EXT_URL;?>style.css" rel="stylesheet"> -->
 <link href="<?php echo themeurl();?>style.css.php" rel="stylesheet">
+
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,600,700,800,900|Playfair+Display&amp;subset=cyrillic" rel="stylesheet">
+
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-<script>
-const HTTP = axios.create({
-  baseURL: '<?php echo BASE_URL;?>'
-});
-</script>
+
+<!--Material design-->
+<link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">

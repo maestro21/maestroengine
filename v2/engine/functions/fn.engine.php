@@ -122,3 +122,12 @@ function tpl($tpl, $data = []){
     }
     return obfile($path, $data);
 }
+
+
+function msg($text, $type = 'success', $code = 200) {
+  return [
+    'message' => T($text),
+    'type' => $type,
+    'code' => $code,
+  ];
+}

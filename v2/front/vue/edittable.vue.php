@@ -6,12 +6,13 @@
       v-bind:headers="theaders"
       :items="titems"
       hide-actions
+      disable-initial-sort
     >
       <template slot="items" slot-scope="props">
-        <td v-for="header in headers">
+        <td v-for="header in headers" v-if="header.value != 'actions'">
           <v-text-field v-model="props.item[header.value]"></v-text-field>
         </td>
-        <td>
+        <td v-else>
           <v-btn icon class="mx-0" @click="del(props.item)">
             <fa icon="far fa-trash-alt" />
           </v-btn>
@@ -34,7 +35,7 @@ Vue.component('edittable', {
       confirm('Are you sure you want to delete this item?') && this.titems.splice(index, 1)
     },
     save () {
-      $.post(this.tendpoint, { data: this.titems });
+      $.post(this.tendpoint, { data: this.titems }, handleResponse);
     }
   },
   data() {

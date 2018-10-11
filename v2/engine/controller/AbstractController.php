@@ -51,6 +51,10 @@ abstract class AbstractController {
             $result[] = $row; 
           }  
           $this->listFields = $result;
+          $this->listFields[] = [
+            'text' => T('actions'),
+            'value' => 'actions'
+          ];
         }
       }
 
@@ -77,8 +81,10 @@ abstract class AbstractController {
           } else {
             $this->error(T('wrong url'));
           }
-
-          $content = $this->render($content);
+           
+          if(!api()) {
+            $content = $this->render($content);
+          }    
 
           return $content;
       }

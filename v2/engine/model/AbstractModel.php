@@ -16,8 +16,12 @@ abstract class AbstractModel {
 
     public function __construct() { 
         $this->name =  str_replace('Model', '', get_class($this)); 
+
         $this->extend();
-        $this->fields[$this->key] = 'hidden';
+        
+        if($this->key) {
+            $this->fields[$this->key] = 'hidden';
+        }
       }
 
     function fields() { 
@@ -28,10 +32,14 @@ abstract class AbstractModel {
         if(empty($data)) return [];
         $return = [];
         foreach($data as $key => $row) {
-          $key = $this->validateField($row, $this->key);
-          if($key) {
-            $return[$key] = $this->validateRow($row);;
-          } 
+            if($this->key) {  
+                $key = $this->validateField($row, $this->key);
+                if($key) {
+                    $return[$key] = $this->validateRow($row);
+                } 
+            } else {
+                $return[] = $this->validateRow($row);
+            }
         }
         return $return;
     }

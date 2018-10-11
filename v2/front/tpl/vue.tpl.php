@@ -5,7 +5,6 @@
 <script>
 new Vue({
 el: '#app',
-iconfont: 'fa',
 data: () => ({
   drawer: false
   })

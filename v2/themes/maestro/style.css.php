@@ -221,3 +221,9 @@ aside h1 {
 thead {
   background: rgba(0,0,0,0.5) !important;
 }
+
+table.v-table thead th {
+  font-size: 1.1em;
+  font-weight: 200;
+  font-family: Roboto;  
+}
