@@ -1,0 +1,13 @@
+diff --git a/v2/engine/controller/AbstractController.php b/v2/engine/controller/AbstractController.php
+index 314995f..2829bf3 100644
+--- a/v2/engine/controller/AbstractController.php
++++ b/v2/engine/controller/AbstractController.php
+@@ -34,7 +34,7 @@ abstract class AbstractController {
+         $this->cl = str_replace('Controller', '', get_class($this));
+         $this->model = model(strtolower($this->cl));
+ 
+-        $this->formFields = $this->model()->fields();
++       // $this->formFields = $this->model()->fields();
+ 
+         $this->setListHeaders();
+         $this->setDefvalues();

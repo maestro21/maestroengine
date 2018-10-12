@@ -45,6 +45,15 @@ abstract class AbstractModel {
     }
 
 
+    function getFieldType($field) {
+        if(is_array($field)) {
+            $type = $field[0];
+        } else {
+            $type = $field;
+        }
+        return $type;
+    }
+
     function validateField($row, $key) {
         $field = $this->fields[$key];
 
@@ -52,12 +61,8 @@ abstract class AbstractModel {
             return null;
         }
 
-        if(is_array($field)) {
-            $type = $field[0];
-        } else {
-            $type = $field;
-        }
-
+        $type = $this->getFieldType($field);
+        
         $value = $row[$key] ?? null;
 
         switch($type) {

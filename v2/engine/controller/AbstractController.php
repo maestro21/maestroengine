@@ -36,8 +36,28 @@ abstract class AbstractController {
 
         $this->formFields = $this->model()->fields();
 
+        $this->setFormFields();
         $this->setListHeaders();
         $this->setDefvalues();
+      }
+
+
+      function setFormFields($data = null) {         
+        if($data == null) {
+          $result = [];
+          foreach($this->model()->fields() as $key => $field) {
+            $row = [
+                'text' => T($key),
+                'value' => $key,
+                'type' => $this->model()->getFieldType($field), 
+                'key' => $key,
+                'options' => $field['options'] ?? null,
+
+            ]; 
+            $result[] = $row; 
+          }  
+          $this->formFields = $result;
+        }
       }
 
       function setListHeaders($data = null) {         

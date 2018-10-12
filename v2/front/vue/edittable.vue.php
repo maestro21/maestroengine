@@ -11,6 +11,7 @@
       <template slot="items" slot-scope="props">
         <td v-for="header in headers" v-if="header.value != 'actions'">
           <v-text-field v-model="props.item[header.value]"></v-text-field>
+          <widget :value="props.item[header.value]" :widget="header" />
         </td>
         <td v-else>
           <v-btn icon class="mx-0" @click="del(props.item)">
@@ -24,7 +25,7 @@
 </script>
 <script>
 Vue.component('edittable', {
-  props: [ 'items', 'headers', 'newitem', 'endpoint'],
+  props: [ 'items', 'headers', 'newitem', 'form', 'endpoint'],
   template: '#edittable',
   methods: {
     add () {
@@ -39,9 +40,11 @@ Vue.component('edittable', {
     }
   },
   data() {
+    console.log(this.headers);
 		return {
 			tnewitem: this.newitem,
 			theaders: this.headers,
+      tform: this.form,
 			titems: this.items,
       tendpoint: this.endpoint
 		}
