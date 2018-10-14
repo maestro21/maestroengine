@@ -5,7 +5,8 @@ abstract class AbstractController {
       /** Form fields */
       var $formFields = [];
       
-      var $listFields = [];
+      /** List headers */
+      var $listHeaders = [];
 
       /**
        * Default values of a new item
@@ -51,12 +52,12 @@ abstract class AbstractController {
             $row = [
                 'text' => T($key),
                 'value' => $key,
-                'type' => $this->model()->getFieldType($field), 
+                'type' => getDefaultWidget($this->model()->getFieldType($field)), 
                 'key' => $key,
                 'options' => $field['options'] ?? null,
 
             ]; 
-            $result[] = $row; 
+            $result[$key] = $row; 
           }  
           $this->formFields = $result;
         }
@@ -74,8 +75,8 @@ abstract class AbstractController {
             $result[] = $row; 
           }  
         }
-          $this->listFields = $result;
-          $this->listFields[] = [
+          $this->listHeaders = $result;
+          $this->listHeaders[] = [
             'text' => T('actions'),
             'value' => 'actions'
           ];

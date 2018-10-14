@@ -2,17 +2,17 @@
 <!-- Widget -->
 <script type="text/x-template" id="widget">
 
-    <div v-if="widget.type === text">
+    <div v-if="twidget.type === '<?php echo WIDGET_STRING;?>'">
         <v-text-field 
-            label="widget.text"
-            v-model="value"
+            :label="twidget.text"
+            v-model="tvalue"
         ></v-text-field>
     </div>
     
-    <div v-else-if="widget.type === checkbox">
+    <div v-else-if="twidget.type === '<?php echo WIDGET_CHECKBOX;?>'">
         <v-checkbox
-            label="widget.text"
-            v-model="value"
+            :label="twidget.text"
+            v-model="tvalue"
         ></v-checkbox>
     </div>  
 
@@ -20,7 +20,13 @@
 <script>
 Vue.component('widget', {
   props: ['widget' , 'value'],
-  template: '#widget'
+  template: '#widget',
+  data() {
+      return {
+          twidget: this.widget,
+          tvalue: this.value
+      }
+  }
 });
 </script>
 <!-- /Widget -->

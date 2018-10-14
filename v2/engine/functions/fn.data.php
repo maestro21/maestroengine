@@ -40,3 +40,20 @@ function keyvalues2rows($data) {
     }
     return $_data;
 }
+
+
+function getDefaultWidget($type) {
+    switch($type) {
+        case DATA_BOOL:
+            return WIDGET_CHECKBOX;
+        break;
+        
+        case DATA_INT:
+            return WIDGET_NUMBER;
+        break;
+
+        default:
+            return WIDGET_STRING;
+        break;
+    }
+}

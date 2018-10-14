@@ -10,8 +10,8 @@
     >
       <template slot="items" slot-scope="props">
         <td v-for="header in headers" v-if="header.value != 'actions'">
-          <v-text-field v-model="props.item[header.value]"></v-text-field>
-          <widget :value="props.item[header.value]" :widget="header" />
+          <!--<v-text-field v-model="props.item[header.value]"></v-text-field> -->
+          <widget v-model="props.item[header.value]"  :widget="getWidget(header.value)" />
         </td>
         <td v-else>
           <v-btn icon class="mx-0" @click="del(props.item)">
@@ -37,6 +37,13 @@ Vue.component('edittable', {
     },
     save () {
       $.post(this.tendpoint, { data: this.titems }, handleResponse);
+    },
+    getWidget(key) {
+      //console.log(this.tform[key]);
+      if(this.tform[key]) {
+        return this.tform[key];
+      }
+      return null;
     }
   },
   data() {

@@ -43,6 +43,9 @@ define('DATA_TEXT', 'text');
 define('DATA_BOOL', 'bool');
 define('DATA_ARRAY', 'array');
 
+define('WIDGET_STRING', 'string');
+define('WIDGET_NUMBER', 'number');
+define('WIDGET_CHECKBOX', 'checkbox');
 
 
 
