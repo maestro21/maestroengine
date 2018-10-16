@@ -5,26 +5,29 @@
     <div v-if="twidget.type === '<?php echo WIDGET_STRING;?>'">
         <v-text-field 
             :label="twidget.text"
-            v-model="tvalue"
+            :name="'data[' + tindex + '][' + twidget.key + ']'"            
+            :value="value"
         ></v-text-field>
     </div>
     
     <div v-else-if="twidget.type === '<?php echo WIDGET_CHECKBOX;?>'">
         <v-checkbox
             :label="twidget.text"
-            v-model="tvalue"
+            :name="'data[' + tindex + '][' + twidget.key + ']'"           
+            :value="value"
         ></v-checkbox>
     </div>  
 
 </script>
 <script>
 Vue.component('widget', {
-  props: ['widget' , 'value'],
+  props: ['widget' , 'value', 'index'],
   template: '#widget',
   data() {
       return {
           twidget: this.widget,
-          tvalue: this.value
+          tvalue: this.value,
+          tindex: this.index,
       }
   }
 });

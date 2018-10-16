@@ -11,4 +11,10 @@
     'name' => 'Русский',
     'active' => true,
   ),
+  2 => 
+  array (
+    'abbr' => 'de',
+    'name' => 'Deutsch',
+    'active' => false,
+  ),
 );

@@ -49,11 +49,10 @@ abstract class AbstractController {
         if($data == null) {
           $result = [];
           foreach($this->model()->fields() as $key => $field) {
-            $row = [
-                'text' => T($key),
-                'value' => $key,
-                'type' => getDefaultWidget($this->model()->getFieldType($field)), 
+            $row = [              
                 'key' => $key,
+                'text' => T($key),
+                'type' => getDefaultWidget($this->model()->getFieldType($field)), 
                 'options' => $field['options'] ?? null,
 
             ]; 

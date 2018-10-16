@@ -1,7 +1,9 @@
+<?php $fid = uniqid(); ?>
 <!-- edittable -->
 <script type="text/x-template" id="edittable">
   <div>
     <v-btn @click.native="add">Add</v-btn>
+    <form id="<?php echo $fid;?>">
     <v-data-table
       v-bind:headers="theaders"
       :items="titems"
@@ -9,9 +11,9 @@
       disable-initial-sort
     >
       <template slot="items" slot-scope="props">
-        <td v-for="header in headers" v-if="header.value != 'actions'">
+        <td v-for="(header) in headers" v-if="header.value != 'actions'">
           <!--<v-text-field v-model="props.item[header.value]"></v-text-field> -->
-          <widget v-model="props.item[header.value]"  :widget="getWidget(header.value)" />
+          <widget :value="props.item[header.value]" :index="props.index" :widget="getWidget(header.value)" />
         </td>
         <td v-else>
           <v-btn icon class="mx-0" @click="del(props.item)">
@@ -19,13 +21,14 @@
           </v-btn>
         </td>
       </template>
-    </v-data-table>    
+    </v-data-table>   
+    </form> 
     <p class="text-md-center"><v-btn @click.native="save">save</v-btn></p>
   </div>
 </script>
 <script>
 Vue.component('edittable', {
-  props: [ 'items', 'headers', 'newitem', 'form', 'endpoint'],
+  props: [ 'items', 'headers', 'newitem', 'formfields', 'endpoint', 'formid'],
   template: '#edittable',
   methods: {
     add () {
@@ -36,12 +39,11 @@ Vue.component('edittable', {
       confirm('Are you sure you want to delete this item?') && this.titems.splice(index, 1)
     },
     save () {
-      $.post(this.tendpoint, { data: this.titems }, handleResponse);
+      $.post(this.tendpoint,  $('#<?php echo $fid;?>').serialize() , handleResponse);
     },
     getWidget(key) {
-      //console.log(this.tform[key]);
-      if(this.tform[key]) {
-        return this.tform[key];
+      if(this.tformfields[key]) {
+        return this.tformfields[key];
       }
       return null;
     }
@@ -51,9 +53,10 @@ Vue.component('edittable', {
 		return {
 			tnewitem: this.newitem,
 			theaders: this.headers,
-      tform: this.form,
+      tformfields: this.formfields,
 			titems: this.items,
-      tendpoint: this.endpoint
+      tendpoint: this.endpoint,
+      tformid: this.formid
 		}
 	}
 });
