@@ -49,7 +49,6 @@ Vue.component('edittable', {
     }
   },
   data() {
-    console.log(this.headers);
 		return {
 			tnewitem: this.newitem,
 			theaders: this.headers,

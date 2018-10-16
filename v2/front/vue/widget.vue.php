@@ -14,7 +14,7 @@
         <v-checkbox
             :label="twidget.text"
             :name="'data[' + tindex + '][' + twidget.key + ']'"           
-            :value="value"
+            v-model="tvalue"
         ></v-checkbox>
     </div>  
 
