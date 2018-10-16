@@ -22,8 +22,6 @@ class FormController extends AbstractController {
     }
 
     function saveAction() {
-        inspect(post());
-        // foreach row [id] => row
         $this->model->save(post('data'));
         return json(msg('saved'));
     }

@@ -11,7 +11,7 @@ abstract class AbstractController {
       /**
        * Default values of a new item
        */
-      var $defvalues = []; 
+      var $defValues = []; 
       
 
 
@@ -87,7 +87,7 @@ abstract class AbstractController {
         foreach($this->formFields as $key => $smth) {
           $data[$key] = null;
         }
-        $this->defvalues = $data;
+        $this->defValues = $data;
       }
 
       function handleRequest() {
