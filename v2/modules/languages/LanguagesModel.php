@@ -14,6 +14,10 @@ class LanguagesModel extends CacheModel {
 
     function save($data) {
         parent::save($data);
+            
+        $data = datafilter($data, [
+            'active' => true,
+        ]);
 
         $data = rows2keyvalues($data, 'abbr', 'name');
 

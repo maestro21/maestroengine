@@ -57,3 +57,15 @@ function getDefaultWidget($type) {
         break;
     }
 }
+
+function datafilter($data, $filter = []) {
+    $return = $data;
+    foreach($data as $index => $row) {
+        foreach($filter as $fkey => $fvalue) {
+            if(($row[$fkey] ?? null) != $fvalue) {
+                unset($return[$index]);
+            }    
+        }
+    }
+    return $return;
+}

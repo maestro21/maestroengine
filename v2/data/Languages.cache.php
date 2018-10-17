@@ -9,18 +9,18 @@
   array (
     'abbr' => 'ru',
     'name' => 'Русский',
-    'active' => false,
+    'active' => true,
   ),
   2 => 
   array (
     'abbr' => 'de',
     'name' => 'Deutsch',
-    'active' => true,
+    'active' => false,
   ),
   3 => 
   array (
     'abbr' => 'fr',
     'name' => 'Francais',
-    'active' => true,
+    'active' => false,
   ),
 );
