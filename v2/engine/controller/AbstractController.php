@@ -31,9 +31,10 @@ abstract class AbstractController {
       public $parse = P_FULL;
 
 
-      function __construct() {
+      function __construct($path = null) {
         $this->cl = str_replace('Controller', '', get_class($this));
-        $this->model = model(strtolower($this->cl));
+        if(!$path) $path = $this->cl;
+        $this->model = model(strtolower($path));
 
         if($this->model()) {
           $this->formFields = $this->model()->fields();
@@ -46,7 +47,7 @@ abstract class AbstractController {
 
 
       function setFormFields($data = null) {         
-        if($data == null) {
+        if($data == null && $this->model()) {
           $result = [];
           foreach($this->model()->fields() as $key => $field) {
             $row = [              
@@ -109,7 +110,7 @@ abstract class AbstractController {
           if(!api()) {
             $content = $this->render($content);
           }    
-
+            
           return $content;
       }
 

@@ -31,6 +31,9 @@ function rows2keyvalues($data, $key = 'key', $value = 'value') {
   }
 
 function keyvalues2rows($data) {
+    if(!$data || !is_array($data)) {
+        return [];
+    }
     $_data = [];
     foreach($data as $key => $value) {
         $_data[] = [

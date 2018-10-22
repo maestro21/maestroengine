@@ -2,20 +2,33 @@
 
 function processRequest() {
   route();
-  if(path(0) != '' && path(0) != 'api' && !isset(langs()[path(0)])) {
-    redirect();
-  }
+  $result = process(path()); 
 
-  $controller = c(path(1));
-  if(!$controller) {
-    redirect();
-  }
-
-  $result = $controller->handleRequest();
+  if(!$result) redirect();
 
   echo $result;
 }
 
+
+function process($path = null) {
+  if(!is_array($path)) {
+    $path = explode('/', $path);
+  }
+
+  $lang = $path[0];
+  if($lang != '' && $lang != 'api' && !isset(langs()[$lang])) {
+    return false;
+  }
+  
+  $controller = c(@$path[1]);
+  if(!$controller) {
+    return false;
+  }
+
+  $result = $controller->handleRequest();
+
+  return  $result;
+}
 
 function redirect($to = null, $time = 0, $relative = false){
     if(!empty($to)) {

@@ -8,7 +8,7 @@
  *  Returns path of module file
  */
 function mf($file) {
-  $filename = BASE_PATH . 'modules/' . $file;
+  $filename = BASE_PATH . 'modules/' . $file; 
   if(file_exists($filename)) {
     return $filename;
   }
@@ -51,7 +51,7 @@ function c($name = '') {
   if($return) {
     require_once($return);
     $name .= 'Controller';
-    $return = new $name();
+    $return = new $name($path);
   }
   return $return;
 }
@@ -66,10 +66,10 @@ function view($view, $data) {
     $view = $view[0];
   }
   
-  $return = mf(strtolower($class) . '/' . $view . VIEW_EXT);
+  $return = mf(strtolower($class) . '/view/' . $view . VIEW_EXT);
   if(!$return) {
     $return = FRONT_PATH . 'view/'  . $view . VIEW_EXT; 
-    if(!file_exists($return)) {
+    if(!file_exists($return)) { die();
       return null;
     }
   }
