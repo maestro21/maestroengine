@@ -1,6 +1,16 @@
 <?php $data = array (
   'test' => 
   array (
-    0 => 'test',
+    'en' => 'rtrty',
+    'ru' => 'etwt',
+    'de' => 'htrh',
+    'fr' => '',
+  ),
+  'jjj' => 
+  array (
+    'en' => 'trhtrhth',
+    'ru' => '',
+    'de' => '',
+    'fr' => '',
   ),
 );

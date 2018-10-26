@@ -3,10 +3,10 @@
     <v-layout>
         <v-flex xs8>
             <template v-for="(lang) in langs">
-            <v-text-field v-if='tlang === lang.abbr'
+            <v-text-field v-show='tlang === lang.abbr'
                 :label="twidget.text + ' ' + lang.name"
-                :name="'data[' + tindex + '][' + twidget.key + '][lang.abbr]'"            
-                :value="value[lang.abbr]"
+                :name="'data[' + tindex + '][' + twidget.key + '][' + lang.abbr + ']'"            
+                :value="getValue(lang.abbr)"
                 ></v-text-field>
             </template>
         </v-flex>
@@ -41,8 +41,13 @@ Vue.component('multilang', {
           tindex: this.index,
       }
   },
-  mounted() {
-      console.log(this.langs);
+  methods: {
+    getValue(lang) {
+        if(this.tvalue && lang in this.tvalue) {
+            return this.tvalue[lang];
+        }
+        return '';  
+    }
   }
 });
 </script>
