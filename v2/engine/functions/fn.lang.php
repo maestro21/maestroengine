@@ -12,22 +12,28 @@ function lang() {
   return getlang()['abbr'] ?? deflang();
 }
 
+function languages($abbr = true) {
+  $_langs = cache('languages'); 
+  if(!$abbr) { return $_langs; }
+  $langs = [];
+  foreach($_langs as $lang) {
+    if($lang['active'] === true) {
+      $langs[$lang['abbr']] = $lang;
+    }
+  } 
+  return $langs;
+}
+
 /**
  * gets language by abbr; if abbr not set - get current lang
  */
 function getlang($abbr = null){
-  $langs = langs();
+  $langs = languages();
   return $langs[$abbr] ?? $langs[session('lang')] ?? $langs[DEFLANG];
 }
 
 function langs() {
-  return [
-    'en' => [
-      'abbr' => 'en',
-      'name' => 'English'
-    ]
-  ];
-  return settings('langs');
+  return cache('langs');
 }
 
 

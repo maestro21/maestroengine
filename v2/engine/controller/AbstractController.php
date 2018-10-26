@@ -17,6 +17,7 @@ abstract class AbstractController {
 
       var $model;
       var $cl = '';
+      var $path = '';
       var $defaultAction = 'index';
       var $allowedActions = ['view', 'list', 'edit', 'add'];
 
@@ -33,62 +34,79 @@ abstract class AbstractController {
 
       function __construct($path = null) {
         $this->cl = str_replace('Controller', '', get_class($this));
-        if(!$path) $path = $this->cl;
+        $this->path = $path ?? $this->cl;
         $this->model = model(strtolower($path));
-
-        if($this->model()) {
-          $this->formFields = $this->model()->fields();
-        }
 
         $this->setFormFields();
         $this->setListHeaders();
         $this->setDefvalues();
+
+        $this->extend();
       }
 
+      function extend(){}
 
-      function setFormFields($data = null) {         
-        if($data == null && $this->model()) {
-          $result = [];
-          foreach($this->model()->fields() as $key => $field) {
-            $row = [              
-                'key' => $key,
-                'text' => T($key),
-                'type' => getDefaultWidget($this->model()->getFieldType($field)), 
-                'options' => $field['options'] ?? null,
-
-            ]; 
-            $result[$key] = $row; 
-          }  
-          $this->formFields = $result;
+      function applyData($target, $data,  $replace = false) {
+        if($data != null) {
+          if($replace) {
+            $target = $data;
+          } else {
+            $target = array_replace_recursive($target, $data);
+          }
         }
+        return $target;
       }
 
-      function setListHeaders($data = null) {         
-        if($data == null) {
-          $result = [];
+      function setFormFields($data = null, $replace = false) {      
+        if(!$this->formFields) {
+          $this->formFields = [];
           if($this->model()) {
-          foreach($this->model()->fields() as $key => $field) {
-            $row = [
-                'text' => $key,
-                'value' => $key 
-            ]; 
-            $result[] = $row; 
-          }  
+            foreach($this->model()->fields() as $key => $field) {
+                $row = [              
+                  'key' => $key,
+                  'text' => T($key),
+                  'type' => getDefaultWidget($this->model()->getFieldType($field)), 
+                  'options' => $field['options'] ?? null,
+                ];
+                $this->formFields[$key] = $row;   
+            }
+          }
         }
-          $this->listHeaders = $result;
-          $this->listHeaders[] = [
-            'text' => T('actions'),
-            'value' => 'actions'
-          ];
-        }
+
+        $this->formFields = $this->applyData( $this->formFields, $data, $replace);
+        return  $this->formFields;
       }
 
-      function setDefvalues() {
-        $data = [];
-        foreach($this->formFields as $key => $smth) {
-          $data[$key] = null;
+      function setListHeaders($data = null, $replace = false) {  
+        if(!$this->listHeaders) {
+          $this->listHeaders = [];
+          if($this->model()) {
+            foreach($this->model()->fields() as $key => $field) {
+              $row = [
+                  'text' => $key,
+                  'value' => $key 
+              ]; 
+              $this->listHeaders[] = $row;  
+            }
+          }
         }
-        $this->defValues = $data;
+        $this->listHeaders = $this->applyData($this->listHeaders, $data, $replace);
+        $this->listHeaders[] = [
+          'text' => T('actions'),
+          'value' => 'actions'
+        ];
+        return $this->listHeaders;
+      }
+
+      function setDefvalues($data = null, $replace = false) {
+        if(!$this->defValues) {
+          $this->defValues = [];
+          foreach($this->formFields as $key => $smth) {
+            $this->defValues[$key] = null;
+          }
+        }
+        $this->defValues = $this->applyData( $this->defValues, $data, $replace);
+        return $this->defValues;
       }
 
       function handleRequest() {
@@ -154,4 +172,22 @@ abstract class AbstractController {
     }
 
     abstract function getAction();
+
+    var $endpoint;
+    public function endpoint($endpoint = null) {
+      if($endpoint) {
+        $this->endpoint = $endpoint;
+      }
+
+      if(!$this->endpoint) {
+        $path = explode('/',$this->path);
+        if($path[0] == $path[1]) {
+          $this->endpoint = $path[0];
+        } else { 
+          $this->endpoint = $this->path;
+        }
+      }
+       
+      return $this->endpoint;
+    }
 }

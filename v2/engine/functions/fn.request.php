@@ -19,8 +19,11 @@ function process($path = null) {
   if($lang != '' && $lang != 'api' && !isset(langs()[$lang])) {
     return false;
   }
-  
-  $controller = c(@$path[1]);
+
+  $controller = c(@$path[1] . '/' . @$path[2]);
+  if(!$controller) {
+    $controller = c(@$path[1]);
+  }
   if(!$controller) {
     return false;
   }

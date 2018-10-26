@@ -18,16 +18,26 @@
         ></v-checkbox>
     </div>  
 
+    <div v-else-if="twidget.type === '<?php echo WIDGET_MULTILANG;?>'">
+        <multilang
+            :widget="twidget"        
+            v-bind:lang="tlang"
+            :index="tindex"
+            v-model="tvalue"
+        ></multilang>
+    </div> 
+
 </script>
 <script>
 Vue.component('widget', {
-  props: ['widget' , 'value', 'index'],
+  props: ['widget' , 'value', 'index', 'lang'],
   template: '#widget',
   data() {
       return {
           twidget: this.widget,
           tvalue: this.value,
           tindex: this.index,
+          tlang: this.lang
       }
   }
 });

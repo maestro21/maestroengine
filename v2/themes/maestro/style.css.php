@@ -119,7 +119,8 @@ h1 {
   width: 40px;
 }
 
-.langs img {
+.langs img,
+.langicon {
     width: 32px;
     height: 32px;
     margin-right: 10px;

@@ -17,7 +17,7 @@ class FormController extends AbstractController {
             'newItem' => $this->defValues,
             'form'  => $this->formFields,
             'data' => $data,
-            'endpoint' => API_URL . $this->cl
+            'endpoint' => API_URL . $this->endpoint()
         ]);
     }
 

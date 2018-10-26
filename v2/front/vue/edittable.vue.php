@@ -1,9 +1,8 @@
-<?php $fid = uniqid(); ?>
 <!-- edittable -->
 <script type="text/x-template" id="edittable">
   <div>
     <v-btn @click.native="add">Add</v-btn>
-    <form id="<?php echo $fid;?>">
+    <form :id="tformid">
     <v-data-table
       v-bind:headers="theaders"
       :items="titems"
@@ -13,7 +12,7 @@
       <template slot="items" slot-scope="props">
         <td v-for="(header) in headers" v-if="header.value != 'actions'">
           <!--<v-text-field v-model="props.item[header.value]"></v-text-field> -->
-          <widget :value="props.item[header.value]" :index="props.index" :widget="getWidget(header.value)" />
+          <widget :value="props.item[header.value]" :lang="tlang" :index="props.index" :widget="getWidget(header.value)" />
         </td>
         <td v-else>
           <v-btn icon class="mx-0" @click="del(props.item)">
@@ -39,7 +38,7 @@ Vue.component('edittable', {
       confirm('Are you sure you want to delete this item?') && this.titems.splice(index, 1)
     },
     save () {
-      $.post(this.tendpoint,  $('#<?php echo $fid;?>').serialize() , handleResponse);
+      $.post(this.tendpoint,  $('#' + this.tformid).serialize() , handleResponse);
     },
     getWidget(key) {
       if(this.tformfields[key]) {
@@ -55,7 +54,8 @@ Vue.component('edittable', {
       tformfields: this.formfields,
 			titems: this.items,
       tendpoint: this.endpoint,
-      tformid: this.formid
+      tformid: this.formid,
+      tlang: '<?php echo lang();?>'
 		}
 	}
 });

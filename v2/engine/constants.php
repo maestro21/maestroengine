@@ -46,7 +46,7 @@ define('DATA_ARRAY', 'array');
 define('WIDGET_STRING', 'string');
 define('WIDGET_NUMBER', 'number');
 define('WIDGET_CHECKBOX', 'checkbox');
-
+define('WIDGET_MULTILANG', 'multilang');
 
 
 define('DEFLANG', $_CONF['deflang'] ?? 'en');

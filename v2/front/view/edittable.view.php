@@ -4,4 +4,5 @@
   v-bind:newItem=<?php echo json($newItem);?>
   v-bind:formfields=<?php echo json($form);?>
   endpoint='<?php echo $endpoint; ?>'
+  formid='<?php echo uniqid();?>'
 />

@@ -18,8 +18,8 @@
         <img src="<?php echo UPLOAD_URL;?>langs/<?php echo $lang['abbr'];?>.png" align="absmiddle"><?php echo $lang['name'];?> &darr;
       </v-btn>
       <v-list  class="langs">
-        <?php $langs = langs(); foreach($langs as $lang) { ?>
-          <v-list-tile @click=""><v-list-tile-title><img src="<?php echo UPLOAD_URL;?>langs/<?php echo $lang['abbr'];?>.png" align="absmiddle"><?php echo $lang['name'];?></v-list-tile-title></v-list-tile>
+        <?php $langs = langs(); foreach($langs as $abbr => $name) { ?>
+          <v-list-tile @click=""><v-list-tile-title><img src="<?php echo UPLOAD_URL;?>langs/<?php echo $abbr;?>.png" align="absmiddle"><?php echo $name;?></v-list-tile-title></v-list-tile>
         <?php } ?>
       </v-list>
     </v-menu>
