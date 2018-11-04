@@ -11,6 +11,7 @@ class SettingsModel extends CacheModel {
         ];   
 
         $this->key = 'key';
+        $this->encode = true;
     }
 
 }

@@ -30,13 +30,15 @@ class CacheModel extends AbstractModel {
   function list($start = null, $length = null) {  
     $data = cache($this->name);
 
-    $this->encmode = ENCODE;
+    if($this->encode) {
+      $this->encmode = ENCODE;
+    }
     if($this->rows2keyvalues) {
         $data = keyvalues2rows($data);
     } 
     $this->key = null;
     $data = $this->validate($data);
-  
+
     if($start !== null) {
       $data = array_slice($data, (int)$start, $length);
     }  
@@ -47,7 +49,9 @@ class CacheModel extends AbstractModel {
    * Save all data
    */
   function save($data) {
-    $this->encmode = DECODE;
+    if($this->encode) {
+      $this->encmode = DECODE;
+    }
     $data = $this->validate($data);
     
     if($this->rows2keyvalues) {

@@ -11,6 +11,8 @@ abstract class AbstractModel {
 
     public $encmode = null;
   
+    public $encode = false;
+
    /**
     * fields in following format 'fieldname' => ['fieldtype', 'defvalue' => 'test', 'null' => true] OR
     * fieldname => fieldtype

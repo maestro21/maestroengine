@@ -12,7 +12,6 @@ class I18nController extends FormController {
     }
 
     function saveAction() {
-        var_dump(post());
         $this->model->save(post('data'));
         return json(msg('saved'));
     }

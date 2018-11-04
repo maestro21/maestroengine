@@ -13,7 +13,7 @@ abstract class AbstractController {
        */
       var $defValues = []; 
       
-
+      var $decode = false;
 
       var $model;
       var $cl = '';

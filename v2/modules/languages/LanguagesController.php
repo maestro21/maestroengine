@@ -26,6 +26,7 @@ class LanguagesController extends FormController {
 
     function listAction() { 
         return $this->view('edittable', [
+            'decode' => false,
             'headers' => $this->listHeaders,
             'newItem' => $this->defValues,
             'form'  => $this->formFields,
