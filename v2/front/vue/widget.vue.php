@@ -6,7 +6,7 @@
         <v-text-field 
             :label="twidget.text"
             :name="'data[' + tindex + '][' + twidget.key + ']'"            
-            :value="value"
+            :value="tvalue"
             :class="twidget.class"
         ></v-text-field>
     </div>
@@ -47,7 +47,7 @@ Vue.component('widget', {
   data() {
       return {
           twidget: this.widget,
-          tvalue: this.value,
+          tvalue: decodeURIComponent(this.value),
           tindex: this.index,
           tlang: this.lang
       }

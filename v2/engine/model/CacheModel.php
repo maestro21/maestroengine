@@ -14,7 +14,7 @@ class CacheModel extends AbstractModel {
     $data = null;
   }
 
-
+  
   protected $rows2keyvalues = false;
 
   function rows2keyvalues($value = null) {
@@ -30,12 +30,13 @@ class CacheModel extends AbstractModel {
   function list($start = null, $length = null) {  
     $data = cache($this->name);
 
+    $this->encmode = ENCODE;
     if($this->rows2keyvalues) {
         $data = keyvalues2rows($data);
-    } else {
-        $data = $this->validate($data);
-    }
-
+    } 
+    $this->key = null;
+    $data = $this->validate($data);
+  
     if($start !== null) {
       $data = array_slice($data, (int)$start, $length);
     }  
@@ -46,7 +47,7 @@ class CacheModel extends AbstractModel {
    * Save all data
    */
   function save($data) {
-    
+    $this->encmode = DECODE;
     $data = $this->validate($data);
     
     if($this->rows2keyvalues) {
@@ -110,5 +111,6 @@ class CacheModel extends AbstractModel {
     }
     return parent::validateRow($row);
   }
+
 
 }

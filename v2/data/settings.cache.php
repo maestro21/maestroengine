@@ -1,4 +1,4 @@
 <?php $data = array (
-  'sitename' => 'My website name',
-  'lang_url' => 'http://www.webstudio-maestro.ch/langselect/'
+  'sitename' => 'My website name2',
+  'lang_url' => 'http://www.webstudio-maestro.ch/langselect/',
 );

@@ -1,11 +1,15 @@
 <?php 
 
+define('ENCODE', 1);
+define('DECODE', 2);
 
 abstract class AbstractModel {
 
     public $key = 'id';
 
     protected $name;
+
+    public $encmode = null;
   
    /**
     * fields in following format 'fieldname' => ['fieldtype', 'defvalue' => 'test', 'null' => true] OR
@@ -70,6 +74,13 @@ abstract class AbstractModel {
             //case DATA_FLOAT: $value = (float)$value; break;
             case DATA_BOOL: $value = (bool)$value; break;
             case DATA_ARRAY: $value = $this->validateArray($value); break;
+            default: 
+                if($this->encmode == ENCODE) {
+                    $value = rawurlencode($value);
+                } else if($this->encmode == DECODE) {
+                    $value = rawurldecode($value);
+                }
+                break;
         }
         return $value;
     }
