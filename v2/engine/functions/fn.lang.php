@@ -28,9 +28,11 @@ function langselect($abbr = false) {
   $_langs = languages($abbr);
   $langs = [];
   foreach($_langs as $k => $row) {
-    $langs[$k] = [];
-    $langs[$k]['text'] = '<img class="langicon" src="' . UPLOAD_URL . 'langs/' .  $row['abbr'] . '.png"  align="absmiddle">';
-    $langs[$k]['value'] = $row['abbr']; 
+    $langs[$k] = [
+      'text' => '',
+      'img' => UPLOAD_URL . 'langs/' .  $row['abbr'] . '.png',
+      'value' => $row['abbr']
+    ];
   }
   return $langs;
 }

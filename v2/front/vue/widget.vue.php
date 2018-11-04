@@ -51,6 +51,11 @@ Vue.component('widget', {
           tindex: this.index,
           tlang: this.lang
       }
+  },
+  methods: {
+    setValue(value) {
+          this.tvalue = value;
+      }
   }
 });
 </script>

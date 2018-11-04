@@ -19,7 +19,7 @@
 </script>
 <script>
 Vue.component('m-select', {
-  props: ['options' , 'value', 'name', 'class' ],
+  props: ['options' , 'value', 'name' ],
   template: '#m-select',
   data() {
       return {
@@ -32,6 +32,7 @@ Vue.component('m-select', {
   methods: {
       setValue(value) {
           this.tvalue = value;
+          this.$emit('setValue', this.tvalue);
       },
       clearSpace(str) {
         return str.replace(/_/gi, ' ');

@@ -1,23 +1,32 @@
 <!-- Widget -->
 <script type="text/x-template" id="multilang">
     <v-layout>
-        <v-flex xs11>
+        <v-flex xs8>
             <template v-for="(lang) in langs">
             <v-text-field v-show='tlang === lang.abbr'
                 :label="twidget.text + ' ' + lang.name"
-                :name="'data[' + tindex + '][' + twidget.key + '][' + lang.abbr + ']'"
+                :name="'data[' + tindex + '][' + twidget.key + '][' + lang.abbr + ']'"            
                 :value="getValue(lang.abbr)"
                 ></v-text-field>
             </template>
         </v-flex>
-        <v-flex xs1>
-            <m-select 
+        <v-flex xs2>
+            <span class="langs">
+            <v-select 
+                item-value="abbr"
+                item-text="name"
                 :items="langs"
-                v-model="tlang"
-                class="langselect">
-            </m-select>
+                v-model="tlang">
+                <template slot="item"  slot-scope="data">
+                    <img class="langicon" :src="'<?php echo UPLOAD_URL;?>langs/' + data.item.abbr + '.png'" align="absmiddle">
+                </template>
+                <template slot="selection"  slot-scope="data">
+                    <img class="langicon" :src="'<?php echo UPLOAD_URL;?>langs/' + data.item.abbr + '.png'" align="absmiddle">
+                </template>
+            </v-select>
+            </span>
         </v-flex>
-    </v-layout>
+    </v-layout>    
 </script>
 <script>
 Vue.component('multilang', {
@@ -25,7 +34,7 @@ Vue.component('multilang', {
   template: '#multilang',
   data() {
       return {
-          langs: <?php echo json(langselect());?>,
+          langs: <?php echo json(languages(false));?>,
           tlang: this.lang,
           twidget: this.widget,
           tvalue: this.value,
@@ -37,17 +46,9 @@ Vue.component('multilang', {
         if(this.tvalue && lang in this.tvalue) {
             return this.tvalue[lang];
         }
-        return '';
+        return '';  
     }
   }
 });
 </script>
 <!-- /Widget -->
-<style>
-.langselect .v-select-list {
-    padding-left: 0;
-}
-.langselect .v-list {
-    background:rgba(0,0,0,0.3) !important;
-}
-</style>
