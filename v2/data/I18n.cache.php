@@ -1,9 +1,9 @@
 <?php $data = array (
-  'test' => 
+  'settings' => 
   array (
-    'en' => 'rtrty',
-    'ru' => 'etwt',
-    'de' => 'htrh',
+    'en' => 'Settings',
+    'ru' => 'Настройки',
+    'de' => 'Einstellungen',
     'fr' => '',
   ),
   'jjj' => 

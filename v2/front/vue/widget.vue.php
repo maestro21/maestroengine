@@ -7,6 +7,7 @@
             :label="twidget.text"
             :name="'data[' + tindex + '][' + twidget.key + ']'"            
             :value="value"
+            :class="twidget.class"
         ></v-text-field>
     </div>
     
@@ -15,6 +16,7 @@
             :label="twidget.text"
             :name="'data[' + tindex + '][' + twidget.key + ']'"           
             v-model="tvalue"
+            :class="twidget.class"
         ></v-checkbox>
     </div>  
 
@@ -24,7 +26,17 @@
             v-bind:lang="tlang"
             :index="tindex"
             v-model="tvalue"
+            :class="twidget.class"
         ></multilang>
+    </div> 
+
+    <div v-else-if="twidget.type === '<?php echo WIDGET_SELECT;?>'">
+        <m-select
+            :options="twidget.options"
+            v-model="tvalue"
+            :name="'data[' + tindex + '][' + twidget.key + ']'"
+            :class="twidget.class"  
+        ></m-select>
     </div> 
 
 </script>

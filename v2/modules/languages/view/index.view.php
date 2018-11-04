@@ -1,1 +1,1 @@
-<?php echo tabs($tabs);?> ef
+<?php echo tabs($tabs);?>

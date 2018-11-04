@@ -47,6 +47,8 @@ define('WIDGET_STRING', 'string');
 define('WIDGET_NUMBER', 'number');
 define('WIDGET_CHECKBOX', 'checkbox');
 define('WIDGET_MULTILANG', 'multilang');
+define('WIDGET_SELECT', 'select');
+
 
 
 define('DEFLANG', $_CONF['deflang'] ?? 'en');

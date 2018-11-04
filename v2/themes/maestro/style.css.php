@@ -115,8 +115,14 @@ h1 {
   height: 50px;
   line-height: 50px;
 }
+.v-list__tile.v-list__tile--link img,
 .langs img {
-  width: 40px;
+  height: 32px;
+  margin-right: 10px;
+}
+
+.v-list__tile.v-list__tile--link {
+  font-weight: 100;
 }
 
 .langs img,
@@ -132,7 +138,8 @@ h1 {
 }
 
 .langs .v-list__tile__title:hover img,
-.langs .v-menu__activator img {
+.langs .v-menu__activator img,
+.langicon:hover {
       border: 1px white solid;
       padding: 2px;
 }
@@ -226,5 +233,31 @@ thead {
 table.v-table thead th {
   font-size: 1.1em;
   font-weight: 200;
-  font-family: Roboto;  
+  font-family: Roboto;
+}
+
+.v-tabs__bar {
+  background-color: transparent !important;
+}
+
+.accent--text {
+  color: wheat !important;
+  caret-color: wheat !important;
+}
+
+.v-select-list .v-list {
+  background-color: rgba(0,0,0,0.3) !important;
+}
+
+ .langicon {
+   margin: 0;
+ }
+.v-select-list .v-text-field .v-input__append-inner {
+    padding: 0;
+}
+
+.v-select-list.v-card {
+  padding: 0;
+  margin: 0;
+  margin-top: 25px;
 }

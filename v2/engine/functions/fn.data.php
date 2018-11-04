@@ -72,3 +72,8 @@ function datafilter($data, $filter = []) {
     }
     return $return;
 }
+
+function safestring($string) {
+    $string = str_replace(' ', '_', $string);
+    return $string;
+}

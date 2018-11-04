@@ -38,6 +38,7 @@ Vue.component('edittable', {
       confirm('Are you sure you want to delete this item?') && this.titems.splice(index, 1)
     },
     save () {
+      console.log(this.titems);
       $.post(this.tendpoint,  $('#' + this.tformid).serialize() , handleResponse);
     },
     getWidget(key) {
@@ -48,6 +49,7 @@ Vue.component('edittable', {
     }
   },
   data() {
+    console.log(this.formfields);
 		return {
 			tnewitem: this.newitem,
 			theaders: this.headers,

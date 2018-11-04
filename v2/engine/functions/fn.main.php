@@ -36,7 +36,7 @@ function data($key = null, $value = null) {
 /* settings are loaded from settings cache and are handled in settings module
   if conf are technical essentials of website, settings can be altered and have
   such data as default language or theme */
-$_SETTINGS = [];
+$_SETTINGS = cache('settings');
 function settings($name = null) {
   global $_SETTINGS;
   if($name) {
@@ -45,6 +45,9 @@ function settings($name = null) {
   return $_SETTINGS;
 }
 
+function s($name = null) {
+  return settings($name);
+}
 
 function inspect($data) {
   echo "<pre>";

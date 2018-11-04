@@ -24,6 +24,17 @@ function languages($abbr = true) {
   return $langs;
 }
 
+function langselect($abbr = false) {
+  $_langs = languages($abbr);
+  $langs = [];
+  foreach($_langs as $k => $row) {
+    $langs[$k] = [];
+    $langs[$k]['text'] = '<img class="langicon" src="' . UPLOAD_URL . 'langs/' .  $row['abbr'] . '.png"  align="absmiddle">';
+    $langs[$k]['value'] = $row['abbr']; 
+  }
+  return $langs;
+}
+
 /**
  * gets language by abbr; if abbr not set - get current lang
  */
@@ -40,3 +51,5 @@ function langs() {
 function t($text) {
   return $text;
 }
+
+
