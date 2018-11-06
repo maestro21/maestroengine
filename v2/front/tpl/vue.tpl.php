@@ -1,5 +1,6 @@
 <?php
   echo include_dir(FRONT_PATH . 'vue/');
+  echo include_vues();
 ?>
 
 <script>

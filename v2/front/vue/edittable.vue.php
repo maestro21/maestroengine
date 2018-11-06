@@ -2,6 +2,7 @@
 <script type="text/x-template" id="edittable">
   <div>
     <v-btn @click.native="add">Add</v-btn>
+    <slot name="buttons"></slot>
     <form :id="tformid">
     <v-data-table
       v-bind:headers="theaders"

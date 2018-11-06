@@ -103,6 +103,18 @@ function include_dir($dir) {
   return $content;
 }
 
+function include_vues() {
+  $dirs = dir_list(BASE_PATH . 'modules/');
+  $content = '';
+  foreach($dirs as $dir) {
+    $path = BASE_PATH . 'modules/' . $dir . '/vue/';
+    if(file_exists($path)) {
+      $content .= include_dir($path);
+    }
+  }
+  return $content;
+}
+
 function theme() {
   return (settings('theme') != '' ? settings('theme') : DEFTHEME);
 }
