@@ -31,7 +31,8 @@ class LanguagesController extends FormController {
             'newItem' => $this->defValues,
             'form'  => $this->formFields,
             'data' => $this->model()->list(),
-            'endpoint' => API_URL . $this->cl
+            'endpoint' => API_URL . $this->cl,
+            'prelanglist' => $this->getWorldLanguages()
         ]);
     }
 
@@ -51,13 +52,20 @@ class LanguagesController extends FormController {
         return $return;
     }
   
+    function getLanguages($option) {
+        $content = json_decode(file_get_contents('http://localhost/langselect/api.php?do=' . $option), true);
+        foreach($content as $k => $row) {
+            $content[$k]['img'] = S('lang_url') . 'flags/' . $row['img'];
+        }
+        return $content;
+    }
 
     function getWorldLanguages() {
-        return true;
+        return $this->getLanguages('getWorldLanguages');
     }
 
     function getEuroLanguages() {
-
+        return $this->getLanguages('getEuroLanguages');
     }
 
     function getEuroWorldLanguages() {

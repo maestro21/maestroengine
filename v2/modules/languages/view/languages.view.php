@@ -6,4 +6,5 @@
   v-bind:decode="<?php echo ($decode ? 'true' : 'false');?>"
   endpoint='<?php echo $endpoint; ?>'
   formid='<?php echo uniqid();?>'
+  prelanglist='<?php echo json($prelanglist);?>'
 />

@@ -11,19 +11,23 @@
         formid=this.tformid
         >
         <template slot="buttons">
-            test
+        <m-select
+                :options="this.tprelanglist"
+                v-model="tprelang"
+                name="prelang"
+            ></m-select>
         </template>
     </edittable>
   </div>
 </script>
 <script>
 Vue.component('edittable-languages', {
-  props: [ 'items', 'headers', 'newitem', 'formfields', 'endpoint', 'formid', 'decode'],
+  props: [ 'items', 'headers', 'newitem', 'formfields', 'endpoint', 'formid', 'decode', 'prelanglist'],
   template: '#edittable-languages',
   methods: {
     
   },
-  data() { 
+  data() {       
 		return {
 			tnewitem: this.newitem,
 			theaders: this.headers,
@@ -32,6 +36,8 @@ Vue.component('edittable-languages', {
             tendpoint: this.endpoint,
             tformid: this.formid,
             tdecode: this.decode,
+            tprelang: 'en',
+            tprelanglist: JSON.parse(this.prelanglist)
 		}
 	}
 });
