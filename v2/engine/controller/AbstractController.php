@@ -102,7 +102,7 @@ abstract class AbstractController {
         if(!$this->defValues) {
           $this->defValues = [];
           foreach($this->formFields as $key => $smth) {
-            $this->defValues[$key] = null;
+            $this->defValues[$key] = "";
           }
         }
         $this->defValues = $this->applyData( $this->defValues, $data, $replace);

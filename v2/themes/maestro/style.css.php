@@ -240,7 +240,12 @@ table.v-table thead th {
   background-color: transparent !important;
 }
 
-.accent--text {
+#app .accent {
+    background-color: wheat !important;
+    border-color: wheat !important;
+}
+#app .accent--text,
+#app .primary--text  {
   color: wheat !important;
   caret-color: wheat !important;
 }
@@ -260,4 +265,29 @@ table.v-table thead th {
   padding: 0;
   margin: 0;
   margin-top: 25px;
+}
+
+#app .application .v-card {
+  background-color: black !important;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: #000;
+    cursor: pointer;
+} 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #fff;  
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: wheat;
+}
+
+#app .v-select-list.v-card {
+  margin-top: 0;
 }

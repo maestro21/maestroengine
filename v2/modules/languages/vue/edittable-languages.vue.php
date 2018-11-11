@@ -1,21 +1,31 @@
 <!-- edittable-languages -->
 <script type="text/x-template" id="edittable-languages">
   <div>
-  <edittable 
+   <edittable 
         v-bind:items=this.titems
         v-bind:headers=this.theaders
-        v-bind:newItem=this.tnewItem
+        :newitem=this.newitem
         v-bind:formfields=this.tformfields
         v-bind:decode=this.tdecode
-        endpoint=this.tendpoint
+        :endpoint=this.tendpoint
         formid=this.tformid
         >
         <template slot="buttons">
-        <m-select
-                :options="this.tprelanglist"
-                v-model="tprelang"
-                name="prelang"
-            ></m-select>
+            <m-dialog
+                btntext="Add predefined language"
+                title="Add predefined language">
+                    <template slot="content">
+                        <m-select
+                            :options="this.tprelanglist"
+                            v-model="this.tprelang"
+                            name="prelang"
+                            id="prelang"
+                        ></m-select>
+                    </template>
+                    <template slot="buttons">
+                        <v-btn @click="addPredefinedLanguage()">Add</v-btn>
+                    </template>
+            </m-dialog>  
         </template>
     </edittable>
   </div>
@@ -23,11 +33,8 @@
 <script>
 Vue.component('edittable-languages', {
   props: [ 'items', 'headers', 'newitem', 'formfields', 'endpoint', 'formid', 'decode', 'prelanglist'],
-  template: '#edittable-languages',
-  methods: {
-    
-  },
-  data() {       
+  template: '#edittable-languages', 
+  data() {
 		return {
 			tnewitem: this.newitem,
 			theaders: this.headers,
@@ -39,7 +46,23 @@ Vue.component('edittable-languages', {
             tprelang: 'en',
             tprelanglist: JSON.parse(this.prelanglist)
 		}
-	}
+	},
+    methods: {
+        addPredefinedLanguage() {
+            this.tprelang = $('#prelang input[name=prelang]').val();
+            for(lang of this.tprelanglist) {
+                if(lang.value == this.tprelang) { 
+                    this.items.push(
+                        {
+                            img: fileFromUrl(lang.img),
+                            abbr: lang.value,
+                            name: lang.text,
+                        }
+                    )
+                }
+            }
+        }
+    }
 });
 </script>
 <!-- /edittable -->

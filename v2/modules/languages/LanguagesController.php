@@ -22,6 +22,7 @@ class LanguagesController extends FormController {
                 'class' => 'langs'
             ]
         ]);
+        $this->setDefvalues();
     }
 
     function listAction() { 
