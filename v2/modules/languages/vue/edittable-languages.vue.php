@@ -20,6 +20,7 @@
                             v-model="this.tprelang"
                             name="prelang"
                             id="prelang"
+                            class="langs"
                         ></m-select>
                     </template>
                     <template slot="buttons">

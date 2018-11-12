@@ -1,10 +1,10 @@
 <!-- Maestro Dialog -->
 <script type="text/x-template" id="m-dialog">
     <v-dialog  max-width="500px">
-        <v-btn slot="activator" color="primary" dark class="mb-2">{{ this.btntext }}</v-btn>
+        <v-btn slot="activator" class="mb-2">{{ this.btntext }}</v-btn>
         <v-card>
           <v-card-title>
-            <span class="headline">{{ this.title }}</span>
+            <h3>{{ this.title }}</h3>
           </v-card-title>
           <v-card-text>
             <v-container grid-list-md>

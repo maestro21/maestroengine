@@ -76,6 +76,15 @@ main {
   margin-bottom: 25px;
 }
 
+.v-dialog .v-card {
+  margin: 0;
+  padding: 0;
+}
+
+.v-card__title {
+  background-color: rgba(255,255,255,0.1);
+}
+
 html, body {
   overflow: hidden;
   font-size:2vmin; /*1.5vmax; */
@@ -118,7 +127,9 @@ h1 {
 .v-list__tile.v-list__tile--link img,
 .langs img {
   height: 32px;
+  width: 32px;
   margin-right: 10px;
+  padding: 3px;
 }
 
 .v-list__tile.v-list__tile--link {
@@ -268,8 +279,9 @@ table.v-table thead th {
 }
 
 #app .application .v-card {
-  background-color: black !important;
+  background-color: rgb(0,0,0,0.8)!important
 }
+
 
 ::-webkit-scrollbar {
     width: 10px;
@@ -290,4 +302,9 @@ table.v-table thead th {
 
 #app .v-select-list.v-card {
   margin-top: 0;
+}
+
+.v-tabs__wrapper {
+  border-bottom: 1px wheat solid;
+  margin-bottom: 10px;
 }
