@@ -43,7 +43,7 @@ Vue.component('edittable', {
       const index = this.titems.indexOf(item);
       confirm('Are you sure you want to delete this item?') && this.titems.splice(index, 1)
     },
-    save () {
+    save () { console.log(  this.tformid);
       $.post(this.tendpoint,  $('#' + this.tformid).serialize() , handleResponse);
     },
     getWidget(key) {

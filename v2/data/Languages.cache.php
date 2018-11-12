@@ -27,4 +27,11 @@
     'name' => 'Francais',
     'active' => false,
   ),
+  4 => 
+  array (
+    'img' => 'spain.png',
+    'abbr' => 'es',
+    'name' => 'Español',
+    'active' => false,
+  ),
 );

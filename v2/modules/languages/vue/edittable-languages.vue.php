@@ -8,7 +8,7 @@
         v-bind:formfields=this.tformfields
         v-bind:decode=this.tdecode
         :endpoint=this.tendpoint
-        formid=this.tformid
+        :formid=this.tformid
         >
         <template slot="buttons">
             <m-dialog
