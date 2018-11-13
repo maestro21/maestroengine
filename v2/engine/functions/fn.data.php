@@ -25,7 +25,11 @@ function cache($name = '', $_data = null) {
 function rows2keyvalues($data, $key = 'key', $value = 'value') {
     $_data = [];
     foreach($data as $row) {
-        $_data[$row[$key]] = $row[$value];
+        if($key) {
+            $_data[$row[$key]] = $row[$value];
+        } else {
+            $_data[] = $row[$value];
+        }
     }
     return $_data;
   }
