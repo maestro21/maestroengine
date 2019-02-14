@@ -1,6 +1,4 @@
-<br>
-<h1><?php echo $title;?>
-<?php echo drawBtns($buttons['admin']);?></h1>
+<?php echo drawBtns($buttons['admin']);?>
 <?php
 $statuses = ['not','far','ok'];
 $statustexts = ['not installed','installed','activated'];

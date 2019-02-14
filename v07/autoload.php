@@ -17,7 +17,7 @@ require_once(BASE_PATH . 'external/php_image_magician.php');
 
 
 getGlobals();
-
+getLabels();
 
 DBbackup();
 

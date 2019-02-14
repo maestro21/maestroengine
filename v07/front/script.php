@@ -4,7 +4,7 @@
 include('../autoload.php');
 getGlobals();
 setVar('lang',$_GET['lang']);
-S('labels', cache('i18n'));
+getLabels();
 
 
 ob_start();

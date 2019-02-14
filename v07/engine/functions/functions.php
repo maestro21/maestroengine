@@ -190,7 +190,12 @@ function delG($name) {
 	M('system')->delByName($name);
 }
 
+function t($label) {
+	global $labels;
+	return $labels[$label] ?? ucfirst($label);
+}
 
+/*
 function T($text, $number = 1, $addnumber = false, $ucfirst = false) {
 	$_text = ucfirst($text);
 	$labels = S('labels');
@@ -209,8 +214,7 @@ function T($text, $number = 1, $addnumber = false, $ucfirst = false) {
 	if($lang != 'ru' && $ucfirst) $text = strtoupper($text);
 
 	return $text;
-
-}
+}*/
 
 function addLabel($key) {
 	$labels = cache('i18n');
@@ -355,12 +359,11 @@ function getLang($lng = null){
 
 function getLabels(){
 	global $labels;
-	$tmp = file("lang/".getLang().".txt");
+	$tmp = file("data/i18n/".getLang().".txt");
 	foreach($tmp as $s){
 		$_s = explode("=",$s); $label = $_s[0]; unset($_s[0]); $text = join("=",$_s);
 		$labels[trim($label)] = trim($text);
-	}
-	if(file_exists('themes/'.G('theme').'/lang.php')) include('themes/'.G('theme').'/lang.php');
+	}	
 }
 
 function getFilterState($class,$field){
@@ -888,7 +891,6 @@ function cache($name, $data = NULL) {
 		return NULL;
 	}
 }
-
 
 /** Clears cache **/
 function cacherm($name) {

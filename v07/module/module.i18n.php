@@ -15,18 +15,12 @@ class i18n extends masterclass {
 			],
 		];
 		/* fields */
-		$this->fields = [
-					'label'			=>	[ 'string', 'text', 'search' => TRUE,],
-					'type'			=>	[ 'int', 'select' ],
-				];
+		$this->fields = [];
 		$langs = getLangs();
 		foreach($langs as $lang) {
-			$this->fields[$lang['abbr']] = [ 'string', 'text'];
+			$this->fields[$lang['abbr']] = [ 'string', 'textarea'];
+			$this->data[$lang['abbr']] = file_get_contents(BASE_PATH . 'data/i18n/' . $lang['abbr'] . '.txt');
 		}
-
-
-		$this->data = cache('i18n');
-
 	}
 
 
@@ -52,33 +46,11 @@ class i18n extends masterclass {
 		$this->ajax =true;
 		$data = array();
 		$langs = getLangs();
-		foreach($this->post['form']['fields'] as $row) {
-			if($row['type'] == 3) {
-				$langs = getLangs();
-				foreach($langs as $lang) {
-					$row[$lang['abbr']] = strToKeyValues($row[$lang['abbr']]);
-				}
-			}
-			$data[$row['label']] = $row;
+		foreach($this->post['form']['fields'] as $lang => $data) {
+			file_put_contents(BASE_PATH . 'data/i18n/' . $lang . '.txt', $data);
 		}
-		ksort($data, SORT_FLAG_CASE);
-		$this->cache($data);
 
 		echo json_encode(array('message' => T('saved'), 'status' => 'ok'));	die();
-	}
-
-
-
-	function addField($key = '{key}', $data = null) {
-		$this->ajax = true;
-
-
-		return tpl('i18n/field', array(
-			'key' 		=> $key,
-			'fields' 	=> $this->fields,
-			'widgets' 	=> $this->options['type'],
-			'data' 		=> $data)
-		);
 	}
 
 }

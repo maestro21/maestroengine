@@ -1941,3 +1941,9 @@ body.open {
 .adminpanel .nopadding {
 	padding: 20px 0;
 }
+
+
+
+#form .translations {
+  height: 1000px;
+}

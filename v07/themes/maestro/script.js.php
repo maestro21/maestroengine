@@ -1,5 +1,9 @@
 $(function() {
 
+	$('form').submit(function(e){
+		e.preventDefault();
+	});
+
 	/* tabs */
 	$(".tabContent > div").hide();
 	$(".tabContent > div:first").show();
