@@ -710,7 +710,7 @@ figure h1 {
 	box-shadow: 0 0px 1px rgba(0,0,0,1);
 }
 
-form .btn  {
+ .btn  {
 	font-size: 15px;
 	padding: 5px 10px;
 	margin: 5px 0px;
@@ -1947,3 +1947,24 @@ body.open {
 #form .translations {
   height: 1000px;
 }
+
+
+.table.ok {
+	border: none;
+	background:transparent;	
+}
+
+.table.ok,
+.table.ok h2 a,
+.table.ok .status {
+	color: rgb(120,255,120);
+	font-weight: 300;
+}
+
+
+.fa.icon,
+thead td a {
+	border: none;
+	background: none;
+}
+
