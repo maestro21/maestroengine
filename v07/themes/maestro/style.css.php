@@ -1949,7 +1949,10 @@ body.open {
 }
 
 
-.table.ok {
+.table.ok,
+.table.far,
+.table.not {
+	padding-left: 20px;
 	border: none;
 	background:transparent;	
 }
@@ -1961,6 +1964,21 @@ body.open {
 	font-weight: 300;
 }
 
+.table.far,
+.table.far h2 a,
+.table.far .status {
+	color: white;
+	font-weight: 300;
+}
+
+
+.table.not,
+.table.not h2 a,
+.table.not .status {
+	color: darkgray;
+	font-weight: 300;
+	font-style:italic;
+}
 
 .fa.icon,
 thead td a {
@@ -1968,3 +1986,21 @@ thead td a {
 	background: none;
 }
 
+.status.td {
+    width: 150px;
+}
+
+.btn-active {
+	background-color:#3f51b5;
+}
+.btn-active:hover {
+	color: #3f51b5;
+	border-color: #3f51b5;
+}
+
+.btn {
+	font-style: normal;
+	line-height: 25px;
+	padding: 5px 15px;
+	border-radius: 2px;
+}

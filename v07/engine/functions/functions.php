@@ -183,7 +183,7 @@ function G($name, $value = NULL) {
 		$_GLOBALS[$name] = $value;
 		//M('system')->set($name, $value);
 	}
-	return (isset($_GLOBALS[$name]) ? $_GLOBALS[$name] : NULL);
+	return $_GLOBALS[$name] ?? NULL;
 }
 
 function delG($name) {
@@ -231,8 +231,9 @@ function addLabel($key) {
 function M($module) {
 	global $masterclass;
 	$filename = BASE_PATH . 'module/module.' . $module . '.php';
-	if(file_exists($filename)) {
+	if(file_exists($filename)) { 
 		require_once(BASE_PATH .'engine/class.masterclass.php');
+
 		require_once($filename);
 		return new $module();
 	}
@@ -340,7 +341,16 @@ function setLang($lang){
 	}
 }
 
-function getLang($lng = null){
+function deflang() {
+	return DEFLANG;
+  }
+
+/*
+function lang() {
+	return getlang()['abbr'] ?? deflang();
+} */
+
+function getLang($lng = null){ return 'en';
 	$lang = getVar('lang'); if($lang) return $lang;
 	$langs = getLangs(); $lang = null;
 	foreach($langs as $_lang) {
@@ -357,13 +367,14 @@ function getLang($lng = null){
 	return $lang;
 }
 
-function getLabels(){
+function getLabels($lang = null){
 	global $labels;
-	$tmp = file("data/i18n/".getLang().".txt");
+	$tmp = file("data/i18n/".getLang($lang).".txt");
 	foreach($tmp as $s){
 		$_s = explode("=",$s); $label = $_s[0]; unset($_s[0]); $text = join("=",$_s);
 		$labels[trim($label)] = trim($text);
-	}	
+	}
+	return $labels;	
 }
 
 function getFilterState($class,$field){
@@ -686,12 +697,12 @@ function getGlobals(){
 }
 
 function getlangs() {
-	$langs = G('langs');
-	if(empty($langs)) {
+	return G('langs') ?? [];
+	/*if(empty($langs)) {
 		$langs = cache('langs', DBALL('select * from langs where active'));
 		G('langs', $langs);
 	}
-	return  $langs;
+	return  $langs;*/
 }
 
 function superAdmin(){
@@ -965,7 +976,7 @@ function dispatch() {
 
 	S('labels', cache('i18n'));
 
-	$module = M($module);
+	$module = M($module); 
 	if(!$module) $module = M(G('defmodule'));
 	if(!$module) $module = M(DEFMODULE);
 	if(!$module) return FALSE;

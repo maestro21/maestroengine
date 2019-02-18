@@ -1,5 +1,37 @@
 <?php class pages extends masterclass {
 
+	protected $labels = [
+		'pages' => 'Pages',
+	];
+
+	protected $defData = [
+		[	
+			'pid' => 0,
+			'url' 	=> 'en',
+			'fullurl' => 'en',
+			'name' => 'Welcome page',
+			'content' => 'Welcome to your newly created website! Powered by Maestro Engine v7',
+			'status' => 2,
+		],
+		[	
+			'pid' => 1,
+			'url' 	=> 'about',
+			'fullurl' => 'en/about',
+			'name' => 'About us',
+			'content' => 'About us page',
+			'status' => 2,
+		],
+		[	
+			'pid' => 1,
+			'url' 	=> 'contacts',
+			'fullurl' => 'en/contacts',
+			'name' => 'Contact us',
+			'content' => 'Contact us page',
+			'status' => 2,
+		],
+	];
+
+
 	function gettables() {
 		return
 		[
@@ -41,16 +73,10 @@
 	function install() {
 		if(!canInstall()) return;
 		parent :: install();
-		include('data/default.pages.php');
-		foreach($pages as $page) {
-			q($this)->qadd($page)->run();
-		}
+		$this->cache();
 	}
 
-	function validate() {
-
-
-	}
+	function validate() {}
 
 
 	function del($id = NULL) {

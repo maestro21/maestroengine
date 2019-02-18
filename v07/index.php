@@ -1,5 +1,5 @@
 <?php 
-define('ENV', 'devf');
+define('ENV', 'dev');
 
 if(ENV === 'dev') {
 	error_reporting(E_ALL);
@@ -13,7 +13,6 @@ if(ENV === 'dev') {
 
 include('autoload.php');
 try {
-
 	/** uncomment if you want to make your website completely private **/
 	/** if(!checkLogged()) redirect(BASE_URL . 'login.php'); /**/
 

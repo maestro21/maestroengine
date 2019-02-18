@@ -1,6 +1,6 @@
 <?php class modules extends masterclass {
 
-	private $systemModules = array('modules', 'system', 'pages', 'i18n', 'langs');
+	private $systemModules = array('i18n', 'modules', 'system',   'langs', 'pages'  );
 
 	function gettables() {
 		return
@@ -30,13 +30,14 @@
 
 	function reinstall() { 		
 		if(!canInstall()) return;
-		$this->install();
+		$this->install(); 
 		$modules = $this->systemModules; //[ ]$this->getModules();
 		foreach($modules as $module) {
 			if($module != $this->className) M($module)->install();
-		}
+		} 
 		$this->admin();
 		q()->update($this->cl)->set('status', 2)->run();
+		cache($this->className, q($this)->qlist()->run());
 	}
 
 
@@ -46,7 +47,11 @@
 		unset($modules[0]);
 		unset($modules[1]);
 		foreach($modules as $k => $module) {
-			$modules[$k] = str_replace('module.','',str_replace('.php','', $module));
+			$name = str_replace('module.','',str_replace('.php','', $module));
+			$modules[$k] = [
+				'name' => $name,
+				'description' => M($name)->description
+			];
 		}
 		return $modules;
 	}
@@ -55,49 +60,19 @@
 		//redirect(BASE_URL);
 		if(!superAdmin()) return;
 		if(hasRight($this->rights['admin'])) {
-			/** getting items from db **/
-			$items = q($this)
-						->qlist()
-						->un('limit')
-						->order('status DESC, name ASC')
-						->run();
-			/** getting real modules from module directory **/
-			$modules = array_flip($this->getModules());
-			/** running through db and assigning values to modules **/
-			foreach($items as $item){
-				if(isset($modules[$item['name']])) {
-					$modules[$item['name']] = $item;
-				} else {
-					q($this->cl)->qdel($item['id'])->run();
-				}
-			}
+		
+			$modules = $this->getModules(); 
+			
 			/** running through modules; if module is not in db - adding it**/
 			foreach($modules as $k => $module) {
-				if(!is_array($module)) {
-					$item = array(
-						'name' 			=> $k,
-						'description' 	=> $module['description'],
-						'status' 		=> 0,
-					);
-					/*if(in_array($k, $this->systemModules)) {
-						M($k)->install();
-						$item['status'] = 2;
-					} */
-					q($this)->qadd($item)->run();
-					$modules[$k] = $item;
-				}
+				$dbdata = q($this)->select()->where(qEq('name', $module['name']))->run(mysql::DBROW); 
+				$module['status'] = $dbdata['status'] ?? 0;				
+				$this->id = $dbdata['id'] ?? 0;
+				$this->saveDB($module);
+				$module['id'] = $this->id;
+				$modules[$k] = $module;
 			}
-
-			/** once more receiving modules **/
-			$modules = 	q($this)
-							->qlist()
-							->un('limit')
-							->order('status DESC, name ASC')
-						->run();
-
-			/** writing cache **/
 			cache($this->className, $modules);
-
 			return $modules;
 		}
 		return FALSE;

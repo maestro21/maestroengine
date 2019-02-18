@@ -170,6 +170,10 @@ class DBquery {
 
 	/** default queries **/
 
+	function qitem($id, $query = '*') {
+		return $this->qget($id, $query = '*');
+	}
+
 	function qget($id, $query = '*') {
 		$id = (int) $id;
 		if($id > 0) {

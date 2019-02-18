@@ -1,12 +1,25 @@
 <?php class system extends masterclass {
 
+
+
+	protected $settings = [				
+		'deflang' 	=> 'en',
+		'sitename'	=> 'Sitename',
+		'theme'		=> 'maestro',
+		'defmodule'	=> 'pages',
+	];
+
+	protected $labels = [
+		'system' => 'Settings'
+	];
+
 	function gettables() {
 		return [
 			'system' => [
 				'fields' => [
 					'name' 		=> [ 'string', 'text', ],
 					'value' 	=> [ 'string', 'text', ],
-					'deletable'	=> [ 'bool', 'checkbox', ]
+					'permanent'	=> [ 'bool', 'checkbox', ]
 				],
 				'idx' => [
 					'name' => [ 'name' ],
@@ -22,20 +35,13 @@
 	}
 
 
-	function install() {
-		if(!canInstall()) return;
-		parent :: install();
-		include('data/default.globals.php');
-		foreach($globals as $k => $v) {
-			$item = array(
-				'name'		=> $k,
-				'value'		=> $v,
-				'deletable'	=> 0,
-			);
-			q($this->cl)->qadd($item)->run();
+
+
+	function saveAll($data) {
+		foreach($data as $k => $v) {
+			$this->set($k, $v);
 		}
 	}
-
 
 	function set($key, $value) {
 		$this->id = q($this)->select('id')->where(qEq('name',$key))->run(MySQL::DBCELL);

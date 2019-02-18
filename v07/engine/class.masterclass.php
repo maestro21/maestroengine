@@ -12,6 +12,10 @@ As of dynamic assignment of class based on URL, i.e. if you want that `politics`
 specific ids, you can do it whether in module `pages` or in site mapping **/
 abstract class masterclass{
 
+	protected $defdata = [];
+	protected $settings = [];
+	protected $labels = [];
+
 	/** default field for a field type in table **/
 	const FIELDTYPE = 1;
 
@@ -216,12 +220,38 @@ abstract class masterclass{
 
 
     /** Class installation method **/
-    public function install() { install($this->tables); }
+    public function install() { 
+		if(!canInstall()) return;
+
+		// create db tables
+		install($this->getTables());
+		
+		// add data
+		$this->saveall($this->defdata);
+
+		// add settings
+		if($this->settings) { 
+			M('system')->saveAll($this->settings);
+		}
+		
+		// add text labels
+		if($this->labels) {
+			M('i18n')->addLabels($this->labels);
+		}
+	}
+
+	public function saveAll($data) {
+		if(!is_array($data) || sizeof($data) === 0) return;
+
+		foreach($data as $el) {
+			$this->saveDB($el);
+		}
+	}
 
 	/** Class uninstallation method **/
     public function uninstall() {
 		uninstall(array_reverse($this->tables));
-		q('modules')->qedit()->where(qEq('name',$this->className));
+		q()->update('modules')->where(qEq('name',$this->className));
 		cacherm($this->className);
 	}
 
