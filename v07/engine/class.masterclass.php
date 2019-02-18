@@ -244,6 +244,7 @@ abstract class masterclass{
 		if(!is_array($data) || sizeof($data) === 0) return;
 
 		foreach($data as $el) {
+			$this->id = 0;
 			$this->saveDB($el);
 		}
 	}

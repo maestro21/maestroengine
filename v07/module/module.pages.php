@@ -4,7 +4,7 @@
 		'pages' => 'Pages',
 	];
 
-	protected $defData = [
+	protected $defdata = [
 		[	
 			'pid' => 0,
 			'url' 	=> 'en',
@@ -123,7 +123,7 @@
 		$T = $this->getPageTree([ 'status' => 2]);
 		cache('menu', $T->treeList);
 
-		$T = $this->getPageTree();
+		$T = $this->getPageTree(); 
 		cache($this->className . 'options', $T->options);
 	}
 
@@ -222,17 +222,6 @@
 		$this->title = ($page['pid'] < 1 ? '<img src=' . BASE_URL . tpath() . 'img/logo.png>' : $page['name']);
 
 		$this->checkBG($page['id']);
-
-		// strahovki specific
-		/*if(count($path) > 2) {
-			$page['subpages'] = $this->getSubMenu($page['pid']); //print_r($subpages);
-			$pname = q()
-						->select('name')
-						->from($this->className)
-						->where(qeq('id',$page['pid']))
-					->run();
-			$page['name'] = $pname[0][0];
-		} */
 		if($page['type'] == 2) redirect(strip_tags($page['content']), 0, true);
 		return $page;
 	}
