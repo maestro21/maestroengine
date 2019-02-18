@@ -3,7 +3,28 @@ const FLAGAPI = 'http://www.webstudio-maestro.ch/langselect/';
 
 class langs extends masterclass {
 
-function gettables() {
+	protected $labels = [
+		'langs' => 'Languages',
+	];
+
+	protected $settings = [
+		'flag_api_url' =>  'http://www.webstudio-maestro.ch/langselect/',
+		'flag_default' => 'united-states-of-america',
+	];
+
+	protected $defData = [
+		[	
+			'pid' => 0,
+			'flag' => '',
+			'abbr' 	=> 'en',
+			'name' => 'Welcome page',
+			'pos' => 1,
+			'active' => 1,
+		]		
+	];
+
+
+	function gettables() {
 		return
 		[
 			'langs' => [

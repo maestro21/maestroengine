@@ -1,46 +1,48 @@
 <?php class system extends masterclass {
 
-	function gettables() {
-		return [
-			'system' => [
-				'fields' => [
-					'name' 		=> [ 'string', 'text', ],
-					'value' 	=> [ 'string', 'text', ],
-					'deletable'	=> [ 'bool', 'checkbox', ]
-				],
-				'idx' => [
-					'name' => [ 'name' ],
-				]
-			],
-		];
+	// MOVING TO CACHE
+
+	protected $settings = [				
+		'deflang' 	=> 'en',
+		'sitename'	=> 'Sitename',
+		'theme'		=> 'maestro',
+		'defmodule'	=> 'pages',
+	];
+
+	protected $labels = [
+		'system' => 'Settings'
+	];
+
+    function gettables() {
+        return [
+            'system' => [
+                'fields' => [
+                    'name'         => [ 'string', 'text', ],
+                    'value'     => [ 'string', 'text', ],
+                    'deletable'    => [ 'bool', 'checkbox', ]
+                ],
+                'idx' => [
+                    'name' => [ 'name' ],
+                ]
+            ],
+        ];
+    }
+
+
+	function saveAll($data){
+		if(!is_array($data) && sizeof($data) === 0) return;
+
+		$cache = cache($this->className) ?? [];
+		foreach($data as $key => $value) {
+			$cache[$key] =   ['name' => $key, 'value' => $value, 'permanent' => 1];
+		} 
+		$this->cache($cache);
 	}
-
-	function logout() {
-		global $_SESSION;
-		unset($_SESSION['user']);
-		redirect(BASE_URL);
-	}
-
-
-	function install() {
-		if(!canInstall()) return;
-		parent :: install();
-		include('data/default.globals.php');
-		foreach($globals as $k => $v) {
-			$item = array(
-				'name'		=> $k,
-				'value'		=> $v,
-				'deletable'	=> 0,
-			);
-			q($this->cl)->qadd($item)->run();
-		}
-	}
-
 
 	function set($key, $value) {
-		$this->id = q($this)->select('id')->where(qEq('name',$key))->run(MySQL::DBCELL);
-		$this->saveDB(array('name' => $key, 'value' => $value));
-		$this->cache();
+		$cache = cache($this->className) ?? [];
+		$cache[$key] = array('name' => $key, 'value' => $value, 'permanent' => 1);
+		$this->cache($cache);
 	}
 
 	function save() {
@@ -64,6 +66,7 @@
 		); */
 	}
 
+	/*
 	function cache($data = NULL) {
 		$cache 	= array();
 		$data 	= q($this->cl)->qlist()->limit(0,10000)->run();;
@@ -71,7 +74,7 @@
 			$cache[$row['name']] = $row['value'];
 		}
 		cache($this->className, $cache);
-	}
+	} */
 
 	function login() {
 		if(superAdmin()) redirect(BASE_URL);
@@ -85,6 +88,13 @@
 			echo json_encode(array('message' => T('wrong pass'), 'status' => 'error', 'redirect' => BASE_URL));  die();
 		}
 	}
+
+	
+	function logout() {
+		global $_SESSION;
+		unset($_SESSION['user']);
+		redirect(BASE_URL);
+}
 
 
 	function langs() {

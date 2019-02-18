@@ -1,5 +1,10 @@
-<?php
+<?php 
 class i18n extends masterclass {
+
+	protected $labels = [
+		'i18n' => 'Translations',
+	];
+
 
 	function gettables() {}
 
@@ -15,13 +20,7 @@ class i18n extends masterclass {
 			],
 		];
 		/* fields */
-		$this->fields = [];
-		$langs = getLangs();
-		foreach($langs as $lang) {
-			$this->fields[$lang['abbr']] = [ 'string', 'textarea'];
-			$this->data[$lang['abbr']] = file_get_contents(BASE_PATH . 'data/i18n/' . $lang['abbr'] . '.txt');
-		}
-	}
+			}
 
 
 	function items() {}
@@ -35,7 +34,14 @@ class i18n extends masterclass {
 	**/
 	public function admin() {
 		if(hasRight($this->rights['admin'])){
+			$this->fields = [];
+			$langs = getLangs();
+			foreach($langs as $lang) {
+				$this->fields[$lang['abbr']] = [ 'string', 'textarea'];
+				$this->data[$lang['abbr']] = file_get_contents(BASE_PATH . 'data/i18n/' . $lang['abbr'] . '.txt');
+			}
 			return $this->data;
+
 		}
 		return FALSE;
 	}
@@ -51,6 +57,18 @@ class i18n extends masterclass {
 		}
 
 		echo json_encode(array('message' => T('saved'), 'status' => 'ok'));	die();
+	}
+
+
+	public function addlabels($data, $lang = null) {
+		$labels = getLabels($lang);
+		$labels = array_merge($labels, $data);
+		$data = '';
+		foreach($labels as $k => $v) {
+			$output .= $k . '=' . $v . PHP_EOL;
+		}
+		$lang = getLang($lang);
+		file_put_contents(BASE_PATH . 'data/i18n/' . $lang . '.txt', $data);
 	}
 
 }

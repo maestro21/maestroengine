@@ -1,6 +1,6 @@
 <?php class modules extends masterclass {
 
-	private $systemModules = array('modules', 'system', 'pages', 'i18n', 'langs');
+	private $systemModules = array('modules', 'system',  'i18n', 'langs', 'pages');
 
 	function gettables() {
 		return
@@ -30,13 +30,18 @@
 
 	function reinstall() { 		
 		if(!canInstall()) return;
+		foreach($this->getModules() as $module) {
+			M($module)->uninstall();
+		}
+
 		$this->install();
 		$modules = $this->systemModules; //[ ]$this->getModules();
 		foreach($modules as $module) {
 			if($module != $this->className) M($module)->install();
 		}
 		$this->admin();
-		q()->update($this->cl)->set('status', 2)->run();
+		q()->update($this->cl)->set('status', 2)->run(null, true);
+		$this->cache();
 	}
 
 
