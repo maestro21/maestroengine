@@ -27,9 +27,5 @@ $(function() {
 		$('.hoverform').toggleClass('show');
 	}); */
 
-	$('a').addClass('animsition-link');
-	$('.noanim').removeClass('animsition-link');
-
-	$(".animsition").animsition();
 
 });

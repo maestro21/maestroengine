@@ -37,5 +37,6 @@
 			<span class="right"> <?php echo T('Design');?> Maestro Studio</span>
 		</div>
 	</div>
+		
 	</body>
 </html>

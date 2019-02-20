@@ -26,6 +26,6 @@
 <script src="<?php echo BASE_URL . EXT_FOLDER;?>shadowbox/shadowbox.js" type="text/javascript"></script>
 <LINK REL="StyleSheet" HREF="<?php echo BASE_URL . EXT_FOLDER;?>shadowbox/shadowbox.css" TYPE="text/css" MEDIA="screen">
 
-  <!-- Animsition -->
-  <script src="<?php echo BASE_URL . EXT_FOLDER;?>animsition/animsition.min.js" type="text/javascript"></script>
-  <LINK REL="StyleSheet" HREF="<?php echo BASE_URL . EXT_FOLDER;?>animsition/animsition.min.css" TYPE="text/css" MEDIA="screen">
+<!-- MS dropdown -->
+<script src="<?php echo BASE_URL . EXT_FOLDER;?>msdropdown/jquery.dd.js" type="text/javascript"></script>
+<LINK REL="StyleSheet" HREF="<?php echo BASE_URL . EXT_FOLDER;?>msdropdown/dd.css" TYPE="text/css" MEDIA="screen">

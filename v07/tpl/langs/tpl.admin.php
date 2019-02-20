@@ -1,5 +1,14 @@
-
 <?php echo drawBtns($buttons['admin']);?></h1>
+
+<div class="btn" id="showAddLangDialog"><?php echo T('add existing lang');?></div>
+
+<div id="addLangDialog" class="modal2 hidden"><!-- Remove this space between .modal and .modal-dialog
+--><div class="modal-dialog2"><div class="fa fa-times icon icon-big modal-close"></div>
+		<?php  echo drawForm(['deflangs' => [ 'string', WIDGET_SELECT_IMG]], $data, $options); ?>
+		<div class="btn" id="addLang"><?php echo T('add');?></div>
+	</div>
+</div>
+
 <table cellpadding=0 cellspacing=0>
 	<thead>
 	<tr>
@@ -37,3 +46,21 @@
 		</tr>
 	<?php } ?>
 </table>
+<script>
+$( document ).ready(function() {
+	$('#showAddLangDialog').click(function() {
+		$('#addLangDialog').toggleClass('hidden');
+	});
+
+	$('#addLang').click(function() {
+		$.post('<?php echo BASE_URL.$class;?>/adddeflang',
+		 {
+			lang: $('#deflangs option:selected').val()
+		}).done(function() {
+			window.location.reload();
+		});
+	});
+});
+
+
+</script>

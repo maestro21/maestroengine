@@ -1,6 +1,6 @@
 
 $( document ).ready(function() {
-
+	$(".imgselect").msDropDown();
 
 	$.validator.addMethod('phone', function (value, element) { console.log('called');
 		return this.optional(element) || /^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$/im.test(value);

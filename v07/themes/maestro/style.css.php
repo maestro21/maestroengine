@@ -2004,3 +2004,106 @@ thead td a {
 	padding: 5px 15px;
 	border-radius: 2px;
 }
+
+
+/** dd fix **/
+.borderRadiusTp { 
+	border-radius: 2px 2px 0 0;
+}
+
+.ddcommon input.text,
+.dd .ddChild,
+.dd .ddChild li,
+.dd .ddTitle {
+	background: rgba(0,0,0,0.3) !important;
+}
+
+.dd .ddChild {
+	background: black !important;
+}
+
+.dd .ddChild li{
+	padding: 7px !important;
+	border-bottom: none !important;
+	text-align:left;
+}
+
+.ddcommon .ddTitle .ddTitleText {
+	text-align: left;
+}
+
+.dd .ddChild li img,
+.dd .ddTitle .ddTitleText img {
+	height: 28px !important;
+}
+
+.dd .ddChild li .ddlabel {
+	color: white  !important;
+	border-bottom: none !important;
+}
+
+.dd .divider {
+	display: none !important;
+}
+
+.dd .ddArrow:before {
+	content: "\25BC"
+}
+
+::-webkit-scrollbar-track
+{
+	background: transparent;
+}
+
+::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: white;
+}
+
+
+.modal {
+	transform: none;
+	width: 500px;
+	margin-left: -250px;
+}
+
+.modal-body {
+	overflow: unset;
+}
+
+
+.modal2 {
+  background: rgba(0, 0, 0, .6);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  text-align: center; /* Center horizontally */
+}
+.modal2:before { /* Center vertically, part 1 */
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.modal-dialog2 {
+  background-color: black;
+  display: inline-block;
+  vertical-align: middle !important; /* Center vertically, part 2 */
+  padding: 1em;
+  border-radius: 5px;
+}
+
+.modal-dialog2 .modal-close{
+	position: relative;
+    left: 100%;
+    top: -37px;
+    border: 1px rgba(255,255,255,0.5) solid;
+}

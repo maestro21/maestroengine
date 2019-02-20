@@ -53,6 +53,7 @@ class LanguagesController extends FormController {
         return $return;
     }
   
+
     function getLanguages($option) {
         $content = json_decode(file_get_contents('http://localhost/langselect/api.php?do=' . $option), true);
         foreach($content as $k => $row) {

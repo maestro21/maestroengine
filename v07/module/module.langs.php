@@ -1,5 +1,5 @@
 <?php
-const FLAGAPI = 'http://www.webstudio-maestro.ch/langselect/';
+
 
 class langs extends masterclass {
 
@@ -36,7 +36,7 @@ class langs extends masterclass {
 		[
 			'langs' => [
 				'fields' => [
-					'flag'	=> [ null, 'select'],
+					'flag'	=> [ null, WIDGET_SELECT_IMG],
 					'abbr' 	=> [ 'string', 'text', 'search' => TRUE ],
 					'name' 	=> [ 'string', 'text', 'null' => TRUE  ],
 					'pos'	=> [ 'int', 'text',  'null' => TRUE  ],
@@ -50,7 +50,42 @@ class langs extends masterclass {
 	}
 
 	public function extend() {
-		$this->options['flag'] = json_decode(file_get_contents(FLAGAPI . 'api.php'));
+		$this->options['flag'] = $this->getLanguages();
+		$this->options['deflangs'] = $this->getLanguages('getEuroLanguages');		
+	}
+
+	// todo: check api localy and on ws
+
+	function getLanguages($option ='') { 
+        $content = json_decode(file_get_contents(G('flag_api_url')  . 'api.php?do=' . $option), true); 
+        foreach($content as $k => $row) {
+			if(empty($option)) {
+				$content[$k] = [
+					'value' => $k,
+					'text' => $row,
+					'img' => G('flag_api_url')  . 'flags/' . $k
+				];
+			} else {
+				$content[$k]['img'] = G('flag_api_url')  . 'flags/' . $row['img'];
+			}
+        }
+        return $content;
+    }
+
+	public function adddeflang() { 
+		$lang = $this->post['lang'];
+		foreach($this->options['deflangs'] as $row) {
+			if($row['value'] === $lang) {
+				file_put_contents(BASE_PATH . 'front/img/langs/' . $lang . '.png', file_get_contents($row['img'])); 
+				$this->saveDB([
+					'abbr' => $lang,
+					'name' => $row['text'],
+					'active' => 1
+				]);
+				$this->cache();
+				die();
+			}
+		}
 	}
 
 	    /** Save element **/

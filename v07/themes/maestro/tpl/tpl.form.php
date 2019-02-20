@@ -219,6 +219,21 @@ $langs = getlangs();
 			</select>
 		<?php break;
 
+		case WIDGET_SELECT_IMG: ?>
+		<select class="imgselect"  name="<?php echo $prefix;?>[<?php echo $key;?>]" id="<?php echo $key;?>">
+		<?php
+			if(is_array($options) && sizeof($options) > 0) {
+				foreach (@$options[$key] as $row){ print_r($row);
+					?>
+					<option value="<?php echo $row['value'];?>" 
+						<?php if($row['img']) echo "title='" . $row['img'] . "' ";?>
+						<?php if($row['value'] == $value) echo " selected='selected'";?>><?php echo T($row['text']);?>
+					</option>
+			<?php } ?>
+		<?php } ?>
+		</select>
+		<?php break;
+
 		case WIDGET_MULTSELECT: ?>
 			<select multiple<?php if($required) echo " required";?> name="<?php echo $prefix;?>[<?php echo $key;?>][]" id="<?php echo $key;?>">
 			<?php
