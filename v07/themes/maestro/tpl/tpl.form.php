@@ -223,6 +223,7 @@ $langs = getlangs();
 		<select class="imgselect"  name="<?php echo $prefix;?>[<?php echo $key;?>]" id="<?php echo $key;?>">
 		<?php
 			if(is_array($options) && sizeof($options) > 0) {
+				$value = $value ?? $options[0]['value'];
 				foreach (@$options[$key] as $row){ print_r($row);
 					?>
 					<option value="<?php echo $row['value'];?>" 
