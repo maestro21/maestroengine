@@ -171,8 +171,7 @@ function processResponse(data, form) {
 	$('.messages').html('');
 	$('.messages').hide();
 	addmsg(data.message, data.status);
-	$('.messages').show(300);
-	if(data.status == 'ok') {
+	if(data.status == 'success') {
 		var timeout = 2000;
 		if(data.timeout) timeout = data.timeout;
 		setTimeout(function() {
@@ -182,7 +181,6 @@ function processResponse(data, form) {
 				else
 					window.location = data.redirect;
 			}
-			$('.messages').html('');
 		},timeout);
 	}
 }
@@ -206,10 +204,8 @@ function conf(action, text) {
 
 
 function addmsg(txt, cl, selector) {
-	if(selector == null) selector = '.messages';
-	if(cl == null) cl = 'ok';
-	var html = '<div class="' + cl + '">' + txt + '</div>';
-	$(selector).html($(selector).html() + html);
+	if(!['error','info', 'warning', 'success'].includes(cl)) cl = 'info';
+	toastr[cl](txt);
 }
 
 

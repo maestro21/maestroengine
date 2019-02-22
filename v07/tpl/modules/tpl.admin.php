@@ -1,4 +1,8 @@
-<?php echo drawBtns($buttons['admin']);?>
+<?php echo btn([
+	'text' => T('reinstall'),
+	'icon' => 'fas fa-sync',
+	'class' => 'reinstall'
+]);?>
 <?php
 $statuses = ['not','far','ok'];
 $statustexts = ['not installed','installed','activated'];

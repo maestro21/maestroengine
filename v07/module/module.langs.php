@@ -52,6 +52,14 @@ class langs extends masterclass {
 	public function extend() {
 		$this->options['flag'] = $this->getLanguages();
 		$this->options['deflangs'] = $this->getLanguages('getEuroLanguages');		
+
+		$this->addBtn('admin', [
+			'url' => '#',
+			'id' => 'showAddLangDialog',
+			'icon' => 'fas fa-plus-circle',
+			'text' => 'Add existing lang',
+		]);
+	
 	}
 
 	// todo: check api localy and on ws
@@ -92,8 +100,10 @@ class langs extends masterclass {
 	public function save() {  //die();
 		if(!superAdmin()) return;
 		$this->parse = FALSE;
-		$this->saveflag($this->post['form']['flag'], $this->post['form']['abbr']);
-		unset($this->post['form']['flag']);
+		if($this->post['form']['flag']) {
+			$this->saveflag($this->post['form']['flag'], $this->post['form']['abbr']);
+			unset($this->post['form']['flag']);
+		}
 		$ret = $this->saveDB($this->post['form']);
 		$this->cache();
 		return json_encode($ret);
@@ -105,7 +115,7 @@ class langs extends masterclass {
 
 	public function delflag() {
 		unlink(BASE_PATH . 'front/img/langs/' . $this->path[2]. '.png');
-		echo json_encode(array('redirect' => 'self', 'status' => 'ok', 'timeout' => 1));
+		echo json_encode(array('redirect' => 'self', 'status' => 'success', 'timeout' => 1));
 		die();
 	}
 	

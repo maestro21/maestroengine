@@ -78,14 +78,34 @@ abstract class masterclass{
 		/** Class template parameters **/
 		$this->title 	= ($this->id != '' ? T($this->cl) . ' #' . $this->id : T($this->cl));
 		$this->buttons = array(
-			'admin' => array( 'add' => 'fa-plus' ),
+			'admin' => array( [
+				'text' => 'add',
+				'icon' => 'fas fa-plus',
+				'url' => 'add'
+			] ),
 			//'view'  => array( 'items' => 'list', 'item/'.$this->id => 'edit' ),
-			'table' => array( 'item/{id}' => 'edit',  'view/{id}' => 'view', ),
+			'table' => [
+				[
+					'class' => 'icon',
+					'url' => 'edit/{id}',
+					'icon' => 'fas fa-edit'
+				],
+				[
+					'class' => 'icon',
+					'url' => 'del/{id}',
+					'icon' => 'fas fa-trash'
+				]
+			]
 		);
 
 		/** Calls virtual method for class extension in child classes **/
 		$this->extend();
   	}
+
+
+	 function addbtn($branch, $button) {
+		 $this->buttons[$branch][] = $button;
+	 } 
 
 	abstract function getTables();
 
@@ -196,7 +216,7 @@ abstract class masterclass{
 		if($this->id < 1) {
 			$this->id = DBinsertId();
 		}
-		return array('redirect' => BASE_URL . $this->cl . '/edit/' . $this->id, 'id' => $this->id, 'status' => 'ok', 'message' => T('saved'));
+		return array('redirect' => BASE_URL . $this->cl . '/edit/' . $this->id, 'id' => $this->id, 'status' => 'success', 'message' => T('saved'));
 	}
 
 
@@ -207,7 +227,7 @@ abstract class masterclass{
 		if(NULL == $id) $id = $this->id;
 		q($this->cl)->qdel($id)->run();
 		$this->parse = FALSE;
-		return json_encode(array('redirect' => 'self', 'status' => 'ok', 'timeout' => 1));
+		return json_encode(array('redirect' => 'self', 'status' => 'success', 'timeout' => 1));
     }
 
 

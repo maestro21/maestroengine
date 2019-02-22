@@ -1,5 +1,5 @@
 
-<?php echo drawBtns($buttons['admin']);?></h1>
+<?php echo btns($buttons['admin']);?>
 <table cellpadding=0 cellspacing=0>
 	<thead>
 	<tr>

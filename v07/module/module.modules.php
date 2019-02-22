@@ -21,7 +21,7 @@
 	function extend() {
 		$this->buttons = [
 			'admin' => [
-				'reinstall'	=> 'reinstall'
+				'#'	=> 'reinstall'
 			]
 		];
 		$this->description = 'Core module for managing other modules';
@@ -105,7 +105,7 @@
 
 		$this->parse = false;
 
-		echo json_encode(array('redirect' => 'self', 'status' => 'ok', 'timeout' => 1));
+		echo json_encode(array('redirect' => 'self', 'status' => 'success', 'timeout' => 1));
 		die();
 	}
 

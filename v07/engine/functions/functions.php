@@ -1326,3 +1326,33 @@ function preparelang($lang) {
 	$lang = str_replace('.png', '',  $lang);
 	return ucwords(str_replace('-',' ', $lang));
 }
+
+
+/**
+ * [
+ * 	url
+ * 	text
+ *  icon
+ *  class
+ * ]
+ */
+function btn($data){ 
+	$href = ($data['url'] ?? 'javascript:void(0);');
+	$text = ($data['icon'] ? icon($data['icon']) : '') . ($data['text'] ? T($data['text']) : '');
+	$class = 'btn' . ($data['class'] ? ' ' . $data['class'] : '' );
+	$id = $data['id'] ? ' id="' . $data['id'] . '"' : '';
+	return sprintf('<a href="%s" class="btn %s"%s>%s</a>', $href, $class, $id, $text);
+}
+
+function icon($class) {
+	return '<i class="' . $class . '"></i>';
+}
+
+
+function btns($btns) { 
+	$result = '';
+	foreach($btns as $btn) {
+		$result .= btn($btn);
+	}
+	return $result;
+}

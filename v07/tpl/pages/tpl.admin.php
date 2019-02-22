@@ -1,4 +1,4 @@
 <br>
-<h1><?php echo drawBtns($buttons['admin']);?></h1>
+<?php echo btns($buttons['admin']);?>
 <hr>
 <?php echo $data; ?>

@@ -29,3 +29,7 @@
 <!-- MS dropdown -->
 <script src="<?php echo BASE_URL . EXT_FOLDER;?>msdropdown/jquery.dd.js" type="text/javascript"></script>
 <LINK REL="StyleSheet" HREF="<?php echo BASE_URL . EXT_FOLDER;?>msdropdown/dd.css" TYPE="text/css" MEDIA="screen">
+
+<!-- Toastr -->
+<script type="text/javascript" src="<?php echo BASE_URL . EXT_FOLDER;?>toastr/toastr.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL . EXT_FOLDER;?>toastr/toastr.min.css" />

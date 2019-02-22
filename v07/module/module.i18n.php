@@ -19,8 +19,10 @@ class i18n extends masterclass {
 				3 => WIDGET_KEYVALUES
 			],
 		];
+
+
 		/* fields */
-			}
+	}
 
 
 	function items() {}
@@ -56,7 +58,7 @@ class i18n extends masterclass {
 			file_put_contents(BASE_PATH . 'data/i18n/' . $lang . '.txt', $data);
 		}
 
-		echo json_encode(array('message' => T('saved'), 'status' => 'ok'));	die();
+		echo json_encode(array('message' => T('saved'), 'status' => 'success'));	die();
 	}
 
 

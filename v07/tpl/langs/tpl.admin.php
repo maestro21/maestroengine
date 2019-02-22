@@ -1,6 +1,4 @@
-<?php echo drawBtns($buttons['admin']);?></h1>
-
-<div class="btn" id="showAddLangDialog"><?php echo T('add existing lang');?></div>
+<?php echo btns($buttons['admin']);?>
 
 <div id="addLangDialog" class="modal2 hidden"><!-- Remove this space between .modal and .modal-dialog
 --><div class="modal-dialog2"><div class="fa fa-times icon icon-big modal-close"></div>

@@ -86,7 +86,7 @@
 			$this->ajax = true;
 			if(md5($_POST['pass']) == ADM_PASS){;
 				session('user', true);
-				echo json_encode(array('message' => T('success'), 'status' => 'ok', 'redirect' => BASE_URL));  die();
+				echo json_encode(array('message' => T('success'), 'status' => 'success', 'redirect' => BASE_URL));  die();
 			}
 			echo json_encode(array('message' => T('wrong pass'), 'status' => 'error', 'redirect' => BASE_URL));  die();
 		}

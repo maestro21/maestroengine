@@ -714,6 +714,8 @@ figure h1 {
 	font-size: 15px;
 	padding: 5px 10px;
 	margin: 5px 0px;
+	
+    margin-right: 20px;
 }
 
 
@@ -2106,4 +2108,29 @@ thead td a {
     left: 100%;
     top: -37px;
     border: 1px rgba(255,255,255,0.5) solid;
+}
+
+.toast-top-center {
+	top: 25px !important;
+}
+
+.toast-bottom-center {
+	bottom: 50px !important;
+}
+
+
+.content {
+	overflow: auto;
+}
+
+.fa, .fas {
+    font-weight: 900;
+    color: white;
+    margin-right: 10px;
+    line-height: 25px;
+}
+
+.btn:hover,
+.btn:hover * {
+    color: rgba(0,0,0,0.7);
 }
