@@ -1336,8 +1336,8 @@ function preparelang($lang) {
  *  class
  * ]
  */
-function btn($data){ 
-	$href = ($data['url'] ?? 'javascript:void(0);');
+function btn($data, $id = null){ 
+	$href = ($data['url'] ? str_replace('{id}', $id, $data['url']) : 'javascript:void(0);');
 	$text = ($data['icon'] ? icon($data['icon']) : '') . ($data['text'] ? T($data['text']) : '');
 	$class = 'btn' . ($data['class'] ? ' ' . $data['class'] : '' );
 	$id = $data['id'] ? ' id="' . $data['id'] . '"' : '';
@@ -1349,10 +1349,10 @@ function icon($class) {
 }
 
 
-function btns($btns) { 
+function btns($btns, $id = null) { 
 	$result = '';
 	foreach($btns as $btn) {
-		$result .= btn($btn);
+		$result .= btn($btn, $id);
 	}
 	return $result;
 }

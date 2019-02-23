@@ -2134,3 +2134,28 @@ thead td a {
 .btn:hover * {
     color: rgba(0,0,0,0.7);
 }
+
+
+
+table .btn {
+	color: rgba(255,255,255,0.7);
+	border: none;
+    background: transparent;
+    /* width: 25px; */
+    /* height: 25px; */
+    line-height: 25px;
+    box-shadow: none;
+    padding: 0;
+    margin-right: 0;
+}
+table .btn:hover {
+	background-color: transparent;
+}
+
+table .btn * {
+	color: rgba(255,255,255,0.7);
+}
+table .btn:hover * {
+	color: white;	
+	font-size: 20px;
+}

@@ -1,5 +1,6 @@
 
-<?php echo btns($buttons['admin']);?>
+<?php echo btns($buttons['admin']);
+?>
 <table cellpadding=0 cellspacing=0>
 	<thead>
 	<tr>
@@ -24,8 +25,7 @@
 			echo "<td>".fType($v, $f[1], @$options[$k])."</td>";
 		}?>
 		<td width=150>
-			<a href="<?php echo BASE_URL.$class;?>/edit/<?php echo $id;?>" target="_blank" class="fa-pencil fa icon icon_sml"></a>
-			<a href="javascript:void(0)" onclick="conf('<?php echo BASE_URL.$class;?>/del/<?php echo $id;?>', '<?php echo T('del conf');?>')" class="fa-trash-o fa icon icon_sml"></a>
+			<?php echo btns($buttons['table'], $id);?>
 		</td>
 		</tr>
 	<?php } ?>

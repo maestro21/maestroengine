@@ -39,7 +39,7 @@ class langs extends masterclass {
 					'flag'	=> [ null, WIDGET_SELECT_IMG],
 					'abbr' 	=> [ 'string', 'text', 'search' => TRUE ],
 					'name' 	=> [ 'string', 'text', 'null' => TRUE  ],
-					'pos'	=> [ 'int', 'text',  'null' => TRUE  ],
+					'pos'	=> [ 'int', 'text',  'null' => TRUE, 'table' => false  ],
 					'active'=> [ 'bool', 'checkbox', 'null' => TRUE ],
 				],
 				'idx' => [
@@ -53,6 +53,8 @@ class langs extends masterclass {
 		$this->options['flag'] = $this->getLanguages();
 		$this->options['deflangs'] = $this->getLanguages('getEuroLanguages');		
 
+		setVar('sort_langs','pos_ASC');
+
 		$this->addBtn('admin', [
 			'url' => '#',
 			'id' => 'showAddLangDialog',
@@ -60,6 +62,7 @@ class langs extends masterclass {
 			'text' => 'Add existing lang',
 		]);
 	
+		$this->addPosBtns();
 	}
 
 	// todo: check api localy and on ws
@@ -124,4 +127,5 @@ class langs extends masterclass {
 		if(!$data)  $data = q($this->cl)->qlist()->order('pos ASC')->run();
 		cache($this->className, $data);
 	}
+
 }

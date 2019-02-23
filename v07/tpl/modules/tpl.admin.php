@@ -45,4 +45,16 @@ function changestatus(module, status_id) {
 	});
 }
 
+
+$(function() {
+	$('.reinstall').click(function(){
+		toastr.info('<?php echo T('reinstalling');?>');
+		$.get('<?php echo BASE_URL;?>modules/reinstall')
+			.done(function() {
+				toastr.success('<?php echo T('reinstalled');?>');
+				window.location.reload(3000);	
+		});
+	});
+});
+
 </script>

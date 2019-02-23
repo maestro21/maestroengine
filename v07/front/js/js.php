@@ -12,3 +12,11 @@ function handleResponse(response) {
     response = JSON.parse(response);
     toastr[response.type](response.message);
 }
+
+
+function call(url) {
+    $.get(url)
+    .done(function( data ) {
+        processResponse(data);
+    });
+}

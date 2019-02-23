@@ -107,6 +107,24 @@ abstract class masterclass{
 		 $this->buttons[$branch][] = $button;
 	 } 
 
+	 
+
+
+	function addPosBtns(){
+		
+		$prefix = BASE_URL . $this->cl . '/changepos/{id}/';
+
+		$this->addBtn('table', [
+			'url' => 'javascript:call(\'' . $prefix . 'up\')',
+			'icon' => 'fas fa-arrow-up',
+		]);
+
+		$this->addBtn('table', [
+			'url' => 'javascript:call(\'' . $prefix . 'down\')',
+			'icon' => 'fas fa-arrow-down',
+		]);
+	}
+
 	abstract function getTables();
 
 
@@ -287,6 +305,40 @@ abstract class masterclass{
 		cache($this->className, $data);
 	}
 
+
+
+	public function changepos($items = null) {
+		$pos = $this->path[3];
+		$id  = $this->path[2];
+
+		$items = $items ?? q($this)->qlist()->order('pos ASC')->run();
+		
+		foreach($items as $k => $item) {
+			if($item['id'] == $id) { 
+				if($pos == 'up' && $k > 0) {
+					$tmp = $items[$k-1];
+					$items[$k-1] = $items[$k];
+					$items[$k] = $tmp;
+					break;
+				}
+
+				if($pos == 'down' && $k > 0) {
+					$tmp = $items[$k+1];
+					$items[$k+1] = $items[$k];
+					$items[$k] = $tmp;
+					break;
+				}
+			}
+		}
+		
+		foreach($items as $k => $item) {
+			q($this)->qedit(['pos' => $k], qEq('id', $item['id']))->run();
+		}
+
+		echo json_encode(array('redirect' => 'self', 'status' => 'success', 'timeout' => 1));
+		die();	
+	}
+
 }
 
 /**
@@ -325,6 +377,7 @@ function call($module, $method, $params = null) {
 		$M->data = $M->parse();
 	}
 	return $M->data;
+
 }
 
 /** TREE **/
