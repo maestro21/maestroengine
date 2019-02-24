@@ -59,4 +59,14 @@ class i18n extends masterclass {
 	}
 
 
+	public function addlabels($data, $lang = 'en') {
+		$labels = getLabels($lang) ?? [];
+		$labels = array_merge($labels, $data);   
+		$data = '';
+		foreach($labels as $k => $v) {
+			$data .= $k . '=' . $v . PHP_EOL;
+		}
+		file_put_contents(BASE_PATH . 'data/i18n/' . $lang . '.txt', $data);
+	}
+
 }
