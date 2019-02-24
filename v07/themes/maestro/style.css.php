@@ -2159,3 +2159,8 @@ table .btn:hover * {
 	color: white;	
 	font-size: 20px;
 }
+
+
+.logout {
+	cursor: pointer;
+}

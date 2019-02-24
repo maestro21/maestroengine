@@ -1,7 +1,9 @@
 
 $( document ).ready(function() {
-	$(".imgselect").msDropDown();
-	setTimeout(function(){ $(".imgselect").msDropDown().data('dd').close(); }, 500);
+	if($(".imgselect").length) {
+		$(".imgselect").msDropDown();
+		setTimeout(function(){ $(".imgselect").msDropDown().data('dd').close(); }, 500);
+	}	
 
 	$.validator.addMethod('phone', function (value, element) { console.log('called');
 		return this.optional(element) || /^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$/im.test(value);

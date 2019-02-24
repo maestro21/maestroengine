@@ -1,5 +1,4 @@
 <?php echo btns($buttons['admin']);?>
-
 <div id="addLangDialog" class="modal2 hidden"><!-- Remove this space between .modal and .modal-dialog
 --><div class="modal-dialog2"><div class="fa fa-times icon icon-big modal-close"></div>
 		<?php  echo drawForm(['deflangs' => [ 'string', WIDGET_SELECT_IMG]], $data, $options); ?>
@@ -13,7 +12,7 @@
 		<td>
 		<a href="<?php echo BASE_URL.$class;?>filter/sort_<?php echo $class;?>/<?php echo 'id_'.getFilterState($class,'id');?>">id</a><?php echo filterImg($class,'id');?>
 		</td>
-		<?php foreach ($fields as $k=>$v){ ?>
+		<?php foreach ($fields as $k=>$v){  if(@$v['hide']) continue;?>
 			<td><a href="<?php echo BASE_URL.$class;?>filter/sort_<?php echo $class;?>/<?php echo $k.'_'.getFilterState($class,$k);?>"><?php echo T($k);?></a><?php echo filterImg($class,$k);?></td>
 		<?php }?>
 		<td><?php echo T('options');?></td>
@@ -26,7 +25,7 @@
 			<a href="<?php echo BASE_URL.$class;?>/view/<?php echo $id;?>" target="_blank">#<?php echo $id;?></a>
 		</td>
 		<?php
-		foreach($fields as $field => $f){
+		foreach($fields as $field => $f){   if(@$f['hide']) continue;
 			$k = $field; $v = $row[$field];
 			if($field == 'flag') {
 					echo "<td>";

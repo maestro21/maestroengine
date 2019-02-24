@@ -3,6 +3,7 @@
 $prefix = 'form'; $id = $data["id"];
 foreach($fields as $key => $field) {
 
+	if(@$field['hide']) continue;
 $widget = $field[1];
 $value = (isset($data[$key]) ? $data[$key] : "");
 $required = (@$field['required'] > 0);

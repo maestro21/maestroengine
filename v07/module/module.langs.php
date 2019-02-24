@@ -39,7 +39,7 @@ class langs extends masterclass {
 					'flag'	=> [ null, WIDGET_SELECT_IMG],
 					'abbr' 	=> [ 'string', 'text', 'search' => TRUE ],
 					'name' 	=> [ 'string', 'text', 'null' => TRUE  ],
-					'pos'	=> [ 'int', 'text',  'null' => TRUE, 'table' => false  ],
+					'pos'	=> [ 'int', 'text',  'null' => TRUE, 'hide' => true  ],
 					'active'=> [ 'bool', 'checkbox', 'null' => TRUE ],
 				],
 				'idx' => [

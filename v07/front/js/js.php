@@ -6,6 +6,21 @@ $( document ).ready(function() {
 		"positionClass": "toast-bottom-center"
 	}
 
+
+    $('.tabHeaders .tab').click(function() {
+        var tab = $(this).data('tab');
+
+        $('.tabHeaders .tab').removeClass('active');
+        $(this).addClass('active');
+
+        $('.tabContent .tab').hide();
+        $('.tabContent .tab_'+ tab).show();
+
+    });
+
+    $('.tabHeaders .tab').first().click();
+
+
 });
 
 function handleResponse(response) {

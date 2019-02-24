@@ -31,7 +31,7 @@
 	function logout() {
 		global $_SESSION;
 		unset($_SESSION['user']);
-		redirect(BASE_URL);
+		echo json_encode(array('message' => T('logout success'), 'status' => 'success', 'redirect' => BASE_URL));  die();
 	}
 
 

@@ -34,5 +34,9 @@ $( document ).ready(function() {
         $('body').toggleClass('open')
         $('.admingear').toggleClass('open')
     });
+
+    $('.logout').click(function() {
+        call('<?php echo BASE_URL . 'system/logout';?>');
+    });
 });
 </script>
