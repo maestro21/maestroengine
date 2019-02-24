@@ -931,9 +931,23 @@ function reinstall() {
 	call('modules', 'cache');
 }
 
-function hasRight($rightname) {
-	global $_RIGHTS;
-	return true; //(isset($_RIGHTS[$rightname]));
+function hasRights($rightname) {
+	if(!$rightname) return true;
+	global $_SESSION;
+	return (isset($_SESSION['rights'][$rightname]));
+}
+
+function setRights($rightname) {
+	global $_SESSION;
+	if(!isset($_SESSION['rights'])) {
+		$_SESSION['rights'] = [];
+	}
+	$_SESSION['rights'][$rightname] = true;
+}
+
+function unsetRights($rightname) {
+	global $_SESSION;
+	unset($_SESSION['rights'][$rightname]);
 }
 
 

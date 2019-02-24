@@ -57,25 +57,21 @@
 	}
 
 	function admin() {
-		//redirect(BASE_URL);
-		if(!superAdmin()) return;
-		if(hasRight($this->rights['admin'])) {
+		$this->checkRights('admin');
 		
-			$modules = $this->getModules(); 
-			
-			/** running through modules; if module is not in db - adding it**/
-			foreach($modules as $k => $module) {
-				$dbdata = q($this)->select()->where(qEq('name', $module['name']))->run(mysql::DBROW); 
-				$module['status'] = $dbdata['status'] ?? 0;				
-				$this->id = $dbdata['id'] ?? 0;
-				$this->saveDB($module);
-				$module['id'] = $this->id;
-				$modules[$k] = $module;
-			}
-			cache($this->className, $modules);
-			return $modules;
+		$modules = $this->getModules(); 
+		
+		/** running through modules; if module is not in db - adding it**/
+		foreach($modules as $k => $module) {
+			$dbdata = q($this)->select()->where(qEq('name', $module['name']))->run(mysql::DBROW); 
+			$module['status'] = $dbdata['status'] ?? 0;				
+			$this->id = $dbdata['id'] ?? 0;
+			$this->saveDB($module);
+			$module['id'] = $this->id;
+			$modules[$k] = $module;
 		}
-		return FALSE;
+		cache($this->className, $modules);
+		return $modules;
 	}
 
 	function cache($data = NULL) {

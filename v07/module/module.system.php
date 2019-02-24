@@ -29,8 +29,9 @@
 	}
 
 	function logout() {
-		global $_SESSION;
+		global $_SESSION, $_RIGHTS;
 		unset($_SESSION['user']);
+		unset($_RIGHTS);
 		echo json_encode(array('message' => T('logout success'), 'status' => 'success', 'redirect' => BASE_URL));  die();
 	}
 
@@ -79,13 +80,14 @@
 		cache($this->className, $cache);
 	}
 
-	function login() {
+	function login() { 
 		if(superAdmin()) redirect(BASE_URL);
 
 		if($this->post) {
 			$this->ajax = true;
-			if(md5($_POST['pass']) == ADM_PASS){;
+			if(md5($_POST['pass']) == ADM_PASS){
 				session('user', true);
+				setRights('admin');
 				echo json_encode(array('message' => T('success'), 'status' => 'success', 'redirect' => BASE_URL));  die();
 			}
 			echo json_encode(array('message' => T('wrong pass'), 'status' => 'error', 'redirect' => BASE_URL));  die();

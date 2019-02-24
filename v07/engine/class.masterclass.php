@@ -150,11 +150,9 @@ abstract class masterclass{
 		Admin method for class data listing
 		@return array() or FALSE;
 	**/
-	public function admin() {
-		if(hasRight($this->rights['admin'])){
-			return $this->items();
-		}
-		return FALSE;
+	public function admin() { //die('111');
+		$this->checkRights('admin');		
+		return $this->items();
 	}
 
 	/**
@@ -162,6 +160,7 @@ abstract class masterclass{
 		@return array() or FALSE;
 	**/
   	public function items() {
+		$this->checkRights('items');
 		$page 			= @(int)$this->path[2];
 		$oQuery 		= q($this->cl)->qlist('*', $page, $this->perpage);
 		$oCountQuery 	= q($this->cl)->qcount();
@@ -189,12 +188,22 @@ abstract class masterclass{
 
 	/** Opens form for adding new element **/
 	public function add($data = NULL) {
+		$this->checkRights('add');
 		$this->tpl = 'addedit';
 		return array('data' => $data, 'fields' =>$this->fields, 'options'=> $this->options);
 	}
 
+
+	public function checkRights($rights) { 
+		if(!isset($this->rights[$rights])) return true;
+		if(!hasRights($this->rights[$rights])) {
+			redirect(BASE_URL); 
+		}
+	}
+
 	/** Retrieves data of a single element for edit **/
     public function edit($id = NULL) {
+		$this->checkRights('edit');
 		if(NULL == $id) $id = $this->id;
 		return $this->add(q($this->cl)->qget($id)->run());
 
@@ -202,6 +211,7 @@ abstract class masterclass{
 
 	/** Retrieves data of a single element for view **/
     public function view($id = NULL) {
+		$this->checkRights('view');
 		if(NULL == $id) $id = $this->id;
 		return q($this->cl)->qget($id)->run();
     }
@@ -209,13 +219,14 @@ abstract class masterclass{
 
     /** Save element **/
     public function save() {  //die();
-			if(!superAdmin()) return;
+		$this->checkRights('save');
 		$this->parse = FALSE;
 		$ret = $this->saveDB($this->post['form']);
 		return json_encode($ret);
 	}
 
 	function saveDB($data) { //debug_print_backtrace();
+		$this->checkRights('save');
 		/* preprocess data */
 		$f = $this->fields;
 		foreach($this->fields as $k => $v) {
@@ -241,7 +252,7 @@ abstract class masterclass{
 
     /** Delete element **/
     public function del($id = NULL) {
-			if(!superAdmin()) return;
+		$this->checkRights('del');
 		if(NULL == $id) $id = $this->id;
 		q($this->cl)->qdel($id)->run();
 		$this->parse = FALSE;
