@@ -931,7 +931,7 @@ function reinstall() {
 	call('modules', 'cache');
 }
 
-function hasRights($rightname) {
+function hasRights($rightname) { var_dump($rightname); die();
 	if(!$rightname) return true;
 	global $_SESSION;
 	return (isset($_SESSION['rights'][$rightname]));

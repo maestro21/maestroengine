@@ -115,11 +115,13 @@ abstract class masterclass{
 		$prefix = BASE_URL . $this->cl . '/changepos/{id}/';
 
 		$this->addBtn('table', [
+			'class' => 'icon',
 			'url' => 'javascript:call(\'' . $prefix . 'up\')',
 			'icon' => 'fas fa-arrow-up',
 		]);
 
 		$this->addBtn('table', [
+			'class' => 'icon',
 			'url' => 'javascript:call(\'' . $prefix . 'down\')',
 			'icon' => 'fas fa-arrow-down',
 		]);
@@ -159,8 +161,8 @@ abstract class masterclass{
 		Default method for class data listing
 		@return array() or FALSE;
 	**/
-  	public function items() {
-		$this->checkRights('items');
+  	public function items() { 
+		$this->checkRights('items'); 
 		$page 			= @(int)$this->path[2];
 		$oQuery 		= q($this->cl)->qlist('*', $page, $this->perpage);
 		$oCountQuery 	= q($this->cl)->qcount();

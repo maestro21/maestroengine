@@ -91,7 +91,7 @@ class mysql extends dbquery {
 			
 			$tmp = array();	
 			foreach ($this->parts['set'] as $key => $value) { 
-				$value = dbquote($value);
+				$value = $this->strip ? $value : dbquote($value);
 				$tmp[] = "\r\n `{$key}` = $value";
 			}
 			$this->rawQuery .= implode(',', $tmp);

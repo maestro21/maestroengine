@@ -7,7 +7,7 @@
 	?>
 		<tr>
 			<td colspan="2" align="center">
-				<div class="btn submit"><?php echo T('save');?></div>
+				<div class="btn submit"><?php echo T('submit');?></div>
 				<div class="messages"></div>
 			</td>
 		</tr>

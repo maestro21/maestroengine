@@ -13,17 +13,17 @@ $langs = getlangs();
 <tr>
 	<?php
 		switch($widget) {
-			case WIDGET_CHECKBOX: echo "<td></td><td>"; break;
+			case WIDGET_CHECKBOX: echo "<td></td><td class='inputs'>"; break;
 			case WIDGET_HIDDEN: break;
 
 			case WIDGET_HTML:
 			case WIDGET_TEXTAREA:
 			case WIDGET_BBCODE:
-				echo "<td colspan=2>";
+				echo "<td colspan=2 class='inputs'>";
 				break;
 
 			default:
-				echo "<td class='lbl'>" . T($key) . ($required ? "<sup>*</sup>":'') . "</td><td>";
+				echo "<td class='lbl'>" . T($key) . ':'.  ($required ? "<sup>*</sup>":'') . "</td><td class='inputs'>";
 				break;
 	}
 

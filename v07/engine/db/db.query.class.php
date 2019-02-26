@@ -256,6 +256,18 @@ class DBquery {
 		return $this;
 	}
 
+	function qSwitch($field, $id) {
+		$id = (int) $id;
+		if($id > 0) {
+			$this
+				->update($this->table)
+				->set($field, 'NOT ' . $field)
+				->where(qEq('id', $id));
+		}
+		return $this;
+	}
+
+
 	function test() {
 
 	}

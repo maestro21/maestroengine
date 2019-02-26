@@ -2130,14 +2130,47 @@ thead td a {
     line-height: 25px;
 }
 
-.btn:hover,
-.btn:hover * {
+#form .btn:hover,
+#form .btn:hover * {
     color: rgba(0,0,0,0.7);
 }
 
 
 
-table .btn {
+.logout {
+	cursor: pointer;
+}
+
+
+form { 
+	display: inline-block;
+}
+
+form table {
+	width: auto;
+}
+
+.page-wrapper .main .content {
+	text-align: center;
+}
+
+table .lbl {
+	text-align: right;
+	width: auto;
+}
+
+table .inputs {
+	text-align: left;
+}
+
+.btn.submit {
+	border: 1px rgba(255,255,255,0.7) solid;
+	width: auto;
+	padding: 5px 30px;
+}
+
+
+.btn.icon {
 	color: rgba(255,255,255,0.7);
 	border: none;
     background: transparent;
@@ -2148,19 +2181,51 @@ table .btn {
     padding: 0;
     margin-right: 0;
 }
-table .btn:hover {
+.btn.icon:hover {
 	background-color: transparent;
 }
 
-table .btn * {
+.btn.icon * {
 	color: rgba(255,255,255,0.7);
 }
-table .btn:hover * {
+.btn.icon:hover * {
 	color: white;	
 	font-size: 20px;
 }
 
+.message {
+	text-align: left;
+	display: block;
+	margin-bottom: 20px;
+}
 
-.logout {
-	cursor: pointer;
+.message .date {
+	font-size: 1.6vmin;
+	color: rgb(200,200,200);
+}
+.message .date a:first-child {
+	margin-left: 20px;
+}
+
+a{ 
+	color: wheat;
+	text-decoration: underline;
+}
+
+
+.adminpanel a {
+	text-decoration: none;
+}
+
+.invisible * {
+	font-style:italic;
+	opacity: 0.7;
+}
+
+.invisible .btn {
+	opacity: 1;
+}
+
+.invisible .fa-eye-slash:before {
+	content: "\f06e"
 }
