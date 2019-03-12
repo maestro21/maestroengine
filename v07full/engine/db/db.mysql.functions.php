@@ -186,6 +186,7 @@ function install($tables) {
 			switch($type){
 				case 'string': $type = ' VARCHAR(255)'; break;
 				case 'blob': $type = ' BLOB'; break;
+				case 'array':
 				case 'text': $type = ' TEXT'; break;
 				case 'int' : $type = ' INT'; break;
 				case 'date' :

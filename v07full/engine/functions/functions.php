@@ -476,6 +476,7 @@ const DB_BOOL 	= 'bool';
 const DB_INT 	= 'int';
 const DB_DATE 	= 'date';
 const DB_FLOAT 	= 'float';
+const DB_ARRAY = 'array';
 
 
 
@@ -931,7 +932,7 @@ function reinstall() {
 	call('modules', 'cache');
 }
 
-function hasRights($rightname) { var_dump($rightname); die();
+function hasRights($rightname) {
 	if(!$rightname) return true;
 	global $_SESSION;
 	return (isset($_SESSION['rights'][$rightname]));

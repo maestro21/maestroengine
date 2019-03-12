@@ -1831,15 +1831,13 @@ select, input, textarea {
 }
 
 .productinfo {
-  vertical-align: middle !important;
+  text-align:left;
   font-weight: 100;
 }
 .productinfo * {
     font-weight: 100 !important
 }
-.product {
-  margin-top: -150px;
-}
+
 
 .product p {
   font-size: 1.5em;
@@ -1877,7 +1875,7 @@ input[type="checkbox"] + label:before {
 }
 
 .admingear {
-	position: absolute;
+	position: fixed;
 	line-height: 50px !important;
 	font-size: 20px;
 	left: 20px;

@@ -14,7 +14,7 @@ foreach($data as $row) { $id = $row['id'];?>
     <?php } ?>
     <a href="<?php echo BASE_URL . 'products/category/' . $row['id'];?>">
       <img class="img" src="<?php echo getImg('productcategories/img', $id);?>"><br>
-      <img class="logo"src="<?php echo getImg('productcategories/logo', $id);?>"><br>
+      <?php echo $row['name'];?><br>
     </a>
 </div>
 <?php } ?>
