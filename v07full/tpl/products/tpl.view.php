@@ -9,6 +9,7 @@
     <div class="td productinfo">
       <p><?php echo unserialize($data['type'])[getlang()];?></p>
       <p><?php echo $description;?></p>
+      <p class="price"><?php if(!empty($data['price'])) { echo "&euro;" . $data['price']; }?></p>
     </div>
   </div>
 </div>

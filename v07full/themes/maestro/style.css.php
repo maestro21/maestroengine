@@ -2167,7 +2167,7 @@ table .inputs {
 	padding: 5px 30px;
 }
 
-
+.admBtns .fa.icon,
 .btn.icon {
 	color: rgba(255,255,255,0.7);
 	border: none;
@@ -2178,25 +2178,39 @@ table .inputs {
     box-shadow: none;
     padding: 0;
     margin-right: 0;
-}
-.btn.icon:hover {
-	background-color: transparent;
+	text-decoration: none;
 }
 
-.btn.icon * {
-	color: rgba(255,255,255,0.7);
+.admBtns {	
+    background-color: rgba(0,0,0,0.5);
 }
-.btn.icon:hover * {
+
+.admBtns .fa.icon:hover,
+.btn.icon:hover {
+	background-color: transparent;
 	color: white;	
 	font-size: 20px;
 }
-
+.admBtns .fa.icon *,
+.btn.icon * {
+	color: rgba(255,255,255,0.7);
+}
 .message {
 	text-align: left;
 	display: block;
 	margin-bottom: 20px;
 }
 
+.gallery .admBtns {
+	margin-top:0;
+	margin-right:0;
+}
+
+.products p.admBtns {
+    position: absolute;
+    margin-left: 130px;
+    margin-top: 10px;
+}
 .message .date {
 	font-size: 1.6vmin;
 	color: rgb(200,200,200);
@@ -2226,4 +2240,21 @@ a{
 
 .invisible .fa-eye-slash:before {
 	content: "\f06e"
+}
+
+
+.price {
+    font-weight: 400 !important;
+    color: wheat;
+    font-size: 2em !important;
+}
+
+.productlist img {
+    height: 250px;
+    width: 150px;
+}
+
+
+.productcategories p.admBtns {
+	margin-top:0;
 }

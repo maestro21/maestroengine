@@ -15,17 +15,16 @@ foreach($data as $row) {
         <a href="javascript:void(0)" onclick="conf('<?php echo BASE_URL.$class;?>/del/<?php echo $id;?>', '<?php echo T('del conf');?>')" class="fa-trash-o fa icon icon_sml"></a>
       </p><br>
     <?php } ?>
-    <a href="<?php echo BASE_URL . 'products/view/' . $id;?>">
+    
       <table>
         <tr>
           <td>
-            <img class="img" src="<?php echo getImg('products', $id);?>" align=left>
+            <a href="<?php echo BASE_URL . 'products/view/' . $id;?>"><img class="img" src="<?php echo getImg('products', $id);?>" align=left></a>
           </td>
           <td>
-            <h3><?php echo $name;?></h3>
+            <a href="<?php echo BASE_URL . 'products/view/' . $id;?>"><h3><?php echo $name;?></h3></a>
             <p><?php echo unserialize($row['type'])[getlang()];?><br>
-              <p><?php if(!empty($row['alchohol'])) { echo T('alch') . ': ' . str_replace('Vol','', $row['alchohol']) . ' Vol'; }?><br>
-                <?php if(!empty($row['size'])) { echo '℮ ' . $row['size']  . ' ml'; }?>
+              <span class="price"><?php if(!empty($row['price'])) { echo "&euro;" . $row['price']; }?></span>
             </p>
             <p>
               <div class="btn sml"><?php echo T('more');?> &rarr;</div>
