@@ -1,6 +1,5 @@
 <?php if(superAdmin()) { ?>
-  <h1><a href="<?php echo BASE_URL.$class;?>/add" title="<?php echo T('add product category');?>"class="fa fa-plus icon" style="display: inline-block;"></a></h1>
-  <hr>
+  <?php echo btns($buttons['admin']); ?>
 <?php } ?>
 <div class="productcategories">
 <?php

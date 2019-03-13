@@ -14,7 +14,6 @@
 		</tr>
 	</table>
 </form>
-<hr></hr>
 <?php } ?>
 
 <div class=gallery>

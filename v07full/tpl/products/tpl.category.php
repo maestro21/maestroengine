@@ -1,6 +1,9 @@
 <?php if(superAdmin()) { ?>
-  <h1><a href="<?php echo BASE_URL.$class;?>/add/<?php echo $id;?>" title="<?php echo T('add product');?>"class="fa fa-plus icon" style="display: inline-block;"></a></h1>
-  <hr>
+  <?php echo btns([[
+				'text' => 'add',
+				'icon' => 'fas fa-plus',
+				'url' => BASE_URL.$class . '/add/' . $id
+			]]); ?>
 <?php } ?>
 <div class="productlist">
 <?php
