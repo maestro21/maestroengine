@@ -2164,3 +2164,27 @@ table .btn:hover * {
 .logout {
 	cursor: pointer;
 }
+
+/** markdown editor */
+.editor-toolbar {	
+    background-color: black;
+}
+.editor-toolbar a.fa {
+	color: white !important;
+}
+.editor-toolbar a.fa:hover {
+	color: black !important;
+}
+
+.fupload {
+	display: none !important;
+}
+
+.CodeMirror {
+	background-color: rgba(0,0,0,0.3) !important;
+}
+
+.main.wrap.wrap-posts.view .wrap {
+    padding: 50px;
+    width: auto;
+}
