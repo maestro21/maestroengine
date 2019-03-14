@@ -17,6 +17,7 @@ $langs = getlangs();
 			case WIDGET_HIDDEN: break;
 
 			case WIDGET_HTML:
+			case WIDGET_MARKDOWN:
 			case WIDGET_TEXTAREA:
 			case WIDGET_BBCODE:
 				echo "<td colspan=2 class='inputs'>";
@@ -331,6 +332,118 @@ $langs = getlangs();
 			</div>
 		<?php break;
 
+		case WIDGET_MARKDOWN: ?>
+		<?php echo T($key);?>:<br>
+		<form enctype="multipart/form-data" id="img_form" method="post">
+		<input type="file" id="<?php echo $key;?>_fupload" class="fupload">
+		</form>
+		<textarea<?php if($required) echo " required";?> class="md" cols="100" rows="10"
+			name="<?php echo $prefix;?>[<?php echo $key;?>]"
+			id="<?php echo $key;?>"><?php echo $value;?></textarea>
+		<script>
+		$(document).ready(function() {
+			var _editor;
+			
+			function getEditor() {
+				console.log(_editor);
+				return _editor;
+			}	
+
+			var simplemde_<?php echo $key;?> = new SimpleMDE({ 
+				element: $("#<?php echo $key;?>")[0], 
+				forceSync: true,
+				autosave: { 
+					enabled: true, 
+					uniqueId: <?php echo $key;?>
+				},
+				toolbar: [
+					"bold",
+					"italic",
+					"strikethrough",
+					"|",
+					"heading",
+					"quote",
+					"horizontal-rule",
+					"|",
+					"link",
+					{
+						name: "image",
+						action: function insertYoutube(editor){
+							var url = prompt('Введите URL'); 
+							_editor = editor;
+							$.post('<?php echo BASE_URL;;?>posts/upimgurl', {
+								'img': url
+							}).done(function( data ) { console.log(data);
+								var text = '![](' + data + ')';
+								pos = _editor.codemirror.getCursor();
+								_editor.codemirror.setSelection(pos, pos);
+								_editor.codemirror.replaceSelection(text);	
+							});
+						},
+						className: "fa fa-image",
+						title: "Insert Image",
+					},
+					{
+						name: "upimg",
+						action: function uploadImage(editor){
+							_editor = editor;
+							$('#<?php echo $key;?>_fupload').trigger('click'); 
+						},
+						className: "fa fa-upload",
+						title: "Upload image",
+					},
+					{
+						name: "youtube",
+						action: function insertYoutube(editor){
+							var url = prompt('Введите URL'); 
+							url = parseYoutubeUrl(url);
+							var text = '<iframe width="1200" height="677" src="https://www.youtube.com/embed/' + url + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+							$('#img_url').val('https://img.youtube.com/vi/' + url + '/maxresdefault.jpg');
+							pos = editor.codemirror.getCursor();
+							editor.codemirror.setSelection(pos, pos);
+							editor.codemirror.replaceSelection(text);	
+						},
+						className: "fa fa-youtube",
+						title: "Insert Youtube",
+					},
+					"|",
+					"table",					
+					"unordered-list",
+					"ordered-list",
+					"|",
+					"preview",
+					"side-by-side",
+					"guide"
+				]
+			});
+
+			$('#<?php echo $key;?>_fupload').on('change', function(){
+
+				var formData = new FormData();
+				// HTML file input, chosen by user
+				formData.append("img", this.files[0]);
+				var request = new XMLHttpRequest();
+				request.open("POST", "<?php echo BASE_URL;?>posts/upimg", true);
+				request.send(formData);
+				request.onreadystatechange = function() { 
+					if (request.readyState != 4) return;
+					if (request.status != 200) {
+						console.log(request.status + ': ' + request.statusText);
+					} else {
+						console.log(request.responseText); 
+						var _editor = getEditor();
+						var text = '![](' + request.responseText + ')';
+						pos = _editor.codemirror.getCursor();
+						_editor.codemirror.setSelection(pos, pos);
+						_editor.codemirror.replaceSelection(text);	
+					}
+				}
+			});
+
+		});
+		</script>
+		<?	
+
 	} ?>
 	<label for="<?php echo $key;?>"></label>
 	<?php if ($widget == WIDGET_CHECKBOX ) echo T($key) . ($required ? "<sup>*</sup>":'');?>
@@ -344,41 +457,3 @@ $langs = getlangs();
 		<table>
 	<?php } ?>
 <?php }?>
-
-<script>
-	tinymce.init({
-		selector:'textarea.html',
-		menu: {},
-		plugins: [
-			'link lists image media table hr searchreplace visualblocks visualchars code fullscreen charmap insertdatetime template textcolor colorpicker alphamanager'
-		],
-
-		toolbar: 'html undo redo |  bold italic underline strikethrough | styleselect forecolor backcolor removeformat  | alignleft aligncenter alignright alignjustify | bullist numlist | table hr | insert link image media ',
-
-		setup: function (editor) {
-			editor.addButton('html', {
-				text: 'html',
-				icon: false,
-				onclick: function () {
-					//var $ = tinymce.dom.DomQuery;
-					var myTextarea = $('#' + editor.id);
-					var myIframe = $(editor.iframeElement);
-
-					myIframe.toggleClass("hidden");
-					myTextarea.toggleClass("visible");
-					if ($('iframe.hidden').length > 0) {
-					  myTextarea.prependTo(".mce-edit-area");
-					  myTextarea.html(editor.getContent({
-					  source_view: true
-					}));
-					} else {
-						editor.setContent(myTextarea.val());
-						myTextarea.appendTo('body');
-					}
-				}
-			});
-	  },
-	});
-
-
-</script>

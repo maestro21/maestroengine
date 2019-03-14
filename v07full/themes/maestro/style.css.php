@@ -2258,3 +2258,64 @@ a{
 .productcategories p.admBtns {
 	margin-top:0;
 }
+
+.wraptext {            
+            vertical-align: bottom;
+            display: table-cell;
+            background-position: center;
+            background-size: 1200px 600px; 
+            height: 600px;
+            width:1200px;
+            color: white;
+        }
+
+.wraptext article {
+            bottom: 0;
+            padding: 30px;
+            background-color: rgba(0,0,0,0.77);
+            font-weight: 200;
+        }
+
+
+.wrap-posts .info {    
+    margin-top: 20px;
+    display: inline-block;
+    font-size: 14px;
+}
+.wrap-posts .info .tags {
+    display: inline-block;
+    margin-left: 40px;
+}
+
+.page-wrapper .main.wrap-posts  .content {
+	text-align: left;
+}
+
+.wrap-posts.view .content {
+	padding: 0;
+	padding-bottom: 50px;
+}
+
+/** markdown editor */
+.editor-toolbar {	
+    background-color: black;
+}
+.editor-toolbar a.fa {
+	color: white !important;
+}
+.editor-toolbar a.fa:hover {
+	color: black !important;
+}
+
+.fupload {
+	display: none !important;
+}
+
+.CodeMirror {
+	background-color: rgba(0,0,0,0.3) !important;
+}
+
+.main.wrap.wrap-posts.view .wrap {
+    padding: 50px;
+    width: auto;
+}

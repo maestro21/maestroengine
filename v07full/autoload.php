@@ -12,6 +12,7 @@ require_once(BASE_PATH . "engine/db/db." . DB_TYPE . ".functions.php");
 require_once(BASE_PATH . 'engine/class.masterclass.php');
 require_once(BASE_PATH . 'engine/class.filemanager.php');
 require_once(BASE_PATH . 'external/php_image_magician.php');
+require_once(BASE_PATH . 'external/Parsedown.php');
 
 //installationCheck();
 

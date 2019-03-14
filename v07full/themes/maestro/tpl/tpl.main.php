@@ -23,7 +23,7 @@
 		</div>
 
 
-		<div class="main wrap">
+		<div class="main wrap wrap-<?php echo $class->className .  ' ' . $class->tpl;?>">
 			<h1><?php echo $title;?></h1>
 			<div class="content">
 			<?php echo $content; ?>

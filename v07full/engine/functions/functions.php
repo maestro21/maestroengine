@@ -468,6 +468,7 @@ const WIDGET_NUMBER		= 'number';
 const WIDGET_URL		= 'url';
 const WIDGET_SLUG		= 'slug';
 const WIDGET_FILE	= 'file';
+const WIDGET_MARKDOWN 	= 'markdown';
 
 const DB_TEXT 	= 'text';
 const DB_BLOB 	= 'blob';
@@ -511,7 +512,9 @@ function fType($value, $type, $options = null, $fieldname = null) {
 			return (int)$value;
 		break;
 
-
+		case WIDGET_MARKDOWN:
+			$parser = new Parsedown();
+			return $parser->text($value);
 		case WIDGET_HTML:
 			Hset('editor');
 
@@ -619,7 +622,7 @@ function sqlFormat($type, $value = '', $quote = false){ //echo $type;
 		case 'array': $value = serialize($value);
 		break;
 
-		case 'date': if($value=='') $value = date("Y-m-d H:i:s"); else{ print_r($value);
+		case 'date': if($value=='') $value = date("Y-m-d H:i:s"); else{ 
 				$value = date("Y-m-d H:i:s",mktime(
 					intval(@$value['h']),
 					intval(@$value['mi']),

@@ -117,7 +117,7 @@ class filemanager {
 		return copy($path, $path2);
 	}
 
-	public function fupload($file, $path, $thumbpath) {
+	public function fupload($file, $path, $thumbpath = null) {
 		global $_FILES;
 		if(empty($_FILES) || !file_exists($_FILES[$file]["tmp_name"])) return FALSE;
 		$file = $_FILES[$file];
@@ -125,7 +125,7 @@ class filemanager {
 		move_uploaded_file($tmpname, $path);
 		/* create thumb for image */
 		$type = explode('/',$file['type']);
-		if($type[0] == 'image') {
+		if($type[0] == 'image' && $thumbpath) {
 			createthumb($path, $thumbpath, 100, 100, $file['type']);
 		}
 	}

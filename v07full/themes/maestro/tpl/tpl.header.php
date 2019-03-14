@@ -33,3 +33,7 @@
 <!-- Toastr -->
 <script type="text/javascript" src="<?php echo BASE_URL . EXT_FOLDER;?>toastr/toastr.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL . EXT_FOLDER;?>toastr/toastr.min.css" />
+
+<!-- MD -->
+<link rel="stylesheet" href="<?php echo BASE_URL . EXT_FOLDER;?>simplemde/simplemde.min.css">
+<script src="<?php echo BASE_URL . EXT_FOLDER;?>simplemde/simplemde.min.js"></script>
