@@ -179,7 +179,7 @@ $langs = getlangs();
 		<?php break;
 
 		case WIDGET_PASS: ?>
-			<input type="password"<?php if($required) echo " required";?> value="" name="<?php echo $prefix;?>[<?php echo $key;?>]" id="<?php echo $key;?>" />";
+			<input type="password"<?php if($required) echo " required";?> value="" name="<?php echo $prefix;?>[<?php echo $key;?>]" id="<?php echo $key;?>" />
 		<?php break;
 
 		case WIDGET_HIDDEN: ?>

@@ -1,5 +1,10 @@
 
 $( document ).ready(function() {
+	bindAll();
+});
+
+function bindAll() {
+
 	if($(".imgselect").length) {
 		$(".imgselect").msDropDown();
 		setTimeout(function(){ $(".imgselect").msDropDown().data('dd').close(); }, 500);
@@ -34,9 +39,6 @@ $( document ).ready(function() {
             }
         });
 	});
-
-
-
 	/*  $(window).keydown(function(event){
 	    if(event.keyCode == 13) {
 	      event.preventDefault();
@@ -45,15 +47,9 @@ $( document ).ready(function() {
 	    }
 	  });*/
 	/*
-	$("#form").submit(function(e){ sendForm(); return false; });
+	$("form").submit(function(e){ sendForm(); return false; });
 	$('.submit').click(function(e) {  sendForm(); return false; });
 	function saveFn(){ saveForm(); } */
-
-	$('.tabMenu div').click(function() {
-		tab($(this).data('id'));
-	});
-	tab(1);
-
 
 	$.fn.serializefiles = function() {
 		var obj = $(this);
@@ -69,43 +65,13 @@ $( document ).ready(function() {
 			formData.append(val.name, val.value);
 		});
 		return formData;
-	};
+	};	
 
-	tinymce.init({
-		selector:'textarea.html',
-		menu: {},
-		plugins: [
-			'link lists image media table hr searchreplace visualblocks visualchars code fullscreen charmap insertdatetime template textcolor colorpicker alphamanager'
-		],
-
-		toolbar: 'html undo redo |  bold italic underline strikethrough | styleselect forecolor backcolor removeformat  | alignleft aligncenter alignright alignjustify | bullist numlist | table hr | insert link image media ',
-
-		setup: function (editor) {
-			editor.addButton('html', {
-				text: 'html',
-				icon: false,
-				onclick: function () {
-					//var $ = tinymce.dom.DomQuery;
-					var myTextarea = $('#' + editor.id);
-					var myIframe = $(editor.iframeElement);
-
-					myIframe.toggleClass("hidden");
-					myTextarea.toggleClass("visible");
-					if ($('iframe.hidden').length > 0) {
-					  myTextarea.prependTo(".mce-edit-area");
-					  myTextarea.html(editor.getContent({
-					  source_view: true
-					}));
-					} else {
-						editor.setContent(myTextarea.val());
-						myTextarea.appendTo('body');
-					}
-				}
-			});
-	  },
+	$('.tabMenu div').click(function() {
+		tab($(this).data('id'));
 	});
-
-});
+	tab(1);
+}
 
 
 function tab(i) {

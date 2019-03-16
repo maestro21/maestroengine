@@ -18,10 +18,10 @@
 						<?php echo menu(); ?>
 					</ul>
 				</div>
-						<?php echo langs();  ?>
+				<?php echo langs();  ?>				
+				<?php echo login(); ?>
 			</div>
 		</div>
-
 
 		<div class="main wrap wrap-<?php echo $class->className .  ' ' . $class->tpl;?>">
 			<h1><?php echo $title;?></h1>
@@ -30,6 +30,17 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	<!--
+		<div id="modaltest">
+			test			
+		</div>			
+		<a onclick="javascript:eModal('#modaltest');" href="javascript:void(0);">test</a>
+		<script>
+			eModal('modaltest');
+		</script>-->
+
 	<div class="footer">
 		<div class="wrapper">
 			&copy; <?php echo date('Y');?> <?php echo G('sitename');?> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -37,6 +48,13 @@
 			<span class="right"> <?php echo T('Design');?> Maestro Studio</span>
 		</div>
 	</div>
+
+	<div class="modal-overlay"></div>	
+	<section id="modal" class="modal">
+		<div class="fa fa-times icon icon-big modal-close"></div>
+		<div class="modal-body">	
+		</div>
+	</section>
 		
 	</body>
 </html>

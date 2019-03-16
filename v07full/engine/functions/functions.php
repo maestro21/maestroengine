@@ -1352,6 +1352,7 @@ function preparelang($lang) {
  * 	text
  *  icon
  *  class
+ * onclick
  * ]
  */
 function btn($data, $id = null){ 
@@ -1359,7 +1360,8 @@ function btn($data, $id = null){
 	$text = ($data['icon'] ? icon($data['icon']) : '') . ($data['text'] ? T($data['text']) : '');
 	$class = 'btn' . ($data['class'] ? ' ' . $data['class'] : '' );
 	$id = $data['id'] ? ' id="' . $data['id'] . '"' : '';
-	return sprintf('<a href="%s" class="btn %s"%s>%s</a>', $href, $class, $id, $text);
+	$onclick = $data['onclick'] ? ' onclick="' . $data['onclick'] . '"' : '';
+	return sprintf('<a href="%s" class="btn %s"%s%s>%s</a>', $href, $class, $id, $onclick, $text);
 }
 
 function icon($class) {
@@ -1373,4 +1375,20 @@ function btns($btns, $id = null) {
 		$result .= btn($btn, $id);
 	}
 	return $result;
+}
+
+
+function tabs($tabs) {
+	return widget('tabs', $tabs);
+}
+
+function widget($name, $data) {
+	return tpl('widgets', [
+		'name' => $name,
+		'data' => $data,
+	]);
+}
+
+function login() {
+	return call('users', 'loginform');
 }

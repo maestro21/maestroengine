@@ -2319,3 +2319,104 @@ a{
     padding: 50px;
     width: auto;
 }
+
+
+/** modal **/
+
+.modal *{
+	color: black;	
+    font-weight: 300;
+}
+
+.modal input {
+	max-width: 300px;
+}
+
+.modal h2 {
+	font-weight: 300 !important;
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 1px black solid;
+}
+
+.modal-close {
+    cursor: pointer;
+    z-index: 20003;
+    position: absolute;
+    top: -20px;
+    right: -30px;
+    background-color: rgba(0,0,0,0.8) !important;
+    /* color: black !important; */
+    /* box-shadow: none !important; */
+}
+
+.modal a {
+    font-weight: 400;
+}
+
+#modal {
+	background-color: rgba(255,255,255,0.85);
+}
+
+
+.btn *,
+.btn {
+	color: white;
+}
+
+#modal .btn {	
+	border: none;
+	box-shadow: none;
+}
+
+
+#modal .btn:hover {
+	background-color: white !important;
+	color: black;
+	border: 1px black solid;
+}
+
+.btn.ok {
+	background-color: green;
+}
+
+#modal .btn.ok:hover *,
+#modal .btn.ok:hover,
+.btn.ok:hover *,
+.btn.ok:hover {
+	color: green;
+}
+
+#modal .btn.ok:hover {	
+	border: 1px green solid;
+}
+
+select, input, textarea {
+    color: rgba(255,255,255,0.7);
+    border: none;
+    background-color: rgba(0,0,0,0.1);
+    padding: 10px 15px;
+    border-radius: 0;
+    border-bottom: 1px rgba(0,0,0,0.5) solid;
+}
+
+.hidden {
+	position: fixed !important;
+}
+
+a.btn.btn.loginbtn {
+    border: none;
+    box-shadow: none;
+    top: 0;
+    position: relative;
+    float: right;
+    margin: 0;
+}
+
+
+label.error {
+    position: absolute;
+    z-index: 111;
+    margin-top: 5px;
+	width: 200px;
+}

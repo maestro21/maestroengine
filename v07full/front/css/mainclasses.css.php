@@ -50,7 +50,7 @@ table input.date.year {
 
 
 .table {
-	display:table;
+	display:table !important;
 }
 
 .tr {
@@ -122,7 +122,7 @@ table input.date.year {
 .error {
 	border: 1px darkred solid;
 	background-color: pink;
-	color: darkred;
+	color: darkred !important;
 }
 .actual {
 	border: 1px gold solid;
