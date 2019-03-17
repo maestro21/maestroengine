@@ -469,6 +469,8 @@ const WIDGET_URL		= 'url';
 const WIDGET_SLUG		= 'slug';
 const WIDGET_FILE	= 'file';
 const WIDGET_MARKDOWN 	= 'markdown';
+const WIDGET_FLAG		= 'flag';
+const WIDGET_LANGS		= 'langs';
 
 const DB_TEXT 	= 'text';
 const DB_BLOB 	= 'blob';
@@ -1417,4 +1419,9 @@ function widget($name, $data) {
 
 function login() {
 	return call('users', 'loginform');
+}
+
+
+function md($val) {
+	return  ftype($val, WIDGET_MARKDOWN);
 }

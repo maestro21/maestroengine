@@ -7,7 +7,11 @@ function bindAll() {
 
 	if($(".imgselect").length) {
 		$(".imgselect").msDropDown();
-		setTimeout(function(){ $(".imgselect").msDropDown().data('dd').close(); }, 500);
+		setTimeout(function(){
+			$(".imgselect").each(function (index, value) {
+				$(this).msDropDown().data('dd').close(); 
+			}); 
+		}, 500);
 	}	
 
 	$.validator.addMethod('phone', function (value, element) { console.log('called');

@@ -195,7 +195,7 @@ body {
 .header a:hover,
 .topmenu ul a:hover {
   color: white;
-	background-color: <?php echo $mainColor;?> !important;
+	background-color: <?php echo $mainColor;?>;
 }
 
 
@@ -1055,7 +1055,7 @@ height: 20px;
 .flags img {
 	width: 28px;
 	height: 28px;
-	margin-right: 10px;
+	margin-right: 5px;
 	border-radius: 50%;
 }
 
@@ -1798,12 +1798,12 @@ border: 0.5px  rgba(255,255,255,0.5) solid !important;
   font-weight: 100 !important;
 }
 
-.langs .topmenu a:hover {
+.topmenu a:hover {
     background-color: white !important;
     color: black !important;
     transition: background-color 500ms linear;
 }
-.langs .topmenu a:hover * {
+.topmenu a:hover * {
   color: black !important;
 }
 
@@ -2426,7 +2426,62 @@ label.error {
 }
 
 
-.topmenu > li > a {
+/** avatar **/
+
+.avatar {
+	width: 300px;
+	height: 300px;
+	cursor: pointer
+}
+
+.avatar div {
+	margin-top: 250px;
+	background-color: rgba(0,0,0,0.3);
+	line-height: 50px;
+	display: none !important;
+}
+
+.avatar:hover div {
+	display: block !important;
+}
+
+.avatar_fupload {
+	display: none !important;
+}
+
+.avatar_sml {
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+}
+
+.avatar,
+.avatar_sml {		
+	border: 1px rgba(255,255,255,0.7) solid;
+	background-color: rgba(0,0,0,0.3);
+	display: inline-block;
+}
+
+.userinfo {
+	line-height: 50px;
+	font-size: 1.8vmin;
+}
+
+.topmenu .userinfo {
 	padding: 0 15px;
 	line-height: 50px;
+	font-size: 1.8vmin;
+}
+
+.topmenu .userinfo:after {
+	content: "\23F7";
+}
+
+.userinfo img {
+	margin-right: 5px;
+}
+
+.userdata {
+	padding-left: 20px;
+	text-align: left;
 }
