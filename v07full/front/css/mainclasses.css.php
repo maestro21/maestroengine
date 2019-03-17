@@ -128,7 +128,7 @@ table input.date.year {
 	border: 1px gold solid;
 	background-color: #FFFF99;
 }
-.far {
+.inactive {
 	border: 1px darkgray solid;
 	background-color: lightgray;
 	color: darkgray;
@@ -137,7 +137,7 @@ table input.date.year {
 .done,
 .ok,
 .actual,
-.far,
+.inactive,
 .btn,
 .not,
 .error {
@@ -150,7 +150,7 @@ table input.date.year {
 .done b,
 .actual b,
 .not b,
-.far b,
+.iactive b,
 .ok b,
 .error b {
 	font-size:14px;

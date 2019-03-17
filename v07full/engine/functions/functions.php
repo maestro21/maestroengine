@@ -643,10 +643,10 @@ function now() {
 }
 
 
-function CheckLogged(){
-	global $_SESSION,$_POST,$_COOKIE;//s inspect($_SESSION);
+function checkLogged(){
+	global $_SESSION,$_POST,$_COOKIE;
 
-	if(isset($_SESSION['user'])) return true;
+	if(isset($_SESSION['user'])) return $_SESSION['user'];
 
 	if(isset($_COOKIE['mail'])){
 		$sql ="SELECT * FROM users where email='{$_COOKIE['mail']}'"; //echo $sql;
@@ -714,6 +714,11 @@ function superAdmin(){
 	return (@$_SESSION['user']);//(@$_SESSION['user']['id'] == 1);
 }
 
+
+function user() {
+    global $_SESSION;
+    return $_SESSION['user'] ?? null;
+}
 
 function getRights(){
 	global $_SESSION, $_RIGHTS;
@@ -1232,20 +1237,23 @@ function uploadImage($file, $path, $imgsize = null, $thumb = null, $option = 'cr
 				return null;
 		}
 		$type = $type[1];
-		$path = BASEFMDIR . $path . '.' . $type;
+		$path =  $path . '.' . $type;
+		$_path =  BASEFMDIR . $path;
 
-		uploadFile($file, $path);
+		uploadFile($file, $_path);
 
 
 		if(is_array($imgsize)) {
-				createthumb($path, $path, $imgsize[0], $imgsize[1], $option);//, $type);
+				createthumb($_path, $_path, $imgsize[0], $imgsize[1], $option);//, $type);
 		}
 		if($thumb && $thumb['path']) {
-				$thumbpath = BASEFMDIR .  $thumb['path'] . '.' . $type;
-				createthumb($path, $thumbpath, $thumb['x'], $thumb['y']);//, $type);
+				$thumbpath = $thumb['path'] . '.' . $type;
+				$_thumbpath = BASEFMDIR .  $thumbpath;
+				$thumbpath = BASEFMURL . $thumbpath;
+				createthumb($_path, $_thumbpath, $thumb['x'], $thumb['y']);//, $type);
 		}
 		return [
-			'img' => $path,
+			'img' => BASEFMURL . $path,
 			'thumb' => $thumbpath ?? null,
 			'type' => $type
 		];
@@ -1324,19 +1332,37 @@ function getthumb($img, $dir){
 
 }*/
 
-function getImg($path, $id) {
+
+function getImgs($path, $id = '', $url = true) {
 	$types = ['jpeg', 'jpg', 'gif', 'png'];
+	$ret = [];
+	if($id) $path .= '/' . $id;
 	foreach($types as $type) {
-			if(file_exists(BASEFMDIR . $path . '/' . $id . '.' . $type)) {
-					return BASEFMURL . $path . '/' . $id . '.' . $type;
-			}
+		if(file_exists(BASEFMDIR . $path .  '.' . $type)) {
+			$ret[] = ($url ? BASEFMURL : BASEFMDIR) . $path .  '.' . $type;
 		}
-		return null;
+	}
+	return $ret;
 }
 
+function getImg($path, $id = '', $url = true) {
+	$types = ['jpeg', 'jpg', 'gif', 'png'];
+	if($id) $path .= '/' . $id;
+	foreach($types as $type) {
+		if(file_exists(BASEFMDIR . $path .  '.' . $type)) {
+			return ($url ? BASEFMURL : BASEFMDIR) . $path .  '.' . $type;
+		}
+	}
+	return null;
+}
+
+function getBgImg($path) {
+	$img = getImg($path);
+	return $img ? 'style="background-image:url(\''. $img . '\')"': '';
+}
 
 function bgImg() {
-		return G('bgimg');
+	return G('bgimg');
 }
 
 

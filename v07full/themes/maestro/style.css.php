@@ -1950,7 +1950,7 @@ body.open {
 
 
 .table.ok,
-.table.far,
+.table.iactive,
 .table.not {
 	padding-left: 20px;
 	border: none;
@@ -1964,9 +1964,9 @@ body.open {
 	font-weight: 300;
 }
 
-.table.far,
-.table.far h2 a,
-.table.far .status {
+.table.iactive,
+.table.iactive h2 a,
+.table.iactive .status {
 	color: white;
 	font-weight: 300;
 }
@@ -2121,7 +2121,7 @@ thead td a {
 	overflow: auto;
 }
 
-.fa, .fas {
+.fa, .fas, .far {
     font-weight: 900;
     color: white;
     margin-right: 10px;
@@ -2392,11 +2392,15 @@ a{
 }
 
 select, input, textarea {
-    color: rgba(255,255,255,0.7);
     border: none;
-    background-color: rgba(0,0,0,0.1);
     padding: 10px 15px;
     border-radius: 0;
+    border-bottom: 1px rgba(255,255,255,0.5) solid;
+}
+
+#modal select, #modal input, #modal textarea {
+    color: rgba(255,255,255,0.7);
+    background-color: rgba(0,0,0,0.1);
     border-bottom: 1px rgba(0,0,0,0.5) solid;
 }
 
@@ -2419,4 +2423,10 @@ label.error {
     z-index: 111;
     margin-top: 5px;
 	width: 200px;
+}
+
+
+.topmenu > li > a {
+	padding: 0 15px;
+	line-height: 50px;
 }

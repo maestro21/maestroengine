@@ -24,7 +24,7 @@ define('BASE_PATH', dirname(__FILE__) . '/');
 define('SITE_PATH', BASE_PATH . PROJECT_NAME . '/');
 define('BASE_FOLDER', '');
 define('PUB_FOLDER', BASE_FOLDER . 'front/');
-define('TPL_FOLDER',  BASE_FOLDER . 'tpl/');
+define('TPL_FOLDER',  BASE_FOLDER . 'templates/');
 define('CLASS_FOLDER',  BASE_FOLDER . 'module/');
 define('DATA_FOLDER',  BASE_FOLDER . 'data/');
 define('EXT_FOLDER',  BASE_FOLDER . 'external/');
