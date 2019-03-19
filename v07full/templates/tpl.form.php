@@ -8,6 +8,8 @@ $widget = $field[1];
 $value = (isset($data[$key]) ? $data[$key] : "");
 $required = (@$field['required'] > 0);
 $langs = getlangs();
+
+$fieldoptions =  $field['options'] ?? $options[$key] ?? [];
 ?>
 
 <tr>
@@ -207,26 +209,22 @@ $langs = getlangs();
 
 		case WIDGET_RADIO: ?>
 		<?php
-			if(is_array($options) && sizeof($options) > 0) {
-				foreach (@$options[$key] as $kk => $vv){ ?>
-					<?php echo T($vv);?>
-					<input type="radio"
-						name="<?php echo $prefix;?>[<?php echo $key;?>]"
-						value="<?php echo $kk;?>"<?php if($required) echo " required";?>
-						<?php if($kk == $value) echo " checked";?> />
-			<?php } ?>
+			foreach ($fieldoptions as $kk => $vv){ ?>
+				<?php echo T($vv);?>
+				<input type="radio"
+					name="<?php echo $prefix;?>[<?php echo $key;?>]"
+					value="<?php echo $kk;?>"<?php if($required) echo " required";?>
+					<?php if($kk == $value) echo " checked";?> />
 		<?php } ?>
 		<?php break;
 
 		case WIDGET_SELECT: ?>
 			<select name="<?php echo $prefix;?>[<?php echo $key;?>]" id="<?php echo $key;?>">
 			<?php
-				if(is_array($options) && sizeof($options) > 0) {
-					foreach (@$options[$key] as $kk => $vv){ ?>
-						<option value="<?php echo $kk;?>"
-							<?php if($kk == $value) echo " selected='selected'";?>><?php echo T($vv);?>
-						</option>
-				<?php } ?>
+				foreach ($fieldoptions as $kk => $vv){ ?>
+					<option value="<?php echo $kk;?>"
+						<?php if($kk == $value) echo " selected='selected'";?>><?php echo T($vv);?>
+					</option>
 			<?php } ?>
 			</select>
 		<?php break;
@@ -234,15 +232,13 @@ $langs = getlangs();
 		case WIDGET_SELECT_IMG: ?>
 		<select class="imgselect"  name="<?php echo $prefix;?>[<?php echo $key;?>]" id="<?php echo $key;?>">
 		<?php
-			if(is_array($options) && sizeof($options) > 0) {
-				$value = $value ?? $options[0]['value'];
-				foreach (@$options[$key] as $row){ print_r($row);
-					?>
-					<option value="<?php echo $row['value'];?>" 
-						<?php if($row['img']) echo "title='" . $row['img'] . "' ";?>
-						<?php if($row['value'] == $value) echo " selected='selected'";?>><?php echo T($row['text']);?>
-					</option>
-			<?php } ?>
+			$value = $value ?? $fieldoptions[0]['value'] ?? 0;
+			foreach ($fieldoptions as $row){
+				?>
+				<option value="<?php echo $row['value'];?>" 
+					<?php if($row['img']) echo "title='" . $row['img'] . "' ";?>
+					<?php if($row['value'] == $value) echo " selected='selected'";?>><?php echo T($row['text']);?>
+				</option>
 		<?php } ?>
 		</select>
 		<?php break;
@@ -251,12 +247,10 @@ $langs = getlangs();
 			<select multiple<?php if($required) echo " required";?> name="<?php echo $prefix;?>[<?php echo $key;?>][]" id="<?php echo $key;?>">
 			<?php
 				$dat = array_flip(explode(",", $value));
-				if(is_array($options) && sizeof($options) > 0) {
-					foreach (@$options[$key] as $kk => $vv){ ?>
-						<option value="<?php echo $kk;?>"
-							<?php if(isset($dat[$kk])) echo " selected='selected'";?>><?php echo T($vv);?>
-						</option>
-				<?php } ?>
+				foreach ($fieldoptions as $kk => $vv){ ?>
+					<option value="<?php echo $kk;?>"
+						<?php if(isset($dat[$kk])) echo " selected='selected'";?>><?php echo T($vv);?>
+					</option>
 			<?php } ?>
 			</select>
 		<?php break;
@@ -331,7 +325,7 @@ $langs = getlangs();
 			$i = 0;
 			$dat = array_flip(explode(",",@$data[$key]));?>
 			<div>
-			<?php foreach (@$options[$key] as $kk => $vv){
+			<?php foreach ($fieldoptions as $kk => $vv){
 				if($i % 10 == 0){  ?>
 					</div><div style="float:left;border:1px black solid;">
 				<?php } ?>

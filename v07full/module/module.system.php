@@ -35,9 +35,6 @@
 		echo json_encode(array('message' => T('logout success'), 'status' => 'success', 'redirect' => BASE_URL));  die();
 	}
 
-
-
-
 	function saveAll($data) {
 		foreach($data as $k => $v) {
 			$this->set($k, $v);
@@ -65,6 +62,12 @@
 
 	function extend() {
 		$this->description = 'Core module for setting up global settings';
+
+		$this->addBtn('admin', [
+			'url' => 'rights',
+			'text' => 'rights',
+			'icon' => 'fas fa-shield-alt'
+		]);
 		/*$this->buttons = array(
 			'admin' => array( 'add' => 'fa-plus', 'langs' => 'languages', 'themes' => 'themes' ),
 			'table' => array( 'item/{id}' => 'edit',  'view/{id}' => 'view', ),

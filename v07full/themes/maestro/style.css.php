@@ -2460,6 +2460,7 @@ label.error {
 	border: 1px rgba(255,255,255,0.7) solid;
 	background-color: rgba(0,0,0,0.3);
 	display: inline-block;
+	border-radius: 50%;
 }
 
 .userinfo {
