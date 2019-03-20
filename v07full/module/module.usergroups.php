@@ -7,8 +7,7 @@ class usergroups extends masterclass {
 			'usergroups' => [
 				'fields' => [
 					'name' 		=> [ 'string', WIDGET_TEXT],
-                    'rights'	=> [ 'text', WIDGET_CHECKBOXES, 'notInTable' => 1, 'options' => $this->rights()],
-                    'users'     => [ null, WIDGET_SEARCHSELECT, 'notInTable' => 1]
+                    'rights'	=> [ 'array', WIDGET_CHECKBOXES, 'notInTable' => 1, 'options' => $this->getRightsOptions()],
 				]
             ],
             'users_to_groups' => [
@@ -19,6 +18,11 @@ class usergroups extends masterclass {
             ],
 		];
 	}
+
+    function getRightsOptions() {
+        $rights = cache('rights');
+        return array_combine($rights, $rights);
+    }
 
 
 	function rights(){
@@ -32,5 +36,14 @@ class usergroups extends masterclass {
 		cache('rights',$rights);
 		echo json_encode(['message' => T('saved'), 'status' => 'success']);  die();
 	}	
+
+    function getGroupOptions() {
+        $res = q($this->cl)->select('name, id')->run(DBALL);
+        $ret = [];
+        foreach($res as $row) {
+            $ret[$row['id']] = $row['name'];
+        }
+        return $ret;
+    }
 
 }

@@ -5,11 +5,12 @@ foreach($fields as $key => $field) {
 
 	if(@$field['hide']) continue;
 $widget = $field[1];
-$value = (isset($data[$key]) ? $data[$key] : "");
+$value = $field['value']  ?? $data[$key] ?? ""; 
+
 $required = (@$field['required'] > 0);
 $langs = getlangs();
 
-$fieldoptions =  $field['options'] ?? $options[$key] ?? [];
+$fieldoptions =  $field['options'] ?? $options[$key] ?? []; 
 ?>
 
 <tr>
@@ -322,15 +323,15 @@ $fieldoptions =  $field['options'] ?? $options[$key] ?? [];
 				break;
 
 		case WIDGET_CHECKBOXES:
-			$i = 0;
-			$dat = array_flip(explode(",",@$data[$key]));?>
+			$i = 0; 
+			$dat = is_array($value) ? $value : unserialize($value);  //array_flip(explode(",",@$data[$key]));?>
 			<div>
 			<?php foreach ($fieldoptions as $kk => $vv){
 				if($i % 10 == 0){  ?>
 					</div><div style="float:left;border:1px black solid;">
 				<?php } ?>
-				<p><input type="checkbox" value="$kk" name="<?php echo $prefix;?>[<?php echo $key;?>][]"
-					<?php if(isset($dat[$kk])) echo " checked";?>><?php echo T($vv);?></p>
+				<p><input type="checkbox" value="<?php echo $kk;?>" name="<?php echo $prefix;?>[<?php echo $key;?>][]"
+					<?php if(in_array($kk, $dat)) echo " checked";?>><?php echo T($vv);?></p>
 				<?php $i++;
 			} ?>
 			</div>

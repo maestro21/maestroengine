@@ -21,11 +21,77 @@ class users extends masterclass {
                     'surname'   =>  [ 'string', WIDGET_TEXT],
                     'country'   =>  [ 'string', WIDGET_FLAG],
                     'city'      =>  [ 'string', WIDGET_TEXT],
-                    'info'      =>  [ 'text', WIDGET_MARKDOWN, 'notInTable' => true],
+                    'info'      =>  [ 'text', WIDGET_MARKDOWN, 'notInTable' => true]
 				],
 			],
 		];
-	}
+    }
+    
+    function extend() {
+        $this->addBtn('table', [
+			'class' => 'icon',
+			'url' => 'usergroups/{id}',
+			'icon' => 'fas fa-users',
+		]);
+
+    }
+
+    function usergroups() {
+        $this->fields = [
+            'groups' => [
+                'array',
+                WIDGET_CHECKBOXES,
+                'options' => M('usergroups')->getGroupOptions(),
+                'value' =>  $this->getusergroupids($this->id)
+            ]
+        ];
+    }
+
+    function getusergroupids($id){
+        return q('users_to_groups')
+        ->select('group_id')
+        ->where(qEq('user_id', $id))
+        ->run(DBCOL);
+    }
+
+
+    function getusergrouprights($id) {
+        $rights = [];
+        $usergroups = q('usergroups` `g')
+            ->select('rights')
+            ->join('users_to_groups','`utg`.`group_id` = `g`.`id`', 'utg')
+            ->where(qEq('utg`.`user_id', $id))
+            ->run(DBCOL);
+         
+        foreach($usergroups as $group) {
+            $group = unserialize($group);
+            $rights = array_merge($rights, $group);
+        }  
+        return array_unique($rights);  
+    }
+
+    function setuserrights($id) {
+        $rights = $this->getusergrouprights($id);
+        foreach($rights as $right) {
+            setRights($right);
+        }
+    }
+
+    function savegroups() {        
+        if($this->id == 0 || !isset($this->post['form']) || !isset($this->post['form']['groups'])) {
+            echo json_encode(['status' => 'error' , 'message' => T('error')]); die();
+        }
+        
+        q('users_to_groups')->delete()->where(qEq('user_id',$this->id))->run();
+        
+        foreach($this->post['form']['groups'] as $group_id) {
+            q('users_to_groups')->qsave([
+                'user_id' => $this->id,
+                'group_id' => $group_id
+            ])->run();
+        }
+        echo json_encode(['status' => 'success' , 'message' => T('success')]); die();
+    }
 
     function loginform(){ }
 
@@ -33,7 +99,9 @@ class users extends masterclass {
         return $this->edit();
     }
     function getUser($id) {
-        return q($this->cl)->qget($id)->run(DBROW);
+        $user = q($this->cl)->qget($id)->run(DBROW);
+        $user['rights'] = $this->getusergrouprights($id);
+        return $user;
     }
 
     function viewprofile() {
@@ -138,10 +206,12 @@ class users extends masterclass {
                     ->from($this->className)
                     ->where(qEq('pass', $username) . ' AND (' . qEq('username', $username) . ' OR ' . qEq('email', $email) . ')')
                     ->run(DBROW);
+                    
         if(empty($user)) {          
             echo json_encode(array('message' => T('error_wrong_pass'), 'status' => 'error', 'redirect' => BASE_URL));  die();
         }
               
+        $this->setuserrights($user['id']);
         session('user', $user);
         $redirecturl = BASE_URL;
 

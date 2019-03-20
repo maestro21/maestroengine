@@ -35,12 +35,6 @@ class mysql extends dbquery {
 	function composeSelectQuery(){ 
 		$this->rawQuery = 'SELECT ' . implode(",\r\n ", $this->parts['select'])  . "\r\n";
 		$this->rawQuery .= 'FROM ' . var2string($this->parts['from'])  . "\r\n";
-		if(isset($this->parts['where']) && is_array($this->parts['where'])) {
-			$this->rawQuery .= 'WHERE 1 '  . "\r\n";
-			foreach($this->parts['where'] as $where) {
-				$this->rawQuery .= ' ' . $where['op'] . ' ' . $where['query']  . "\r\n";
-			}
-		}
 		if(isset($this->parts['join']) && is_array($this->parts['join'])) {
 			foreach($this->parts['join'] as $join) {
 				if($join['table'] && $join['cond']) {
@@ -50,6 +44,13 @@ class mysql extends dbquery {
 		}
 		if(isset($this->parts['group'])) {
 			$this->rawQuery .= 'GROUP BY ' . var2string($this->parts['group'])  . "\r\n";
+		}
+		
+		if(isset($this->parts['where']) && is_array($this->parts['where'])) {
+			$this->rawQuery .= 'WHERE 1 '  . "\r\n";
+			foreach($this->parts['where'] as $where) {
+				$this->rawQuery .= ' ' . $where['op'] . ' ' . $where['query']  . "\r\n";
+			}
 		}
 		if(isset($this->parts['having']) && is_array($this->parts['having'])) {
 			$this->rawQuery .= 'HAVING 1 '  . "\r\n";

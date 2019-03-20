@@ -711,21 +711,18 @@ function getlangs() {
 	return  $langs;*/
 }
 
-function superAdmin(){
-	global $_SESSION;
-	return (@$_SESSION['user']);//(@$_SESSION['user']['id'] == 1);
+function superAdmin(){	
+	return (user() == 'superadmin');
 }
 
+function isLogged() {
+	return (user() !== null);
+}
 
 function user() {
-    global $_SESSION;
-    return $_SESSION['user'] ?? null;
+    return session('user') ?? null;
 }
 
-function getRights(){
-	global $_SESSION, $_RIGHTS;
-	$_RIGHTS['admin'] = TRUE;
-}
 
 function sendMail($data){
 	/*$headers =
@@ -942,10 +939,14 @@ function reinstall() {
 	call('modules', 'cache');
 }
 
-function hasRights($rightname) {
-	if(!$rightname) return true;
-	global $_SESSION;
-	return (isset($_SESSION['rights'][$rightname]));
+
+function getRights() {
+	return session('rights');
+}
+
+function hasRights($rightname = null) {
+	if(!$rightname || superadmin()) return true;
+	return in_array($rights, getRights());
 }
 
 function setRights($rightname) {

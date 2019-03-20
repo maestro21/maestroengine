@@ -64,7 +64,7 @@ class DBquery {
 	//	$this->clear();
 		$this->queryType = 'update';
 		$this->requestType = self::DBQUERY;
-		$this->parts['update'] = "`$table`";
+		$this->parts['update'] = "$table";
 		return $this;
 	}
 
