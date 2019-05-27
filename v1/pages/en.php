@@ -87,10 +87,16 @@
                     </tbody></table>
             </div>
         </form>
+    <a href="http://localhost/maestroengine/v07full/data/uploads/galleries/1/367.png" rel="shadowbox">
+        <div class="third box" style="width:300px;height:200px;background-image: url('http://localhost/maestroengine/v07full/data/uploads/galleries/1/367.png');">
+            <div class="btns"><a class="nobtn btn"><i class="icon fab fa-whatsapp"></i></a></div>
+        </div>
+    </a>
 
       <div class="third">
+          <block>
           Maestro Studio is a Swiss Web Development Company that offers full range of services to create and develop your needs for a personalized website as well as Blockchain development based on EthereumSolidity. Blockchain is the revolutionary technology of our time, which provides a convenient, independent and secure way to exchange information and provide financial transactions. Our products are of high quality and developed in the heart of Switzerland.
-      </div>
+      </div></div>
 
         <div class="third">
             Maestro Studio is a Swiss Web Development Company that offers full range of services to create and develop your needs for a personalized website as well as Blockchain development based on EthereumSolidity. Blockchain is the revolutionary technology of our time, which provides a convenient, independent and secure way to exchange information and provide financial transactions. Our products are of high quality and developed in the heart of Switzerland.
@@ -101,8 +107,7 @@
         </div>
 
 
-        <?php echo box([
-          'class' => 'third',
+        <?php echo block(box([
           'w' => 300,
           'h' => 200,
           'text' => 'Random box',
@@ -113,7 +118,21 @@
                   'class' => 'nobtn'
               ]
           ]
-        ]);?>
+        ]));?>
+
+        <?php echo block(sbox([
+            'link' => 'http://localhost/maestroengine/v07full/data/uploads/galleries/1/367.png',
+            'w' => 300,
+            'h' => 200,
+            'text' => 'Random box',
+            'bg' => 'http://localhost/maestroengine/v07full/data/uploads/galleries/1/367.png',
+            'btns' => [
+                [
+                    'icon' => 'fab fa-whatsapp',
+                    'class' => 'nobtn'
+                ]
+            ]
+        ]));?>
 
         <?php echo popupbtn('popupcontent', 'Open popup');?>
 

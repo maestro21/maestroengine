@@ -4,10 +4,6 @@ html {
     font-family: Arial;
 }
 
-:root {
-    --main-color: green;
-}
-
 
 body {
      margin: 0;
@@ -130,12 +126,21 @@ form {
 
 .box .text {
     padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 20px);
 }
 
 .box .text,
 .box .btns .nobtn .icon {
     background-color: rgba(0,0,0,0.5);
     color: white;
+}
+
+.boxlink {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .btns {
@@ -147,4 +152,12 @@ form {
 .btn.nobtn {
     padding: 0;
     background-color: transparent;
+}
+
+.block {
+    margin: 10px;
+}
+
+.tmcn {
+    display: inline-block;
 }

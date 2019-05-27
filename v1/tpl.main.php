@@ -17,15 +17,18 @@
 <body>
   <header>
     <nav class="wrap" class="navbar navbar-inverse navbar-fixed-top">
-      <?php foreach($menu as $link => $text) { ?>
-          <a href="<?php echo BASE_URL . $lang . '/'. $link;?>"><?php echo $text;?></a>
-      <?php } ?>
+        <?php echo navBtns();?>
+        <div class="tmcn"><?php include('topmenu.php');?></div>
       <div class="right langs">
           <ul class="dropdown">
-              <li><a href="#"><?php echo $deflang;?></a>
+              <li> <a href="#"><span class="lang_short"><?php echo $lang;?></span>
+                  <span class="lang_long">English</span></a>
                   <ul>
                       <?php foreach($langs as $lang) { ?>
-                          <li><a href="<?php echo BASE_URL . $lang;?>"><?php echo $lang;?></a></li>
+                          <li><a href="<?php echo BASE_URL . $lang;?>">
+                                  <span class="lang_short"><?php echo $lang;?></span>
+                                  <span class="lang_long">English</span>
+                              </a></li>
                       <?php } ?>
                   </ul>
               </li>
@@ -35,6 +38,8 @@
   </header>
   <main>
     <div class="wrap">
+        <div class="tmcm"><?php include('topmenu.php');?></div>
+
       <?php include('pages/' . $page . '.php');?>
     </div>
   </main>

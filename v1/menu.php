@@ -3,7 +3,8 @@ $menu = [
 
   'en' => [
     '' => 'Home',
-    'about' => 'About us'
+    'about' => 'About us',
+    'test' => 'Test',
   ],
 
   'ru' => [
