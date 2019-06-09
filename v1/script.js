@@ -40,3 +40,9 @@ function checkDisplayMenu() {
         $('.tmcn').show();
     }
 }
+
+function toggleCp() {
+    $('.adminpanel').toggleClass('open');
+    $('body').toggleClass('open')
+    $('.adminbtn').toggleClass('open')
+}

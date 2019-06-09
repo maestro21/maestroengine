@@ -157,7 +157,7 @@
 
 	function menu($tpl = 'menu'){
 		$this->parse = false;
-		$tree = cache('menu');
+		$tree = cache('menu'); var_dump(getLang());
 		foreach($tree as $lang => $topmenu) {
 			if($topmenu['url'] == getLang()) {
 				// show home button

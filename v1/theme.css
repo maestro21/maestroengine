@@ -1,3 +1,10 @@
+:root {
+    --highlight-color: wheat;
+    --bg-color: rgba(0,0,0,0.6);
+    --border-color: rgba(255,255,255,0.5);
+}
+
+
 html {
     font-size: 18px;
     font-family: Roboto;
@@ -35,17 +42,146 @@ body {
     background-attachment: fixed;
 }
 
-header {
-    background-color: rgba(0,0,0,0.7);
-}
 
+header {
+    background-color: rgba(0,0,0,0.75);
+}
 main {
     background-color: rgba(0,0,0,0.3);
 }
 
-.block {
-    background-color: rgba(0,0,0,0.7);
+main .wrap .content{
+    background-color: var(--bg-color);
     color: white;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 3px;
+}
+
+main .icon {
+    color: white;
+}
+
+main a {
+    color: var(--highlight-color);
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.dropdown a:hover,
+.btn:hover {
+    text-decoration: none;
+}
+
+nav .btn {
+    background-color: transparent;
+}
+
+nav  .dropdown {
+    background-color: transparent;
+}
+
+.topmenu,
+nav  .dropdown ul {
+    background-color: rgba(0,0,0,0.8);
+}
+
+select, input, textarea {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 0;
+    border: none !important;
+    border-bottom: 1px rgba(255,255,255,0.5) solid !important;
+    background-color: rgba(0,0,0,0.3);
+    color: white;
+}
+
+main .btn {
+    background-color: rgba(0,0,0,0.5);
+    border: 1px rgba(255,255,255, 0.5) solid;
+}
+
+main .btn:hover {
+    background-color: white;
+    color: black;
+}
+
+.btns .btn {
+    border: none;
+    color: var(--highlight-color);
+}
+
+.btns .btn:hover {
+    background-color: transparent;
+    color: var(--highlight-color);
+}
+
+.box {
+    opacity: 0.8;
+}
+
+.box:hover {
+    opacity: 1;
+}
+
+.box,
+.popup {
+    background-color: black;
+    color: white;
+    border: 1px var(--border-color) solid;
+    border-radius: 3px;
+}
+
+.popup h3 {
+    margin-top: 0;
+}
+
+.btn.nobtn .icon, .icon {
+    color: white;
+    background-color: transparent;
+}
+
+.btn.nobtn .icon:hover,
+.icon:hover {
+    color: var(--highlight-color);
+}
+
+
+.popup .btns {
+    margin-top: -10px;
+    margin-right: -10px;
+}
+
+.popup .btns {
+    background-color: black;
+}
+
+::-webkit-scrollbar-track
+{
+    background: transparent;
+}
+
+::-webkit-scrollbar
+{
+    width: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb
+{
+    background-color: white;
+}
+
+.avatar {
+    border: 1px white solid;
+    border-radius: 50%;
+    padding: 2px;
+    opacity: 1;
+    height: 30px;
+    width: 30px;
 }

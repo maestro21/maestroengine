@@ -29,6 +29,7 @@ a .icon {
     padding: 10px 20px;
     text-decoration: none;
     cursor: pointer;
+    display: inline-block;
 }
 
 
@@ -85,7 +86,7 @@ textarea {
 
 .dropdown > li > ul ul {
     left: 100%;
-    margin-left: -10px;
+    /*margin-left: -10px; */
     margin-top: -50px;
 }
 

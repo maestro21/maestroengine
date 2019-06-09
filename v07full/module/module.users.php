@@ -56,7 +56,8 @@ class users extends masterclass {
 
 
     function getusergrouprights($id) {
-        $rights = [];
+        $rights = []; 
+        if($id < 1) return [];
         $usergroups = q('usergroups` `g')
             ->select('rights')
             ->join('users_to_groups','`utg`.`group_id` = `g`.`id`', 'utg')
@@ -99,6 +100,7 @@ class users extends masterclass {
         return $this->edit();
     }
     function getUser($id) {
+        if($id < 1) return;
         $user = q($this->cl)->qget($id)->run(DBROW);
         $user['rights'] = $this->getusergrouprights($id);
         return $user;

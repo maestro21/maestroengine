@@ -1,6 +1,4 @@
-<h1>Welcome page</h1>
 
-<div class="block">
     <p style="display: block;"><strong style="display: inline;">Maestro Studio</strong> is a Swiss Web Development Company that offers full range of services to create and develop your needs for a personalized website as well as Blockchain development based on EthereumSolidity. Blockchain is the revolutionary technology of our time, which provides a convenient, independent and secure way to exchange information and provide financial transactions. Our products are of high quality and developed in the heart of Switzerland. Our products and services include:</p>
     <ul style="display: block;">
         <li style="display: list-item;">Swiss quality</li>
@@ -94,9 +92,8 @@
     </a>
 
       <div class="third">
-          <block>
           Maestro Studio is a Swiss Web Development Company that offers full range of services to create and develop your needs for a personalized website as well as Blockchain development based on EthereumSolidity. Blockchain is the revolutionary technology of our time, which provides a convenient, independent and secure way to exchange information and provide financial transactions. Our products are of high quality and developed in the heart of Switzerland.
-      </div></div>
+      </div>
 
         <div class="third">
             Maestro Studio is a Swiss Web Development Company that offers full range of services to create and develop your needs for a personalized website as well as Blockchain development based on EthereumSolidity. Blockchain is the revolutionary technology of our time, which provides a convenient, independent and secure way to exchange information and provide financial transactions. Our products are of high quality and developed in the heart of Switzerland.
@@ -114,7 +111,7 @@
           'bg' => 'https://picsum.photos/300/200',
           'btns' => [
               [
-                  'icon' => 'fab fa-whatsapp',
+                  'icon' => 'fas fa-pencil-alt',
                   'class' => 'nobtn'
               ]
           ]
@@ -128,7 +125,7 @@
             'bg' => 'http://localhost/maestroengine/v07full/data/uploads/galleries/1/367.png',
             'btns' => [
                 [
-                    'icon' => 'fab fa-whatsapp',
+                    'icon' => 'fas fa-pencil-alt',
                     'class' => 'nobtn'
                 ]
             ]
@@ -138,10 +135,9 @@
 
 
         <?php echo popup('popupcontent', '
-                <h1>Popup content</h1>
+                <h3>Popup content</h3>
                 Some popup content
                 ' . popupbtn('popupcontent2', 'Another popup')
         );?>
 
         <?php echo popup('popupcontent2', 'Another popup');?>
-</div>

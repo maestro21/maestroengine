@@ -350,7 +350,7 @@ function lang() {
 	return getlang()['abbr'] ?? deflang();
 } */
 
-function getLang($lng = null){ return 'en';
+function getLang($lng = null){
 	$lang = getVar('lang'); if($lang) return $lang;
 	$langs = getLangs(); $lang = null;
 	foreach($langs as $_lang) {

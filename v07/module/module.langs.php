@@ -127,5 +127,4 @@ class langs extends masterclass {
 		if(!$data)  $data = q($this->cl)->qlist()->order('pos ASC')->run();
 		cache($this->className, $data);
 	}
-
 }

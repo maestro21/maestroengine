@@ -126,8 +126,8 @@ function addClass($data, $class) {
 function navBtns() {
     return  btn([
         'icon' => 'fas fa-laptop',
-        'class' => 'cp',
-        'onclick' => 'alert(\'cp\')'
+        'class' => 'cp adminbtn',
+        'onclick' => 'toggleCp()'
     ]).
     btn([
         'icon' => 'fas fa-home',
