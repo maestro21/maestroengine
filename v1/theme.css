@@ -53,7 +53,7 @@ main {
 main .wrap .content{
     background-color: var(--bg-color);
     color: white;
-    padding: 10px 20px;
+    padding: 25px;
     border-radius: 3px;
 }
 
@@ -123,6 +123,8 @@ main .btn:hover {
 
 .box {
     opacity: 0.8;
+    margin: 10px;
+    display: inline-block;
 }
 
 .box:hover {
@@ -163,7 +165,7 @@ main .btn:hover {
 
 ::-webkit-scrollbar-track
 {
-    background: transparent;
+    background: var(--bg-color);;
 }
 
 ::-webkit-scrollbar
@@ -184,4 +186,37 @@ main .btn:hover {
     opacity: 1;
     height: 30px;
     width: 30px;
+}
+
+li {
+    list-style-type: none;
+}
+
+main li:before {
+    color: gold;
+    content: "\2605";
+    padding-right: 10px;
+    position: absolute;
+    margin-left: -30px;
+}
+
+.footer {
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    bottom: 0;
+    z-index: 999;
+    width: 100%;
+    bottom: 0;
+}
+
+
+
+footer {
+    background-color: red;
+    margin-top: 50px;
+    min-height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: white;
+    background-color: var(--bg-color);
 }
