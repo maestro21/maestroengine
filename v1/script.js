@@ -21,7 +21,8 @@ $( window ).resize(function() {
 
 var menuWidth = 0;
 $(function() {
-    menuWidth = $('.langs').width() + $('.topmenu').width() + $('.cp').width() + $('.home').width() + 100;
+    menuWidth = $('.langs').width() + $('.topmenu').width() + $('.cp').width() + $('.logo').width() + 100;
+    console.log(menuWidth);
     checkDisplayMenu();
 });
 

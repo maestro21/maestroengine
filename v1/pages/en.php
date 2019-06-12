@@ -104,32 +104,36 @@
         </div>
 
 
-        <?php echo block(box([
-          'w' => 300,
-          'h' => 200,
-          'text' => 'Random box',
-          'bg' => 'https://picsum.photos/300/200',
-          'btns' => [
-              [
-                  'icon' => 'fas fa-pencil-alt',
-                  'class' => 'nobtn'
-              ]
-          ]
-        ]));?>
+        <?php echo
+            block(
+            box([
+                  'w' => 300,
+                  'h' => 200,
+                  'text' => 'Random box',
+                  'bg' => 'https://picsum.photos/300/200',
+                  'btns' => [
+                      [
+                          'icon' => 'fas fa-pencil-alt',
+                          'class' => 'nobtn'
+                      ]
+                  ]
+                ])
+                .
+                sbox([
+                    'link' => 'http://localhost/maestroengine/v07full/data/uploads/galleries/1/367.png',
+                    'w' => 300,
+                    'h' => 200,
+                    'text' => 'Random box',
+                    'bg' => 'http://localhost/maestroengine/v07full/data/uploads/galleries/1/367.png',
+                    'btns' => [
+                        [
+                            'icon' => 'fas fa-pencil-alt',
+                            'class' => 'nobtn'
+                        ]
+                    ]
+                ])
+            );?>
 
-        <?php echo block(sbox([
-            'link' => 'http://localhost/maestroengine/v07full/data/uploads/galleries/1/367.png',
-            'w' => 300,
-            'h' => 200,
-            'text' => 'Random box',
-            'bg' => 'http://localhost/maestroengine/v07full/data/uploads/galleries/1/367.png',
-            'btns' => [
-                [
-                    'icon' => 'fas fa-pencil-alt',
-                    'class' => 'nobtn'
-                ]
-            ]
-        ]));?>
 
         <?php echo popupbtn('popupcontent', 'Open popup');?>
 

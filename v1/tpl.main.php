@@ -47,6 +47,13 @@
             <?php include('pages/' . $page . '.php');?>
         </div>
     </div>
+
+
+      <footer>
+          <div class="wrap">
+              &copy; <?php echo date('Y');?> Sitename | Developed by <a href="http://maestro-studio.net" target="_blank">Maestro Studio</a>
+          </div>
+      </footer>
   </main>
 </body>
 </html>

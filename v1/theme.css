@@ -220,3 +220,40 @@ footer {
     color: white;
     background-color: var(--bg-color);
 }
+
+
+
+
+.logo {
+    padding: 0 5px;
+    line-height: 50px;
+}
+
+
+.logo img {
+    vertical-align: middle;
+    padding: 5px;
+    height: 40px;
+    display: inline-block;
+}
+
+.logo img.logo_black {
+    display: none;
+}
+
+
+.logo:hover {
+    background-color: white;
+}
+
+.logo:hover .logo_white {
+     display:none;
+ }
+
+.logo:hover .logo_black {
+    display:inline-block;
+}
+
+* {
+    transition: 1s background-color, color, opacity ease-out;
+}

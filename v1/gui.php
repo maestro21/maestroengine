@@ -85,6 +85,7 @@ function block($text) { return '<div class="block">' . $text . '</div>'; }
 function img($img, $attrs = []) {
     $attrs['src'] = $img;
     $attrs = attrs($attrs)
+            . attr($attrs, 'src')
             . attr($attrs, 'title');
     return "<img$attrs />";
 }
@@ -128,12 +129,15 @@ function navBtns() {
         'icon' => 'fas fa-laptop',
         'class' => 'cp adminbtn',
         'onclick' => 'toggleCp()'
-    ]).
-    btn([
+    ])
+    .
+    logo()
+    /*btn([
         'icon' => 'fas fa-home',
         'class' => 'home',
         'href' => BASE_URL
-    ]) .
+    ]) */
+    .
     btn([
         'icon' => 'fas fa-bars',
         'class' => 'toggleMenu',
@@ -141,6 +145,25 @@ function navBtns() {
     ]);
 
 }
+
+function logo() {
+    return a([
+        'href' => BASE_URL,
+        'class' => 'logo',
+        'text' =>
+            img('http://webstudio-maestro.com/img/logo.png',
+              [
+                  'class' => 'logo_white',
+                  'title' => 'Maestro Studio',
+               ]) .
+            img('http://webstudio-maestro.com/img/logo_black.png',
+                [
+                    'class' => 'logo_black',
+                    'title' => 'Maestro Studio',
+                ])
+    ]);
+}
+
 
 function popupbtn($popupid, $text = '', $data = []) {
     $data['onclick'] = "popup('$popupid')";
