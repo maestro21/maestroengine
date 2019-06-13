@@ -8,7 +8,7 @@ getLabels();
 
 
 ob_start();
-$tp = '../' . tpath() . 'script.js.php';
+$tp = '../' . tpath() . 'script.js';
 if(file_exists($tp)){
 	include($tp);
 }

@@ -13,8 +13,9 @@ specific ids, you can do it whether in module `pages` or in site mapping **/
 abstract class masterclass{
 
 	protected $defdata = [];
-	protected $settings = [];
+	protected $settings;
 	protected $labels = [];
+
 
 	/** default field for a field type in table **/
 	const FIELDTYPE = 1;
@@ -74,6 +75,9 @@ abstract class masterclass{
 			'save'	=> 'admin',
 			'del'	=> 'admin',
 		);
+
+		$settings = str_replace('Module', 'Settings', $this->cl);
+		$this->settings = new $settings();
 
 		/** Class template parameters **/
 		$this->title 	= ($this->id != '' ? T($this->cl) . ' #' . $this->id : T($this->cl));
