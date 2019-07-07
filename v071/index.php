@@ -22,6 +22,8 @@ try {
 
 	$class = dispatch();
 
+	//var_dump($class); die();
+
 	/** output **/
 	if($class->ajax)
 		echo $class->output;

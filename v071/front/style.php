@@ -42,8 +42,17 @@ if($rebuild) {
 	/* main css */
 	$css = dir_list('css');
 	foreach($css as $file) {
-		include('css/' . $file); 
+	    if(is_file('css/' . $file)) {
+            include('css/' . $file);
+        }
 	}
+
+    $css = dir_list('css/modules');
+    foreach($css as $file) {
+        if(is_file('css/modules/' . $file)) {
+            include('css/modules/' . $file);
+        }
+    }
 
 	
 	foreach($fontfamilies as $font) {

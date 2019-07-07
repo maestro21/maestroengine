@@ -51,23 +51,17 @@ class langs extends masterclass {
 
 	public function extend() {
 		$this->options['flag'] = $this->getLanguages();
-		$this->options['deflangs'] = $this->getLanguages('getEuroLanguages');		
+
+		$this->options['deflangs'] = $this->getLanguages('getEuroLanguages', ($this->method != 'adddeflang'));
 
 		setVar('sort_langs','pos_ASC');
-
-		$this->addBtn('admin', [
-			'url' => '#',
-			'id' => 'showAddLangDialog',
-			'icon' => 'fas fa-plus-circle',
-			'text' => 'Add existing lang',
-		]);
 	
 		$this->addPosBtns();
 	}
 
 	// todo: check api localy and on ws
 
-	function getLanguages($option ='') { 
+	function getLanguages($option ='', $simple = false) {
         $content = json_decode(file_get_contents(G('flag_api_url')  . 'api.php?do=' . $option), true); 
         foreach($content as $k => $row) {
 			if(empty($option)) {
@@ -77,23 +71,29 @@ class langs extends masterclass {
 					'img' => G('flag_api_url')  . 'flags/' . $k
 				];
 			} else {
-				$content[$k]['img'] = G('flag_api_url')  . 'flags/' . $row['img'];
+			    if($simple) {
+                    $content[$row['value']] = $row['text'];
+                    unset($content[$k]);
+                } else {
+                    $content[$k]['img'] = G('flag_api_url')  . 'flags/' . $row['img'];
+                }
 			}
         }
         return $content;
     }
 
-	public function adddeflang() { 
+	public function adddeflang() {
 		$lang = $this->post['lang'];
 		foreach($this->options['deflangs'] as $row) {
 			if($row['value'] === $lang) {
-				file_put_contents(BASE_PATH . 'front/img/langs/' . $lang . '.png', file_get_contents($row['img'])); 
+				file_put_contents(BASE_PATH . 'front/img/langs/' . $lang . '.png', file_get_contents($row['img']));
 				$this->saveDB([
 					'abbr' => $lang,
 					'name' => $row['text'],
 					'active' => 1
 				]);
 				$this->cache();
+				json_ok();
 				die();
 			}
 		}

@@ -1,4 +1,6 @@
 <br>
 <?php echo btns($buttons['admin']);?>
 <hr>
-<?php echo $data; ?>
+<div class="pageList">
+    <?php echo $data; ?>
+</div>

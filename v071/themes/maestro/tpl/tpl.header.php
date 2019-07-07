@@ -38,3 +38,6 @@
 <!-- MD -->
 <link rel="stylesheet" href="<?php echo BASE_URL . EXT_FOLDER;?>simplemde/simplemde.min.css">
 <script src="<?php echo BASE_URL . EXT_FOLDER;?>simplemde/simplemde.min.js"></script>
+
+<!-- Ckeditor -->
+<script src="//cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>

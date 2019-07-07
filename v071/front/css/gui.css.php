@@ -155,3 +155,19 @@ nav .toggleMenu {
         display: none;
     }
 }
+
+
+a.icon.btn {
+    border: 0;
+    padding: 0 10px;
+    background-color: transparent;
+}
+
+a.icon.btn:hover,
+a.icon.btn i:hover {
+    background-color: transparent;
+}
+
+.rowBtns {
+
+}

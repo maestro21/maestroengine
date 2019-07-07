@@ -92,7 +92,7 @@ function bindForm() {
 		var data = {
 			file: $(this).siblings('a').attr('href')
 		};
-		console.log(data);
+
 		//$(this).parentNode.html('<?php echo T("no files selected");?>');
 		$.post('<?php echo BASE_URL . 'fileviewer/delbyurl';?>?ajax=1',data);
 	});
@@ -179,11 +179,16 @@ function addmsg(txt, cl, selector) {
 
 /* Editor editor */
 function syncEditorContents() {
+
+
+    for ( instance in CKEDITOR.instances )
+        CKEDITOR.instances[instance].updateElement();
+
 	 $('textarea').each(function() {
         var id = $(this).attr("id");
 		if($(this).hasClass('html')) {
-			$(this).appendTo('form');
-			$(this).val(tinyMCE.get(id).getContent());
+			//$(this).appendTo('form');
+			//$(this).val(tinyMCE.get(id).getContent());
 		}
     });
 }

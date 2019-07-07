@@ -264,3 +264,7 @@ body {
     background-size: cover;
     background-attachment: fixed;
 }
+
+.pageList {
+    margin-left: 30px;
+}

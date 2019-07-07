@@ -92,7 +92,7 @@ abstract class masterclass{
 				],
 				[
 					'class' => 'icon',
-					'url' => 'del/{id}',
+					'url' => 'javascript:call(\'del/{id}\')',
 					'icon' => 'fas fa-trash'
 				]
 			]
@@ -115,11 +115,13 @@ abstract class masterclass{
 		$prefix = BASE_URL . $this->cl . '/changepos/{id}/';
 
 		$this->addBtn('table', [
+            'class' => 'icon',
 			'url' => 'javascript:call(\'' . $prefix . 'up\')',
 			'icon' => 'fas fa-arrow-up',
 		]);
 
 		$this->addBtn('table', [
+            'class' => 'icon',
 			'url' => 'javascript:call(\'' . $prefix . 'down\')',
 			'icon' => 'fas fa-arrow-down',
 		]);
@@ -194,7 +196,8 @@ abstract class masterclass{
 	}
 
 
-	public function checkRights($rights) { 
+	public function checkRights($rights) {
+	    if(superAdmin()) return true;
 		if(!isset($this->rights[$rights])) return true;
 		if(!hasRights($this->rights[$rights])) {
 			redirect(BASE_URL); 
@@ -256,7 +259,7 @@ abstract class masterclass{
 		if(NULL == $id) $id = $this->id;
 		q($this->cl)->qdel($id)->run();
 		$this->parse = FALSE;
-		return json_encode(array('redirect' => 'self', 'status' => 'success', 'timeout' => 1));
+		json(['redirect' => 'self', 'status' => 'success', 'timeout' => 1]);
     }
 
 

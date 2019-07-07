@@ -1163,6 +1163,14 @@ function msg($status, $message, $redirect = false) {
 	echo json_encode($arr); die();
 }
 
+function json($data) {
+    echo json_encode($data); die();
+}
+
+function json_ok($msg = 'ok', $redirect = true) {
+    msg(200, t($msg), $redirect);
+}
+
 function tslash($path){
 	$path = rtrim($path, '/') . '/';
 	return $path;
@@ -1367,11 +1375,12 @@ function icon($class) {
 	return '<i class="' . $class . '"></i>';
 }
 
-
+*/
 function btns($btns, $id = null) { 
 	$result = '';
 	foreach($btns as $btn) {
-		$result .= btn($btn, $id);
+	    if($id) $btn['id'] = $id;
+		$result .= btn($btn);
 	}
 	return $result;
-} */
+}

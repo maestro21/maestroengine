@@ -1,10 +1,11 @@
-<?php echo btns($buttons['admin']);?>
-<div id="addLangDialog" class="modal2 hidden"><!-- Remove this space between .modal and .modal-dialog
---><div class="modal-dialog2"><div class="fa fa-times icon icon-big modal-close"></div>
-		<?php  echo drawForm(['deflangs' => [ 'string', WIDGET_SELECT_IMG]], $data, $options); ?>
-		<div class="btn" id="addLang"><?php echo T('add');?></div>
-	</div>
-</div>
+<?php echo btns($buttons['admin']) .
+    popupbtn('addDefLangDialog', T('add deflang'), ['icon' => 'fas fa-plus' ]) .
+    popup('addDefLangDialog',
+        h3(T('add exisiting lang')) .
+        drawForm(['deflangs' => [ 'string', WIDGET_SELECT]], $data, $options) .
+        btn(['id' => 'addLang', 'text' => T('add')])
+    ); ?>
+);?>
 
 <table cellpadding=0 cellspacing=0>
 	<thead>
@@ -36,7 +37,7 @@
 					echo "<td>".fType($v, $f[1], @$options[$k])."</td>";
 				}
 		}?>
-		<td width=150>
+		<td class="rowBtns">
 			<?php echo btns($buttons['table'], $id);?>
 		</td>
 		</tr>

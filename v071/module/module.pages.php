@@ -43,7 +43,7 @@
 					'url'		=>	[ 'string',	'text' ],
 					'fullurl'	=>  [ 'string', 'info' ],
 					'type'		=>	[ 'int', 'select' ],
-					'content' 	=> 	[ 'blob', WIDGET_MARKDOWN, 'search' => TRUE ],
+					'content' 	=> 	[ 'blob', WIDGET_HTML, 'search' => TRUE ],
 					'status'	=>	[ 'int', 'select' ],
 					'pos'		=> [ 'int', 'text',  'null' => TRUE  ],
 				],

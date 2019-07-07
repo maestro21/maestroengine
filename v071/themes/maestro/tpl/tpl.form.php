@@ -137,6 +137,9 @@ $langs = getlangs();
 				name="<?php echo $prefix;?>[<?php echo $key;?>]"
 				id="<?php echo $key;?>"><?php echo $value;?></textarea>
 
+        <Script>
+            CKEDITOR.replace('<?php echo $key;?>');
+        </Script>
 		<?php
 			/*include('external/maestroeditor/editor.php');
 			maestroeditor($key, $key, $value);
@@ -221,12 +224,40 @@ $langs = getlangs();
 			</select>
 		<?php break;
 
-		case WIDGET_SELECT_IMG: ?>
-		<select class="imgselect"  name="<?php echo $prefix;?>[<?php echo $key;?>]" id="<?php echo $key;?>">
+		case WIDGET_SELECT_IMG: /*?>
+        <input type="hidden"  name="<?php echo $prefix;?>[<?php echo $key;?>]" id="<?php echo $key;?>">
+
+        <ul class="dropdown" id="<?php echo $key;?>_dd">
+            <li>
+                <span class="value"></span>
+                <ul>
+                    <?php $langs = getLangs();
+                    foreach (@$options[$key] as $row)  {
+                        $abbr = $lang['abbr'];
+                        $url = (empty($lang['website']) ?  BASE_URL . $abbr : $lang['website'] . HOST_FOLDER);?>
+                        <li id="lang_<?php echo $abbr;?>">
+                            <a href="<?php echo $url;?>">
+                                <?php if($row['img']) { ?>
+                                <span class="lang_long"><img src="<?php echo IMG_URL . 'langs/' .$abbr . '.png';?>" align="absmiddle"  class="avatar"> <?php echo $lang['name'];?></span>
+                                <?php } ?>
+                                <span class="lang_short"><?php echo $abbr;?></span>
+                            </a>
+                        </li>
+                    <?php if($abbr == getLang()) { ?>
+                        <script>$('.curr_lang').html($('#lang_<?php echo $abbr;?> a').html());</script>
+                    <?php } ?>
+                    <?php } ?>
+                </ul>
+            </li>
+        </ul>
+
+
+        <?php */ ?>
+        <select class="imgselect"  name="<?php echo $prefix;?>[<?php echo $key;?>]" id="<?php echo $key;?>">
 		<?php
 			if(is_array($options) && sizeof($options) > 0) {
 				$value = $value ?? $options[0]['value'];
-				foreach (@$options[$key] as $row){ print_r($row);
+				foreach (@$options[$key] as $row){
 					?>
 					<option value="<?php echo $row['value'];?>" 
 						<?php if($row['img']) echo "title='" . $row['img'] . "' ";?>
@@ -235,7 +266,7 @@ $langs = getlangs();
 			<?php } ?>
 		<?php } ?>
 		</select>
-		<?php break;
+		<?php  break;
 
 		case WIDGET_MULTSELECT: ?>
 			<select multiple<?php if($required) echo " required";?> name="<?php echo $prefix;?>[<?php echo $key;?>][]" id="<?php echo $key;?>">

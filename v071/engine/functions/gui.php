@@ -209,6 +209,7 @@ function  popup($id, $content) {
  * data - array
  */
 function a($data) {
+    $data['href'] = $data['href'] ?? $data['url'] ?? '';
     $attr = attrs($data)
         . attr($data, 'href')//, null,'javascript:void(0);')
         . attr($data, 'rel');

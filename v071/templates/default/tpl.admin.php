@@ -24,7 +24,7 @@
 			$k = $field; $v = $row[$field]; 
 			echo "<td>".fType($v, $f[1], @$options[$k])."</td>";
 		}?>
-		<td width=150>
+		<td class="rowBtns">
 			<?php echo btns($buttons['table'], $id);?>
 		</td>
 		</tr>
