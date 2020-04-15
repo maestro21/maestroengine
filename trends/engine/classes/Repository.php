@@ -6,6 +6,11 @@ class Repository extends MySql
 
     protected $modelName = null;
 
+    /**
+     * @var ModelField[]
+     */
+    protected $fields = [];
+
     public function __construct($table = NULL)
     {
         parent::__construct($table);
@@ -13,29 +18,18 @@ class Repository extends MySql
         if(class_exists($modelName)) {
             $this->modelName = $modelName;
         }
+        $this->fields = getClassFields($modelName);
     }
 
-    private function getModel($data) {
-        if(!$this->modelName || !class_exists($this->modelName)) {
-            return null;
-        }
-        $modelName = $this->modelName;
-        $model = new $modelName();
-
-        foreach($data as $k => $v) {
-            $method = 'get' . ucfirst($k);
-            if(method_exists($model, $method)) {
-                $model->$method($v);
-            }
-        }
+    public function getModel($data) {
+        $model = createModelFromDBData($this->modelName, $data);
+        return $model;
     }
 
 
-    private function getModels($data) {
-        if($this->modelName) {
-            foreach ($data as $k => $row) {
-                $data[$k] = $this->getModel($data);
-            }
+    public function getModels($data) {
+        foreach ($data as $k => $row) {
+            $data[$k] = $this->getModel($row);
         }
         return $data;
     }
@@ -44,12 +38,13 @@ class Repository extends MySql
         return $this->qdel($id)->run();
     }
 
-    public function save($params) {
+    public function save(Model $model) {
+        $params = prepareModelDataForDb($model);
         return $this->qsave($params)->run();
     }
 
     public function get($id) {
-        return $this->qget($id)->run();
+        return $this->getModel($this->qget($id)->run());
     }
 
     public function list($page = 0) {

@@ -218,6 +218,8 @@ class DBqueryBuilder {
 	}
 
 	function qsave($params = array()) {
+
+debug_print_backtrace();
 		$this->requestType = self::DBQUERY;
 		if(sizeof($params > 0)) {
 			$this

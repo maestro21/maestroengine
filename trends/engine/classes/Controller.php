@@ -13,4 +13,12 @@ class Controller extends Singleton {
     public function repo(){
         return $this->repo;
     }
+
+
+    public function tpl($name, $data) {
+        $path = MODULE_PATH . unclass(get_class($this)) . '/tpl/' . $name . '.tpl.php';
+        if(file_exists($path)) {
+            return obfile($path, $data);
+        }
+    }
 }

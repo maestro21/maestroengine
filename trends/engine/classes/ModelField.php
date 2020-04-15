@@ -3,6 +3,12 @@
 
 class ModelField
 {
+
+    /**
+     * @var string
+     */
+    private $var;
+
     /**
      * @var string
      */
@@ -50,11 +56,12 @@ class ModelField
      * @param $search
      * @param bool $inTable
      */
-    public function __construct($name = '', $dbType = DATA_STRING, $nullable = true, $default = null, $widget = WIDGET_TEXT, $search = false, $inTable = true)
+    public function __construct($name = '', $var = DATA_STRING, $dbType = DATA_STRING, $nullable = true, $default = null, $widget = WIDGET_TEXT, $search = false, $inTable = true)
     {
         /* Backend */
         $this->name = (string)$name;
         $this->dbType = $dbType;
+        $this->var = $var;
         $this->nullable = (bool)$nullable;
         $this->default = $default;
         /* Frontend */
@@ -76,7 +83,7 @@ class ModelField
      */
     public function getDbType()
     {
-        return $this->dbType;
+        return $this->dbType ?? $this->var;
     }
 
     /**
@@ -187,6 +194,24 @@ class ModelField
     public function setInTable($inTable)
     {
         $this->inTable = $inTable;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVar()
+    {
+        return $this->var;
+    }
+
+    /**
+     * @param string $var
+     * @return $this
+     */
+    public function setVar($var)
+    {
+        $this->var = $var;
         return $this;
     }
 

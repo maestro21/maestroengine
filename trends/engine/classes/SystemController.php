@@ -12,6 +12,7 @@ class SystemController extends Singleton {
         foreach($models as $model) {
             $model = model($model);
             $table = $model->getTable();
+            if($model->notInDb()) continue;
 
             if(!in_array($table,$tables)) {
                 db_create_table($model);

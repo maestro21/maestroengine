@@ -16,6 +16,15 @@ function mf($file) {
 }
 
 
+function unclass($classname) {
+    $classname = str_replace('Controller', '', $classname);
+    $classname = str_replace('Model', '', $classname);
+    $classname = str_replace('Repository', '', $classname);
+    $classname = str_replace('Service', '', $classname);
+    $classname = lcfirst($classname);
+    return $classname;
+}
+
 function unext($path) {
     $path = explode('.', $path);
     return trim($path[0]);

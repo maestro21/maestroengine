@@ -57,6 +57,54 @@ function keyvalues2rows($data) {
     }
     return $_data;
 }
+/** FORMAT FUNCTIONS **/
+function parseString($string = '') {
+    return addslashes(htmlspecialchars(@trim($string)));
+}
+
+function string_decode($string) {
+    return html_entity_decode(stripslashes($string));
+}
+
+
+function var2string($val) {
+    if(is_array($val)) $val = implode(',', $val);
+    return $val;
+}
+
+function sqlFormat($type, $value = '', $quote = false){ //echo $type;
+    switch($type){
+        case DATA_INT: $value = intval($value);
+            break;
+
+        case DATA_FLOAT: $value = floatval($value);
+            break;
+
+        case DATA_PASS : $value = md5($value);
+            break;
+
+        case DATA_ARRAY: $value = serialize($value);
+            break;
+
+        case DATA_TIME: if($value=='') $value = date("Y-m-d H:i:s"); else{
+            $value = date("Y-m-d H:i:s",mktime(
+                intval(@$value['h']),
+                intval(@$value['mi']),
+                intval(@$value['s']),
+                intval(@$value['m']),
+                intval(@$value['d']),
+                intval(@$value['y'])
+            ));
+        }
+        break;
+
+        default: $value =  parseString($value);
+            break;
+
+    }
+    if($quote) $value = dbquote($value);
+    return $value;
+}
 
 
 function getDefaultWidget($type) {
@@ -90,4 +138,136 @@ function datafilter($data, $filter = []) {
 function safestring($string) {
     $string = str_replace(' ', '_', $string);
     return $string;
+}
+
+function getValue($obj, $prop) {
+    $return = null;
+    $method = 'get' . ucfirst($prop);
+    if(method_exists($obj, $method)) {
+        $return = $obj->$method();
+    } else {
+        $method = 'is' . ucfirst($prop);
+        if(method_exists($obj, $method)) {
+            $return = $obj->$method();
+        }
+    }
+    return $return;
+}
+
+function setValue($obj, $prop, $val) {
+    $return = null;
+    $method = 'set' . ucfirst($prop);
+    if(method_exists($obj, $method)) {
+        $obj->$method($val);
+    }
+    return $obj;
+}
+
+
+
+function getClassAnnotations($class) {
+    $r = new ReflectionClass($class);
+    $doc = $r->getDocComment();
+    preg_match_all('#@(.*?)\n#s', $doc, $annotations);
+
+    $return = [];
+    foreach($annotations[1] as $annotation) {
+        $annotation = explode(' ', $annotation);
+        $return[trim($annotation[0])] = trim($annotation[1]);
+    }
+    return $return;
+}
+
+function getClassFields($class)
+{
+    $r = new ReflectionClass($class);
+    $props = $r->getProperties(ReflectionProperty::IS_PRIVATE);
+
+    $result = [];
+
+    foreach($props as $prop) {
+        $doc = $prop->getDocComment();
+        preg_match_all('#@(.*?)\n#s', $doc, $annotations);
+        $result[$prop->getName()] = processClassFields($prop->getName(), $annotations[1] ?? []);
+    }
+
+    return $result;
+}
+
+/**
+ * Process field annotation -> return ModelField from array
+ * @param string $name
+ * @param array $annotationFields
+ * @return ModelField
+ */
+function processClassFields(string $name, array $annotationFields) {
+    $modelField = new ModelField($name);
+    foreach($annotationFields as $field) {
+        $field = explode(' ', $field);
+        $fieldname = $field[0];
+        if($fieldname == 'var') $fieldname = 'dbType';
+        $setter = trim('set' . ucfirst($fieldname));
+        if(method_exists($modelField, $setter)) {
+            $data = $field[1] ?? 1;
+            $modelField->$setter($data);
+        }
+    }
+    return $modelField;
+}
+
+function prepareModelDataForDb(Model $model) {
+    $data = [];
+    $fields = getClassFields(get_class($model));
+    /** @var ModelField $field */
+    foreach ($fields as $field) {
+        $name = $field->getName();
+        $value = getValue($model, $name);
+        $data[$name] = sqlFormat($field->getDbType(), $value);
+    }
+    return $data;
+}
+
+function createModelFromDBData($className, $data){
+    if(!class_exists($className)) return $data;
+
+    $fields = getClassFields($className);
+
+    $model = new $className();
+    foreach($data as $prop => $value) {
+        $method = 'set' . ucfirst($prop);
+        if(method_exists($model, $method) && isset($fields[$prop])) {
+            /** @var ModelField $field */
+            $field = $fields[$prop];
+            $type = $field ? $field->getDbType() : DATA_STRING;
+            $value = validateField($type, $value);
+            if(is_array($value) && $type == DATA_ARRAY && strpos($field->getVar(),'[]')) {
+                $value = createObjectArray($field, $value);
+            }
+            $model->$method($value);
+        }
+    }
+    return $model;
+}
+
+function createObjectArray(ModelField $field, $data) {
+    if(is_array($data) && $field->getDbType() == DATA_ARRAY && strpos($field->getVar(),'[]')) {
+        $values = [];
+        $class = trim(str_replace('[]','',$field->getVar()));
+        if(!class_exists($class)) $data;
+        foreach ($data as $row) {
+            $values[] = createModelFromDBData($class, $row);
+        }
+        return $values;
+    }
+}
+
+
+function validateField($type, $value) {
+    switch($type) {
+        case DATA_INT: $value = (int)$value; break;
+        case DATA_FLOAT: $value = (float)$value; break;
+        case DATA_BOOL: $value = (bool)$value; break;
+        case DATA_ARRAY: $value = unserialize($value); break;
+    }
+    return $value;
 }

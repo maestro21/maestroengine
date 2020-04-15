@@ -13,15 +13,9 @@ class TrendsModel extends Model
     private $name;
 
     /**
-     * @var string
-     */
-    private $title;
-
-
-    /**
      * News previews. Not to mess with real news
-     * @var array
-     * @dbtype text
+     * @var TrendNewsModel[]
+     * @dbtype array
      */
     private $news;
 
@@ -36,8 +30,8 @@ class TrendsModel extends Model
     private $picture;
 
     /**
-     * @var \DateTime
-     * @dbtype time
+     * yes, we want to save it as string
+     * @var string
      */
     private $time;
 
@@ -46,6 +40,11 @@ class TrendsModel extends Model
      * @dbtype bool
      */
     private $new;
+
+    /**
+     * @var string
+     */
+    private $link;
 
     /**
      * @return string
@@ -65,23 +64,6 @@ class TrendsModel extends Model
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     * @return $this;
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-        return $this;
-    }
 
     /**
      * @return string
@@ -110,7 +92,7 @@ class TrendsModel extends Model
     }
 
     /**
-     * @param array $news
+     * @param array|null $news
      * @return $this;
      */
     public function setNews($news)
@@ -165,10 +147,12 @@ class TrendsModel extends Model
 
     /**
      * @param DateTime $time
+     * @return $this;
      */
     public function setTime($time)
     {
         $this->time = $time;
+        return $this;
     }
 
     /**
@@ -181,10 +165,12 @@ class TrendsModel extends Model
 
     /**
      * @param bool $new
+     * @return $this;
      */
     public function setNew($new)
     {
         $this->new = $new;
+        return $this;
     }
 
 }

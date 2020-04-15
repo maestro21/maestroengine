@@ -55,6 +55,7 @@ define('DATA_BOOL', 'bool');
 define('DATA_ARRAY', 'array');
 define('DATA_TIME', 'time');
 define('DATA_BLOB','blob');
+define('DATA_PASS', 'pass');
 
 define('WIDGET_TEXT', 'text');
 define('WIDGET_TEXTAREA', 'textarea');

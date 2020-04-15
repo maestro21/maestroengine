@@ -301,3 +301,4 @@ function checkTables($tables) {
 	$arr = DBcol(sprintf("SHOW TABLES FROM '%s'", HOST_DB));
 	return in_array($tables, $arr);
 }
+
