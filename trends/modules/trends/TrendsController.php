@@ -39,7 +39,6 @@ class TrendsController extends Controller
             $entry = (array)$entry;
             /** @var TrendsModel $oEntry */
             $oEntry = $this->repo()->findByNameAndTime($entry['title'], $entry['pubDate']);
-
             if(!$oEntry) {
                 $oEntry = new TrendsModel();
                 $oEntry
@@ -48,7 +47,7 @@ class TrendsController extends Controller
                     ->setNews($this->processNews($entry['news_item']))
                     ->setTraffic($entry['approx_traffic'])
                     ->setLink($entry['link'])
-                    ->setTime($entry['pubDate'])
+                    ->setTime(oTime($entry['pubDate']))
                     ->setNew(true);
                 $this->repo()->save($oEntry);
             } else {

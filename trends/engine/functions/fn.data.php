@@ -73,6 +73,7 @@ function var2string($val) {
 }
 
 function sqlFormat($type, $value = '', $quote = false){ //echo $type;
+    $type = trim(strtolower($type));
     switch($type){
         case DATA_INT: $value = intval($value);
             break;
@@ -86,16 +87,11 @@ function sqlFormat($type, $value = '', $quote = false){ //echo $type;
         case DATA_ARRAY: $value = serialize($value);
             break;
 
-        case DATA_TIME: if($value=='') $value = date("Y-m-d H:i:s"); else{
-            $value = date("Y-m-d H:i:s",mktime(
-                intval(@$value['h']),
-                intval(@$value['mi']),
-                intval(@$value['s']),
-                intval(@$value['m']),
-                intval(@$value['d']),
-                intval(@$value['y'])
-            ));
-        }
+        case DATA_TIME:
+            if(is_a($value,'Time')) {
+                /** @var Time $value */
+                $value = $value->getSqlFormat();
+            }
         break;
 
         default: $value =  parseString($value);
@@ -205,7 +201,7 @@ function processClassFields(string $name, array $annotationFields) {
     foreach($annotationFields as $field) {
         $field = explode(' ', $field);
         $fieldname = $field[0];
-        if($fieldname == 'var') $fieldname = 'dbType';
+        //if($fieldname == 'var') $fieldname = 'dbType';
         $setter = trim('set' . ucfirst($fieldname));
         if(method_exists($modelField, $setter)) {
             $data = $field[1] ?? 1;
@@ -240,9 +236,9 @@ function createModelFromDBData($className, $data){
             $field = $fields[$prop];
             $type = $field ? $field->getDbType() : DATA_STRING;
             $value = validateField($type, $value);
-            if(is_array($value) && $type == DATA_ARRAY && strpos($field->getVar(),'[]')) {
+            /*if(is_array($value) && $type == DATA_ARRAY && strpos($field->getVar(),'[]')) { var_dump($value);
                 $value = createObjectArray($field, $value);
-            }
+            } */
             $model->$method($value);
         }
     }
@@ -267,7 +263,15 @@ function validateField($type, $value) {
         case DATA_INT: $value = (int)$value; break;
         case DATA_FLOAT: $value = (float)$value; break;
         case DATA_BOOL: $value = (bool)$value; break;
-        case DATA_ARRAY: $value = unserialize($value); break;
+        case DATA_ARRAY: $value = unserialize($value);  break;
+        case DATA_TIME: $value = oTime($value); break;
     }
     return $value;
+}
+
+function isValidTimeStamp($timestamp)
+{   print_r($timestamp);
+    return ((string) (int) $timestamp === $timestamp)
+        && ($timestamp <= PHP_INT_MAX)
+        && ($timestamp >= ~PHP_INT_MAX);
 }

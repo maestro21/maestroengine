@@ -13,7 +13,8 @@
             <div>
                 <h2><?php if($entry->isNew()) echo "<b>NEW!</b> ";?><a href="<?= $entry->getLink(); ?>" target="_blank"><?= $entry->getName(); ?></a> </h2>
                 <a href="https://www.google.com/search?q=<?= $entry->getName; ?>" target="_blank">Google</a>
-                <b><?= $entry->getTraffic();?></b><br> <i><?=$entry->getTime();?></i> <?php $dt = strtotime($entry->getTime()); var_dump($dt);?>
+                <b><?= $entry->getTraffic();?></b><br> <i><span title="<?=$entry->getTime()->getDateTime();?>">
+                        <?=$entry->getTime()->setTimezone("MST")->getDateTime();?></span></i>
                 <ol>
                     <?php
                      /** @var TrendNewsModel $item */

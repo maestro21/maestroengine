@@ -15,9 +15,9 @@ class ModelField
     private $name;
 
     /**
-     * @var string
+     * @var string|null
      * annotation @dbtype
-     * possible values: int, string, boo
+     * possible values: int, string, bool
      */
     private $dbType;
 
@@ -56,7 +56,7 @@ class ModelField
      * @param $search
      * @param bool $inTable
      */
-    public function __construct($name = '', $var = DATA_STRING, $dbType = DATA_STRING, $nullable = true, $default = null, $widget = WIDGET_TEXT, $search = false, $inTable = true)
+    public function __construct($name = '', $var = DATA_STRING, $dbType = null, $nullable = true, $default = null, $widget = WIDGET_TEXT, $search = false, $inTable = true)
     {
         /* Backend */
         $this->name = (string)$name;
@@ -83,7 +83,7 @@ class ModelField
      */
     public function getDbType()
     {
-        return $this->dbType ?? $this->var;
+        return trim(strtolower($this->dbType ?? $this->var));
     }
 
     /**
@@ -138,7 +138,7 @@ class ModelField
     }
 
     /**
-     * @param string $dbType
+     * @param string|null $dbType
      * @return $this;
      */
     public function setDbType($dbType)

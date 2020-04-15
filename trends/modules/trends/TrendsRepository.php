@@ -20,7 +20,7 @@ class TrendsRepository extends Repository
                 ->select()
                 ->from($this->table)
                 ->where(qEq('name',$name))
-                ->where(qEq('time', $time))
+                ->where(qEq('time', oTime($time)->getSqlFormat()))
             ->run(DBROW);
 
         if($model) $model = createModelFromDBData('TrendsModel', $model);

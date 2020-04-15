@@ -14,6 +14,7 @@ $loadList = [
     '../conf',
     'constants',
     'classes/Singleton',
+    'classes/Time',
     'db/autoload',
     'classes/ModelField',
     'classes/Model',

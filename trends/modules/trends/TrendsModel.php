@@ -30,8 +30,7 @@ class TrendsModel extends Model
     private $picture;
 
     /**
-     * yes, we want to save it as string
-     * @var string
+     * @var Time
      */
     private $time;
 
@@ -138,7 +137,7 @@ class TrendsModel extends Model
     }
 
     /**
-     * @return DateTime
+     * @return Time
      */
     public function getTime()
     {
@@ -146,7 +145,7 @@ class TrendsModel extends Model
     }
 
     /**
-     * @param DateTime $time
+     * @param Time $time
      * @return $this;
      */
     public function setTime($time)
