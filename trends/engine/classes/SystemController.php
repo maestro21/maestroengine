@@ -22,4 +22,14 @@ class SystemController extends Singleton {
         }
     }
 
+    public function p1Action() {
+        DBquery("UPDATe trends SET traffic = traffic * 1000;");
+        echo "Patch 1: Update traffic implemented";
+    }
+
+
+    public function unp1Action() {
+        DBquery("UPDATe trends SET traffic = traffic / 1000;");
+        echo "REVERT Patch 1: Update traffic implemented";
+    }
 }

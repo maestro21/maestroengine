@@ -36,7 +36,7 @@ class Config
      */
     public function __construct(
         $baseUrl,
-        ?DBConfig $dbc = null,
+        $dbc = null,
         $defLang = 'en',
         $defController = 'pages',
         $defTheme = 'default'

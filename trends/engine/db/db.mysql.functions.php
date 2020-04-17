@@ -103,6 +103,7 @@ function db_update_table(Model $model) {
     $changes = [];
     /** @var ModelField $field */
     foreach($fields as $field) {
+        if($field->getName() == 'id') continue;
         if(isset($_fields[$field->getName()])) {
             if(!fieldsAreEqual($field, $_fields[$field->getName()])) {
                 $changes[] = 'MODIFY ' . db_create_field($field);

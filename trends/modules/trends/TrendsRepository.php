@@ -14,11 +14,12 @@ class TrendsRepository extends Repository
     }
 
 
-    public function findByNameAndTime(string $name, string $time) {
+    public function findExisting(string $name, string $time, string $country) {
         $model = $this
                 ->clear()
                 ->select()
                 ->from($this->table)
+                ->where(qEq('country', $country))
                 ->where(qEq('name',$name))
                 ->where(qEq('time', oTime($time)->getSqlFormat()))
             ->run(DBROW);
@@ -32,7 +33,12 @@ class TrendsRepository extends Repository
         $this->update($this->table)->set('new',false)->run();
     }
 
-    public function list($page = 0) {
-        return $this->getModels($this->qlist('*', $page)->order('new DESC')->order('time DESC')->run());
+    public function list($country = 0) {
+        return $this->getModels($this
+            ->qlist('*')
+                ->where(qEq('country', $country))
+                ->order('new DESC')
+                ->order('time DESC')
+            ->run());
     }
 }

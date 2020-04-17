@@ -7,7 +7,7 @@ class Time
     private $dateTime;
 
 
-    public function __construct($src = null)
+    public function __construct($src = 'now')
     {
         $this->dateTime = new DateTime();
         $this->set($src);
@@ -18,7 +18,7 @@ class Time
      * @param mixed $src
      * @return $this
      */
-    public function set($src = null) {
+    public function set($src = 'now') {
 
         if($src instanceof DateTime) {
             $this->dateTime = $src;
@@ -31,6 +31,7 @@ class Time
                 return $this;
             } catch (Exception $e) {}
         }
+
 
         if(isValidTimeStamp($src)) {
             $this->dateTime->setTimestamp($src);
@@ -54,7 +55,7 @@ class Time
     }
 
     public function getTime() {
-        return $this->dateTime->format('h:i');
+        return $this->dateTime->format('G:i');
     }
 
     public function getDate() {
@@ -62,12 +63,16 @@ class Time
     }
 
     public function getDateTime(){
-        return $this->dateTime->format('d M Y, D G:i T');
+        return $this->dateTime->format('d M Y, D G:i P');
     }
 
     public function setUTC() {
         $this->setTimezone("UTC");
         return $this;
+    }
+
+    public function setMyTimeZone() {
+
     }
 
     public function getSqlFormat() {
@@ -77,6 +82,6 @@ class Time
 }
 
 
-function oTime($t) {
+function oTime($t = 'now') {
     return new Time($t);
 }

@@ -177,8 +177,7 @@ function getClassAnnotations($class) {
 function getClassFields($class)
 {
     $r = new ReflectionClass($class);
-    $props = $r->getProperties(ReflectionProperty::IS_PRIVATE);
-
+    $props = $r->getProperties();
     $result = [];
 
     foreach($props as $prop) {
@@ -209,6 +208,11 @@ function processClassFields(string $name, array $annotationFields) {
         }
     }
     return $modelField;
+}
+
+
+function fnum($num) {
+    return number_format($num);
 }
 
 function prepareModelDataForDb(Model $model) {
@@ -270,8 +274,6 @@ function validateField($type, $value) {
 }
 
 function isValidTimeStamp($timestamp)
-{   print_r($timestamp);
-    return ((string) (int) $timestamp === $timestamp)
-        && ($timestamp <= PHP_INT_MAX)
-        && ($timestamp >= ~PHP_INT_MAX);
+{
+    return ($timestamp <= PHP_INT_MAX) && ($timestamp >= ~PHP_INT_MAX);
 }

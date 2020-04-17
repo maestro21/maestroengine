@@ -13,6 +13,11 @@ class TrendsModel extends Model
     private $name;
 
     /**
+     * @var string
+     */
+    private $country;
+
+    /**
      * News previews. Not to mess with real news
      * @var TrendNewsModel[]
      * @dbtype array
@@ -20,7 +25,7 @@ class TrendsModel extends Model
     private $news;
 
     /**
-     * @var string
+     * @var int
      */
     private $traffic;
 
@@ -44,6 +49,11 @@ class TrendsModel extends Model
      * @var string
      */
     private $link;
+
+    /**
+     * @var array
+     */
+    private $trafficHistory;
 
     /**
      * @return string
@@ -170,6 +180,72 @@ class TrendsModel extends Model
     {
         $this->new = $new;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param string $country
+     * @return $this
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTrafficHistory()
+    {
+        return $this->trafficHistory;
+    }
+
+    /**
+     * @param array $trafficHistory
+     * @return $this
+     */
+    public function setTrafficHistory($trafficHistory)
+    {
+        $this->trafficHistory = $trafficHistory;
+        return $this;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return $this
+     */
+    public function addHistory($key, $value) { echo $key . ' ' . $value;
+        if(!$this->trafficHistory) $this->trafficHistory = [];
+        if(!is_array($this->trafficHistory)) $this->trafficHistory = unserialize($this->trafficHistory);
+        $this->trafficHistory[$key] = $value;
+        return $this;
+    }
+
+    /**
+     * @param string $d
+     * @return string
+     */
+    public function getTrafficHistoryFormatted($d = "\n") {
+        $return = [];
+        if(is_array($this->trafficHistory)) {
+            foreach($this->trafficHistory as $k => $v) {
+                //if($v == $this->getTraffic()) continue;
+                $k = oTime($k)->getTime();
+                $v = fnum($v) . "+";
+                $return[] .= "$k : $v";
+            }
+        }
+        $return = implode($d, $return);
+        return $return;
     }
 
 }
